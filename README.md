@@ -6,7 +6,7 @@ Ideas:
 parsebible.cpp is used to parse a bible.txt into a more "efficient" data structure.
 I was thinking a parsed file to look as so:
 
-GENESIS
+`GENESIS
 1:1 In the beginning...
 1:2 But the earth...
 ...
@@ -17,7 +17,7 @@ EXODUS
 ...
 ^
 LEVITICUS
-...
+...`
 
 And so on.
 Each chapter will end with the delimiter ^. This will allow us to read just the name of the chapter, and if it is
