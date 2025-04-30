@@ -17,23 +17,28 @@ int main(int argc, char* argv[]) {
     return 1;
   }
 
-  string line;
-  string currentBook;
-  string version;
-  string verabbr;
+  string line, currentBook, version, verabbr;
+
   getline(bible,verabbr);
   getline(bible,version);
   cout << "Bible version: " << version << endl;
   while (getline(bible, line)) {
+    //Reads book
     string newBook;
     stringstream verse(line);
     verse >> newBook;
     if (isdigit(newBook[0])) {
       string secondTitle;
       verse >> secondTitle;
-      newBook += secondTitle;
+      newBook += ' ' + secondTitle;
     }
-    cout << "Book: " << newBook << '\n';
+    if (currentBook != newBook) cout << "Book: " << newBook << '\n';
+    currentBook = newBook;
+
+    //Reads chapter:verse
+    
+
+    //Reads verse
   }
   return 0;
 }
