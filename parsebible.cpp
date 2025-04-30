@@ -6,8 +6,8 @@
 using namespace std;
 
 int main(int argc, char* argv[]) {
-  if (argc != 2) {
-    cout << "Usage: " << argv[0] << " [FILE]" << endl;
+  if (argc != 5) {
+    cout << "Usage: " << argv[0] << " [FILE] [BOOK] [CHAPTER] [VERSE]" << endl;
     return 1;
   }
 
@@ -17,6 +17,9 @@ int main(int argc, char* argv[]) {
     return 1;
   }
 
+  string inputBook = argv[2];
+  int inputChapter = stoi(argv[3]);
+  int inputVerse = stoi(argv[4]);
   string line, currentBook, version, verabbr;
 
   getline(bible,verabbr);
@@ -30,15 +33,25 @@ int main(int argc, char* argv[]) {
     if (isdigit(newBook[0])) {
       string secondTitle;
       verse >> secondTitle;
-      newBook += ' ' + secondTitle;
+      newBook += secondTitle;
     }
-    if (currentBook != newBook) cout << "Book: " << newBook << '\n';
+    //if (currentBook != newBook) cout << "Book: " << newBook << '\n';
     currentBook = newBook;
 
-    //Reads chapter:verse
-    
+    if (currentBook == inputBook) {
+      //Reads chapter:verse
+      int chapter, verseNumber;
+      char colon;
+      verse >> chapter >> colon >> verseNumber;
+      //cout << chapter << ":" << verseNumber << '\t';
 
-    //Reads verse
+      if (chapter == inputChapter && verseNumber == inputVerse) {
+        //Reads verse
+        string fullVerse;
+        getline(verse, fullVerse);
+        cout << fullVerse << endl;
+      }
+    }
   }
   return 0;
 }
