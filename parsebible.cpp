@@ -18,9 +18,9 @@ int main(int argc, char* argv[]) {
     return 1;
   }
 
-  string line, currentBook, version, verabbr;
+  string line, currentBook = "", version, verabbr;
 
-  getline(bible,verabbr);
+  getline(bible, verabbr);
   getline(bible,version);
   cout << "Bible version: " << version << endl;
   ofstream bibleOutput(verabbr + ".txt");
@@ -36,20 +36,31 @@ int main(int argc, char* argv[]) {
     }
     transform(newBook.begin(), newBook.end(), newBook.begin(), ::toupper);
     if (currentBook != newBook) {
-      cout << newBook << endl;
+      if (!currentBook.empty()) {
+        //cout << '^' << '\n';
+        bibleOutput << '^' << '\n'; 
+      }
+      //cout << newBook << '\n';
+      bibleOutput << newBook << '\n';
     }
-    currentBook = newBook;
 
     //Reads chapter:verse
     int chapter, verseNumber;
     char colon;
     verse >> chapter >> colon >> verseNumber;
     //cout << chapter << ":" << verseNumber << " ";
+    bibleOutput << chapter << ":" << verseNumber << " ";
 
     //Reads verse
     string fullVerse;
     getline(verse, fullVerse);
-    //cout << fullVerse << endl;
+    //cout << fullVerse << '\n';
+    bibleOutput << fullVerse << '\n';
+
+    currentBook = newBook;
   }
+
+  bibleOutput.close();
+  bible.close();
   return 0;
 }
