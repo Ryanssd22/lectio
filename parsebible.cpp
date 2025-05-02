@@ -7,10 +7,14 @@
 using namespace std;
 
 int main(int argc, char* argv[]) {
-  if (argc != 2) {
+  if (argc != 5) {
     cout << "Usage: " << argv[0] << " [FILE]";
     return 1;
   }
+
+  string bookSearch = argv[2];
+  int chapterSearch = stoi(argv[3]);
+  int verseSearch = stoi(argv[4]);
 
   ifstream bible(argv[1]);
   if (!bible.is_open()) {
@@ -54,8 +58,8 @@ int main(int argc, char* argv[]) {
     //Reads verse
     string fullVerse;
     getline(verse, fullVerse);
-    //cout << fullVerse << '\n';
     bibleOutput << fullVerse << '\n';
+    if (chapter == chapterSearch && verseNumber == verseSearch && newBook==bookSearch) cout << fullVerse << '\n';
 
     currentBook = newBook;
   }

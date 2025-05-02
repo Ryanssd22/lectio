@@ -24,14 +24,11 @@ def clean(text):
     return re.sub(r"\s+", " ", cleanStr).strip()
 
 
-if not os.path.exists("biblegateway"):
-    os.mkdir("biblegateway")
-
 BASEURL = "https://www.biblegateway.com/passage/?search="
-TRANSLATION = "NABRE"
+TRANSLATION = "DRA"
 
 # Reads all books from bibleGateway and outputs to /biblegateway
-with open("biblegateway/" + TRANSLATION + ".txt", "w", encoding="utf-8") as outputFile:
+with open(TRANSLATION + ".txt", "w", encoding="utf-8") as outputFile:
     for book in BOOKS:
         print("BOOK:", book)
         outputFile.write(f"{book.upper()}")
