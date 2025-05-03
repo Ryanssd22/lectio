@@ -140,3 +140,5 @@ BOOKCHAPTERS = {
     "Jude": 1,
     "Revelation": 22,
 }
+
+VERSIONS = []
