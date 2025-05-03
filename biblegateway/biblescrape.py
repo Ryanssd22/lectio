@@ -40,6 +40,7 @@ def downloadBook(book, translation):
             ):
                 # outputFile.write("\n")
                 bibleProgress[book] = chapter - 1
+                BOOKCHAPTERS[book] = bibleProgress[book]
                 output += "\n"
                 break
 
@@ -130,7 +131,10 @@ def clean(text):
     return re.sub(r"\s+", " ", cleanStr).strip()
 
 
-TRANSLATION = "NABRE"
+if len(sys.argv) > 1:
+    TRANSLATION = sys.argv[1]
+else:
+    TRANSLATION = "NABRE"
 BASEURL = "https://www.biblegateway.com/passage/?search="
 
 # Reads all books from bibleGateway and outputs to /biblegateway
