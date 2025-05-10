@@ -137,7 +137,7 @@ else:
     TRANSLATION = "NABRE"
 BASEURL = "https://www.biblegateway.com/passage/?search="
 
-# Reads all books from bibleGateway and outputs to /biblegateway
+# Reads all books from bibleGateway and outputs to /biblegateway/bibles
 multistart = time.time()
 threads = []
 for book in BOOKS:
@@ -159,7 +159,7 @@ while not downloadFinished:
 
 print("\nOutputting into file...")
 
-with open(TRANSLATION + ".txt", "w", encoding="utf-8") as outputFile:
+with open("bibles/" + TRANSLATION + ".txt", "w", encoding="utf-8") as outputFile:
     for book in BOOKS:
         line = book.upper() + rawBible[book]
         outputFile.write(line)
