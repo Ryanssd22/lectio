@@ -8,16 +8,22 @@ weekdayPage = requests.get(
 )
 weekdaySoup = BeautifulSoup(weekdayPage.text, "html.parser")
 tables = weekdaySoup.find_all("table")
-tableData = []
+tableData = {}
 
 for i, table in enumerate(tables):
     rows = table.find_all("tr")
-    tableData.append([])
     for row in rows:
         cols = row.find_all("td")
         cols = [col.text.strip() for col in cols]
-        tableData[i].append(cols)
+        date = cols[1]
+        if not date in [".", "Day", "Day or Feast"]:
+            cols.pop(1)
+            cols.pop(2)
+            if not date in tableData:
+                tableData[date] = [cols]
+            else:
+                tableData[date].append(cols)
 
-for table in tableData:
-    for row in table:
-        print(f"{row[0]:40} | {row[1]:55} | {row[2]:4} | {row[3]:10}")
+
+for row in tableData:
+    print(f"{row:75} | {tableData[row]}")
