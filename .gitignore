@@ -33,6 +33,10 @@
 
 # Python
 __pycahce__
+__pycache__/*
 
 # Downloaded bibles
 biblegateway/bibles/*
+
+# Some mac thing
+.DS_Store
