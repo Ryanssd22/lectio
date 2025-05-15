@@ -15,6 +15,11 @@ weekdaySoup = BeautifulSoup(weekdayPage.text, "html.parser")
 tables = weekdaySoup.find_all("table")
 tableData = {}
 
+# TODO: Fix up key names
+# TODO: Figure out a way to organize gospel, reading, and response somehow
+# TODO: Sort dictionary
+# TODO: Separate specific dates into their own dictionary
+
 for i, table in enumerate(tables):
     rows = table.find_all("tr")
     for row in rows:
@@ -42,5 +47,4 @@ for i, table in enumerate(tables):
 sortedTableData = dict(sorted(tableData.items()))
 
 for row in tableData:
-    if "OT" in row:
-        printTableData(row)
+    printTableData(row)
