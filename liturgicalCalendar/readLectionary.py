@@ -32,10 +32,12 @@ for i, table in enumerate(tables):
         # cols[3] = Lec#
 
         date = cols[1]
-        date = date.replace("Ord. Time", "OT")
-        date = date.replace("Lent", "LE")
-        date = date.replace("Advent", "AD")
-        date = date.replace("Easter", "EA")
+        date = date.replace(",", "")
+        date = date.replace("Ord. Time ", "OT")
+        date = date.replace("Lent ", "LE")
+        date = date.replace("Advent ", "AD")
+        date = date.replace("Easter ", "EA")
+        date = date.replace("Week ", "")
         if not date in [".", "Day", "Day or Feast"]:
             cols.pop(3)
             cols.pop(1)
@@ -44,7 +46,17 @@ for i, table in enumerate(tables):
             else:
                 tableData[date].append(cols)
 
+        if "(resp. - note 2)" in date:
+            tableData.pop(date)
+            date = date.replace(" (resp. - note 2)", "")
+            cols.append("RESP")
+            if not date in tableData:
+                tableData[date] = [cols]
+            else:
+                tableData[date].append(cols)
+
+
 sortedTableData = dict(sorted(tableData.items()))
 
-for row in tableData:
+for row in sortedTableData:
     printTableData(row)
