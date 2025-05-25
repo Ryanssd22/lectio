@@ -159,6 +159,9 @@ while not downloadFinished:
 
 print("\nOutputting into file...")
 
+if not os.path.exists("bibles"):
+    os.makedirs("bibles")
+
 with open("bibles/" + TRANSLATION + ".txt", "w", encoding="utf-8") as outputFile:
     for book in BOOKS:
         line = book.upper() + rawBible[book]
