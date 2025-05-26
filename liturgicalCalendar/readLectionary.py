@@ -9,9 +9,7 @@ Array of verses
 
 Verse Class:
     reading (Gen 3:9-15, 20)
-    category (OLD, GOS, NEW, RES, NULL)
-    weekdayYear (0 (for both), 1, 2)
-    weekendYear (0 (for all), 1, 2, 3)
+    category (FIR, SEC, GOS, RES, ALL, NULL)
 """
 
 #!/usr/bin/env python
@@ -21,20 +19,15 @@ from bs4 import BeautifulSoup
 
 
 class Verse:
-    def __init__(self, reading, weekdayYear, weekendYear, category="NULL"):
+    def __init__(self, reading, category="NULL"):
         self.reading = reading
-        self.weekdayYear = weekdayYear
-        self.weekendYear = weekendYear
         self.category = category
 
     def setCategory(self, category):
         self.type = category
 
-    def setWeekendYear(self, weekendYear):
-        self.weekendYear = weekendYear
-
     def __repr__(self):
-        return f"{{{self.reading}, {self.weekdayYear}, {self.weekendYear}, {self.category}}}"
+        return f"{{{self.reading}, {self.category}}}"
 
 
 def printDict(dict):
@@ -92,12 +85,28 @@ def addReading(dict, date, reading, misc=False):
     addVerseToDict(dict, date, reading)
 
 
-weekdayPage = requests.get(
-    "https://catholic-resources.org/Lectionary/Index-Weekdays.htm"
+def getTables(link):
+    site = requests.get(link)
+    soup = BeautifulSoup(site.text, "html.parser")
+    tables = soup.find_all("table")
+    return tables
+
+
+def getRows(table):
+    parsedRows = []
+    rows = table.find_all("tr")
+    for row in rows:
+        cols = row.find_all("td")
+        cols = [col.text.strip() for col in cols]
+        parsedRows.append(cols)
+    return parsedRows
+
+
+# Links from cathoilic-resources.org/Lectionary
+adventSunday = "https://catholic-resources.org/Lectionary/1998USL-Advent.htm"
+adventWeekday = (
+    "https://catholic-resources.org/Lectionary/2002USL-Weekdays-AdventChristmas.htm"
 )
-weekdaySoup = BeautifulSoup(weekdayPage.text, "html.parser")
-tables = weekdaySoup.find_all("table")
-tableData = {}
 
 OT = {}
 LE = {}
@@ -105,67 +114,91 @@ EA = {}
 AD = {}
 MISC = {}
 
-for i, table in enumerate(tables):
-    rows = table.find_all("tr")
-    for row in rows:
-        cols = row.find_all("td")
-        cols = [col.text.strip() for col in cols]
+# Advent Sunday
+adventSundayTable = getTables(adventSunday)
+adventSundayRows = getRows(adventSundayTable[0])
+adventSundayRows.pop(0)
+for row in adventSundayRows:
+    date = row[2]
+    cycle = date[-1]
+    first = Verse(row[3], "FIR")
+    resp = Verse(row[4], "RES")
+    second = Verse(row[5], "SEC")
+    alleluia = Verse(row[6], "ALL")
+    gospel = Verse(row[7], "GOS")
+    AD["0" + date[0] + "-7" + cycle] = [first, resp, second, alleluia, gospel]
 
-        # cols[0] = Reading
-        # cols[1] = Day/Feast
-        # cols[2] = Year
-        # cols[3] = Lec#
+# Advent Weekday
+adventWeekdayTable = getTables(adventWeekday)
+adventWeekdayRows = getRows(adventWeekdayTable[0])
+adventWeekdayRows.pop(18)
+adventWeekdayRows.pop(0)
+for row in adventWeekdayRows:
+    date = row[2]
+    AD[date] = "TEST"
 
-        date = cols[1]
-        date = date.replace(",", "")
 
-        # Determines type of reading
-        category = ""
-        match i:
-            case 0:
-                category = "OLD"
-            case 1:
-                category = "GOS"
-            case 2:
-                category = "NEW"
-            case 3:
-                category = "RESP"
-
-        # Determines weekendYear
-        weekendYear = 0
-        if cols[2] in ["1", "2"]:
-            weekendYear = int(cols[2])
-
-        verse = Verse(cols[0], weekendYear, 0, category)
-
-        if not date in [".", "Day", "Day or Feast"]:
-            cols.pop(3)
-            cols.pop(1)
-            if "Ord. Time" in date:
-                date = date.replace("Ord. Time ", "OT")
-                date = replaceDayOfWeek(date)
-                addReading(OT, date, verse)
-            elif "Lent" in date:
-                date = date.replace("Lent ", "LE")
-                date = replaceDayOfWeek(date)
-                addReading(LE, date, verse)
-            elif "Easter" in date:
-                date = date.replace("Easter ", "EA")
-                date = replaceDayOfWeek(date)
-                addReading(EA, date, verse)
-            elif "Advent" in date:
-                date = date.replace("Advent ", "AD")
-                date = replaceDayOfWeek(date)
-                addReading(AD, date, verse)
-            else:
-                addReading(MISC, date, verse, True)
-
-OT = dict(sorted(OT.items()))
-AD = dict(sorted(AD.items()))
-EA = dict(sorted(EA.items()))
-LE = dict(sorted(LE.items()))
-MISC = dict(sorted(MISC.items()))
-
+# for i, table in enumerate(tables):
+#     rows = table.find_all("tr")
+#     for row in rows:
+#         cols = row.find_all("td")
+#         cols = [col.text.strip() for col in cols]
+#
+#         # cols[0] = Reading
+#         # cols[1] = Day/Feast
+#         # cols[2] = Year
+#         # cols[3] = Lec#
+#
+#         date = cols[1]
+#         date = date.replace(",", "")
+#
+#         # Determines type of reading
+#         category = ""
+#         match i:
+#             case 0:
+#                 category = "OLD"
+#             case 1:
+#                 category = "GOS"
+#             case 2:
+#                 category = "NEW"
+#             case 3:
+#                 category = "RESP"
+#
+#         # Determines weekendYear
+#         weekendYear = 0
+#         if cols[2] in ["1", "2"]:
+#             weekendYear = int(cols[2])
+#
+#         verse = Verse(cols[0], weekendYear, 0, category)
+#
+#         if not date in [".", "Day", "Day or Feast"]:
+#             cols.pop(3)
+#             cols.pop(1)
+#             if "Ord. Time" in date:
+#                 date = date.replace("Ord. Time ", "OT")
+#                 date = replaceDayOfWeek(date)
+#                 addReading(OT, date, verse)
+#             elif "Lent" in date:
+#                 date = date.replace("Lent ", "LE")
+#                 date = replaceDayOfWeek(date)
+#                 addReading(LE, date, verse)
+#             elif "Easter" in date:
+#                 date = date.replace("Easter ", "EA")
+#                 date = replaceDayOfWeek(date)
+#                 addReading(EA, date, verse)
+#             elif "Advent" in date:
+#                 date = date.replace("Advent ", "AD")
+#                 date = replaceDayOfWeek(date)
+#                 addReading(AD, date, verse)
+#             else:
+#                 addReading(MISC, date, verse, True)
+#
+# OT = dict(sorted(OT.items()))
+# AD = dict(sorted(AD.items()))
+# EA = dict(sorted(EA.items()))
+# LE = dict(sorted(LE.items()))
+# MISC = dict(sorted(MISC.items()))
+#
 print("ADVENT:")
 printDict(AD)
 print("ORDINARY TIME:")
