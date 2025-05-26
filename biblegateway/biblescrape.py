@@ -28,12 +28,17 @@ def downloadBook(book, translation):
     output = ""
     while chapter < 200:
         try:
-            bibleProgress[book] = min(chapter - 1, chapterAmount - 1)
             FULL_URL = (
                 biblegatewayURL + book + "+" + str(chapter) + "&version=" + translation
             )
             page = requests.get(FULL_URL, timeout=5)
 
+            # Test if book actually exists
+            if "No results found." in page.text and chapter == 1:
+                # del bibleProgress[book]
+                break
+
+            bibleProgress[book] = min(chapter - 1, chapterAmount - 1)
             # Test if data is found
             if "No results found." in page.text or (
                 book in ["Obadiah", "Philemon", "Jude", "2 John", "3 John"]
@@ -110,7 +115,7 @@ def updateProgressBar():
                 + "░" * (LENGTH - filledLength)
                 + "|"
                 + f" {percentComplete}%"
-                + f" ({finishedChapters} / {totalChapters})"
+                + f" ({finishedChapters} / {totalChapters})   "
                 + "\n"
             )
             if progressPercent < 1:
@@ -150,13 +155,15 @@ for book in BOOKS:
     rawBible[book] = -1
     thread.start()
 
+print("Downloading from BibleGateway:", flush=True)
+
 while not downloadFinished:
+    time.sleep(0.1)
     updateProgressBar()
     downloadFinished = True
     for check in rawBible:
         if rawBible[check] == -1:
             downloadFinished = False
-    time.sleep(0.1)
 
 print("\nOutputting into file...")
 
