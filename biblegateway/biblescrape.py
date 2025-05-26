@@ -155,7 +155,7 @@ for book in BOOKS:
     rawBible[book] = -1
     thread.start()
 
-print("Downloading from BibleGateway:", flush=True)
+print(f"Downloading {TRANSLATION} from BibleGateway:", flush=True)
 
 while not downloadFinished:
     time.sleep(0.1)
@@ -172,8 +172,9 @@ if not os.path.exists("bibles"):
 
 with open("bibles/" + TRANSLATION + ".txt", "w", encoding="utf-8") as outputFile:
     for book in BOOKS:
-        line = book.upper() + rawBible[book]
-        outputFile.write(line)
+        if book in bibleProgress:
+            line = book.upper() + rawBible[book]
+            outputFile.write(line)
 
 multiduration = round(time.time() - multistart, 2)
 print(f"Finished downloading. {multiduration}s")
