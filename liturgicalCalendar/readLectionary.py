@@ -35,15 +35,21 @@ def printDict(dict):
         print(f"{row:75} | {dict[row]}")
 
 
-def replaceDayOfWeek(date):
-    date = date.replace("Week ", "")
-    date = date.replace(" Mon", "-1")
-    date = date.replace(" Tues", "-2")
-    date = date.replace(" Wed", "-3")
-    date = date.replace(" Thurs", "-4")
-    date = date.replace(" Fri", "-5")
-    date = date.replace(" Sat", "-6")
-    return date
+def getDayOfWeek(date):
+    day = "0"
+    if "Mon" in date:
+        day = "1"
+    elif "Tues" in date:
+        day = "2"
+    elif "Wed" in date:
+        day = "3"
+    elif "Thurs" in date:
+        day = "4"
+    elif "Fri" in date:
+        day = "5"
+    elif "Sat" in date:
+        day = "6"
+    return day
 
 
 def addVerseToDict(dict, date, reading):
@@ -112,6 +118,7 @@ OT = {}
 LE = {}
 EA = {}
 AD = {}
+CH = {}
 MISC = {}
 
 # Advent Sunday
@@ -124,9 +131,10 @@ for row in adventSundayRows:
     first = Verse(row[3], "FIR")
     resp = Verse(row[4], "RES")
     second = Verse(row[5], "SEC")
-    alleluia = Verse(row[6], "ALL")
     gospel = Verse(row[7], "GOS")
-    AD["0" + date[0] + "-7" + cycle] = [first, resp, second, alleluia, gospel]
+
+    key = "0" + date[0] + "-7" + cycle
+    AD[key] = [first, resp, second, gospel]
 
 # Advent Weekday
 adventWeekdayTable = getTables(adventWeekday)
@@ -135,7 +143,18 @@ adventWeekdayRows.pop(18)
 adventWeekdayRows.pop(0)
 for row in adventWeekdayRows:
     date = row[2]
-    AD[date] = "TEST"
+    first = Verse(row[3], "FIR")
+    resp = Verse(row[4], "RES")
+    gospel = Verse(row[6], "GOS")
+
+    key = ""
+    if "December" in date:
+        key = "Dec" + date[9:11]
+    else:
+        day = getDayOfWeek(date)
+        key = "0" + date[0] + "-" + day
+
+    AD[key] = [first, resp, gospel]
 
 
 # for i, table in enumerate(tables):
@@ -201,11 +220,18 @@ for row in adventWeekdayRows:
 #
 print("ADVENT:")
 printDict(AD)
+print("\n")
+print("CHRISTMAS:")
+printDict(CH)
+print("\n")
 print("ORDINARY TIME:")
 printDict(OT)
+print("\n")
 print("LENT:")
 printDict(LE)
+print("\n")
 print("EASTER:")
 printDict(EA)
+print("\n")
 print("MISCELLANEOUS:")
 printDict(MISC)
