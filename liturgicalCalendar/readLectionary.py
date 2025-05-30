@@ -20,7 +20,7 @@ from bs4 import BeautifulSoup
 
 class Verse:
     def __init__(self, reading, category="NULL"):
-        self.reading = reading
+        self.reading = " ".join(reading.split()).strip()
         self.category = category
 
     def setCategory(self, category):
@@ -113,6 +113,17 @@ adventSunday = "https://catholic-resources.org/Lectionary/1998USL-Advent.htm"
 adventWeekday = (
     "https://catholic-resources.org/Lectionary/2002USL-Weekdays-AdventChristmas.htm"
 )
+christmasSunday = "https://catholic-resources.org/Lectionary/1998USL-Christmas.htm"
+ordinarySundayA = "https://catholic-resources.org/Lectionary/1998USL-OrdinaryA.htm"
+ordinarySundayB = "https://catholic-resources.org/Lectionary/1998USL-OrdinaryB.htm"
+ordinarySundayC = "https://catholic-resources.org/Lectionary/1998USL-OrdinaryC.htm"
+ordinaryWeekday1 = "https://catholic-resources.org/Lectionary/2002USL-Weekdays-OT-I.htm"
+ordinaryWeekday2 = (
+    "https://catholic-resources.org/Lectionary/2002USL-Weekdays-OT-II.htm"
+)
+lentSunday = "https://catholic-resources.org/Lectionary/1998USL-Lent.htm"
+lentWeekday = "https://catholic-resources.org/Lectionary/2002USL-Weekdays-Lent.htm"
+easterSunday = "https://catholic-resources.org/Lectionary/1998USL-Easter.htm"
 
 OT = {}
 LE = {}
@@ -133,7 +144,7 @@ for row in adventSundayRows:
     second = Verse(row[5], "SEC")
     gospel = Verse(row[7], "GOS")
 
-    key = "0" + date[0] + "-7" + cycle
+    key = "0" + date[0] + "-7-" + cycle
     AD[key] = [first, resp, second, gospel]
 
 # Advent Weekday
@@ -156,6 +167,190 @@ for row in adventWeekdayRows:
 
     AD[key] = [first, resp, gospel]
 
+# Christmas Sunday
+christmasSundayTables = getTables(christmasSunday)
+christmasSundayRows = getRows(christmasSundayTables[0])
+christmasSundayRows.pop(0)
+for i, row in enumerate(christmasSundayRows):
+    date = " ".join(row[2].split()).strip()
+    first = Verse(row[3], "FIR")
+    resp = Verse(row[4], "RES")
+    second = Verse(row[5], "SEC")
+    gospel = Verse(row[7], "GOS")
+
+    if i == 4:  # Fix typo for Holy Family year A
+        date = "The Holy Family - A"
+
+    match i:
+        case 0:
+            date = "01-7-VIGIL"
+        case 1:
+            date = "01-7-NIGHT"
+        case 2:
+            date = "01-7-DAWN"
+        case 3:
+            date = "01-7-DAY"
+        case 4:
+            date = "02-7-A"
+        case 5:
+            date = "02-7-B"
+        case 6:
+            date = "02-7-C"
+        case 7:
+            date = "Jan01"
+        case 8:  # In US, this is always the epiphany
+            date = "03-7"
+        case 9:
+            date = "EPIPHANY"
+        case 10:
+            date = "BAPTISM-A"
+        case 11:
+            date = "BAPTISM-B"
+        case 12:
+            date = "BAPTISM-C"
+
+    CH[date] = [first, resp, second, gospel]
+
+# Christmas Weekday
+christmasWeekdayRows = getRows(adventWeekdayTable[1])
+christmasWeekdayRows.pop(0)
+
+for i, row in enumerate(christmasWeekdayRows):  # Readings already in chrismas Sundays
+    if row[2] == "(see the Sunday Lectionary)":
+        christmasWeekdayRows.pop(i)
+
+for i, row in enumerate(christmasWeekdayRows):
+    date = " ".join(row[1].split()).strip()
+    date = date.replace("[", "")
+    if date[:3] in ["Dec", "Jan"]:
+        date = date[:3] + date[5:7]
+        if date[4] in [" ", "]"]:
+            date = date[:-1]
+    else:
+        date = "EPIPHANY-" + str(i - 11)
+
+    CH[date] = [
+        Verse(row[2], "FIR"),
+        Verse(row[3], "RES"),
+        Verse(row[5], "GOS"),
+    ]
+
+# Ordinary Time Sundays
+ordinarySundayTableA = getTables(ordinarySundayA)
+ordinarySundayTableB = getTables(ordinarySundayB)
+ordinarySundayTableC = getTables(ordinarySundayC)
+ordinarySundayRows = [
+    getRows(ordinarySundayTableA[0]),
+    getRows(ordinarySundayTableB[0]),
+    getRows(ordinarySundayTableC[0]),
+]
+for i, rows in enumerate(ordinarySundayRows):
+    rows.pop(0)
+    weekendYear = ""
+    match i:
+        case 0:
+            weekendYear = "A"
+        case 1:
+            weekendYear = "B"
+        case 2:
+            weekendYear = "C"
+
+    for row in rows:
+        date = row[2]
+        if date[1] in ["n", "r", "t"]:
+            date = "0" + date[0]
+        if "Feast of the Baptism of the Lord" in date:
+            date = "01"
+        key = date[:2] + "-7-" + weekendYear
+        OT[key] = [
+            Verse(row[3], "FIR"),
+            Verse(row[4], "RES"),
+            Verse(row[5], "SEC"),
+            Verse(" ".join(row[7].split()).strip(), "GOS"),
+        ]
+
+# Ordinary time Weekday
+ordinaryWeekdayTable1 = getTables(ordinaryWeekday1)
+ordinaryWeekdayTable2 = getTables(ordinaryWeekday2)
+ordinaryWeekdayRows = [
+    getRows(ordinaryWeekdayTable1[0]),
+    getRows(ordinaryWeekdayTable2[0]),
+]
+for i, rows in enumerate(ordinaryWeekdayRows):
+    for row in rows:
+        date = row[1]
+        if date != "Day":
+            weekday = getDayOfWeek(date)
+
+            key = date[5:7] + "-" + weekday
+            if key[1] == " ":
+                key = key.replace(" ", "")
+                key = "0" + key
+
+            key = key + "-" + str(i + 1)
+
+            OT[key] = [Verse(row[2], "FIR"), Verse(row[3], "RES"), Verse(row[5], "GOS")]
+
+# Lent Sunday
+lentSundayTables = getTables(lentSunday)
+lentSundayRows = getRows(lentSundayTables[0])
+lentSundayRows.pop(0)
+for row in lentSundayRows:
+    if len(row) == 8:
+        date = row[2]
+
+        first = Verse(row[3], "FIR")
+        responsal = Verse(row[4], "RES")
+        second = Verse(row[5], "SEC")
+        gospel = Verse(row[7], "GOS")
+        if "Palm Sunday" in date:
+            for i in ["A", "B", "C"]:
+                gospelReading = row[7].split(f"{i}:")
+                gospelReading = gospelReading[1].split("\n")[0].strip()
+                key = "07-7" + "-" + i
+                if "Procession" in date:
+                    key = key + "-PROC"
+                else:
+                    key = key + "-MASS"
+                gospel = Verse(gospelReading, "GOS")
+                LE[key] = [first, responsal, second, gospel]
+        else:
+            key = "0" + date[0] + "-" + date[-1]
+            LE[key] = [first, responsal, second, gospel]
+
+# Lent Weekdays
+lentWeekdayTables = getTables(lentWeekday)
+lentWeekdayRows = getRows(lentWeekdayTables[0])
+ashWednesday = 3
+for row in lentWeekdayRows:
+    if not row[2] == "Day":
+        date = row[2]
+        weekday = getDayOfWeek(date)
+
+        key = "0" + date[0] + "-" + weekday
+        if "Ash" in date:
+            key = "00-" + str(ashWednesday)
+            ashWednesday += 1
+        if "Holy Week" in date:
+            if "Chrism Mass" in date:
+                weekday = "4"
+            key = "06-" + weekday
+        LE[key] = [Verse(row[3], "FIR"), Verse(row[4], "RES"), Verse(row[6], "GOS")]
+
+# Easter Sundays
+easterSundayTables = getTables(easterSunday)
+easterSundayRows = getRows(easterSundayTables[0])
+for row in easterSundayRows:
+    if len(row) == 8 and row[2] != "Sunday or Feast":
+        date = row[2]
+
+        key = date
+        EA[key] = [
+            Verse(row[3], "FIR"),
+            Verse(row[4], "RES"),
+            Verse(row[5], "SEC"),
+            Verse(row[7], "GOS"),
+        ]
 
 # for i, table in enumerate(tables):
 #     rows = table.find_all("tr")
@@ -165,7 +360,7 @@ for row in adventWeekdayRows:
 #
 #         # cols[0] = Reading
 #         # cols[1] = Day/Feast
-#         # cols[2] = Year
+#         # cols[ju2] = Year
 #         # cols[3] = Lec#
 #
 #         date = cols[1]
