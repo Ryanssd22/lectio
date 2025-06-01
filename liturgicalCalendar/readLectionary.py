@@ -634,19 +634,6 @@ for row in saintRows:
             title, first=row[5], responsal=row[6], second=row[7], gospel=row[9]
         )
 
-        # SAINTPROPER[key] = [title]
-        # if row[5] not in ["x", "."]:
-        #     SAINTPROPER[key].append(Verse(row[5], "FIR"))
-        # if row[6] not in ["x", "."]:
-        #     SAINTPROPER[key].append(Verse(row[5], "RES"))
-        # if row[7] not in ["x", "."]:
-        #     SAINTPROPER[key].append(Verse(row[5], "SEC"))
-        # if row[9] not in ["x", "."]:
-        #     SAINTPROPER[key].append(Verse(row[5], "GOS"))
-        #
-        # if len(SAINTPROPER[key]) < 2:
-        #     del SAINTPROPER[key]
-
 
 print("ADVENT:")
 printDict(AD)
@@ -682,7 +669,7 @@ parsedLectionary = {
     "LENT": parseDict(LE),
     "EASTER": parseDict(EA),
     "SOLEMNITY": parseDict(MAJSOLEM),
-    # "SAINTPROPER": parseDict(SAINTPROPER),
+    "SAINTPROPER": parseDict(SAINTPROPER),
 }
 
 with open("lectionaryTemplate.json", "w") as f:

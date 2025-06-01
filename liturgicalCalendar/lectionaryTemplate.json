@@ -5155,5 +5155,1505 @@
       "second": "Eph 1:3-6, 11-12",
       "gospel": "Luke 1:26-38"
     }
+  },
+  "SAINTPROPER": {
+    "Jan2": {
+      "title": "Sts. Basil the Great & Gregory Nazianzen, bishops and doctors of the Church",
+      "first": "Eph 4:1-7, 11-13 (#722.8)",
+      "responsal": "Ps 23:1b-3a, 4, 5, 6 (#721.2)",
+      "second": null,
+      "gospel": "Matt 23:8-12 (#724.3)"
+    },
+    "Jan3-OPT": {
+      "title": "The Most Holy Name of Jesus",
+      "first": "Phil 2:1-11",
+      "responsal": "Ps 8:4-5, 6-7, 8-9",
+      "second": null,
+      "gospel": "Luke 2:21-24"
+    },
+    "Jan4": {
+      "title": "St. Elizabeth Ann Seton, religious",
+      "first": "(see #737-742)",
+      "responsal": null,
+      "second": null,
+      "gospel": null
+    },
+    "Jan5": {
+      "title": "St. John Neumann, bishop",
+      "first": "(see #719-724)",
+      "responsal": null,
+      "second": null,
+      "gospel": null
+    },
+    "Jan6": {
+      "title": "St. Andr\u00e9 Bessette, religious",
+      "first": "(see #737-742)",
+      "responsal": null,
+      "second": null,
+      "gospel": null
+    },
+    "Jan7-OPT": {
+      "title": "St. Raymond of Pe\u00f1afort, priest",
+      "first": "2 Cor 5:14-20 (#722.7)",
+      "responsal": "Ps 103:1bc-2, 3-4, 8-9, 13-14, 17-18a (#739.6)",
+      "second": null,
+      "gospel": "Luke 12:35-40 (#742.22)"
+    },
+    "Jan13-OPT": {
+      "title": "St. Hilary, bishop and doctor of the Church",
+      "first": "1 John 2:18-25",
+      "responsal": "Ps 110:1, 2, 3, 4 (#721.7)",
+      "second": null,
+      "gospel": "Matt 5:13-19 (#730.1)"
+    },
+    "Jan17": {
+      "title": "St. Anthony, abbot",
+      "first": "Eph 6:10-13, 18 (#740.8)",
+      "responsal": "Ps 16:1-2a+5, 7-8, 11 (#739.3)",
+      "second": null,
+      "gospel": "Matt 19:16-26"
+    },
+    "Jan20-OPT": {
+      "title": "St. Sebastian, martyr",
+      "first": "1 Peter 3:14-17 (#716.8)",
+      "responsal": "Ps 34:2-3, 4-5, 6-7, 8-9 (#715.2)",
+      "second": null,
+      "gospel": "Matt 10:28-33 (#718.2)"
+    },
+    "Jan21": {
+      "title": "St. Agnes, virgin and martyr",
+      "first": "1 Cor 1:26-31 (#740.2)",
+      "responsal": "Ps 23:1b-3a, 4, 5, 6 (#739.4)",
+      "second": null,
+      "gospel": "Matt 13:44-46 (#742.5)"
+    },
+    "Jan22": {
+      "title": "Day of Prayer for the Legal Protection of Unborn Children (moved to 1/23 if 1/22 is a Sunday)",
+      "first": "(see #947A-947E; or #887-891)",
+      "responsal": null,
+      "second": null,
+      "gospel": null
+    },
+    "Jan22 (USA Jan23)-OPT": {
+      "title": "St. Vincent, deacon and martyr",
+      "first": "2 Cor 4:7-15 (#716.3)",
+      "responsal": "Ps 34:2-3, 4-5, 6-7, 8-9 (#715.2)",
+      "second": null,
+      "gospel": "Matt 10:17-22 (#718.1)"
+    },
+    "Jan23": {
+      "title": "St. Marianne Cope, virgin",
+      "first": "(see #731-736 or #737-742)",
+      "responsal": null,
+      "second": null,
+      "gospel": null
+    },
+    "Jan24": {
+      "title": "St. Francis de Sales, bishop and doctor of the Church",
+      "first": "Eph 3:8-12 (#728.4)",
+      "responsal": "Ps 37:3-4, 5-6, 30-31 (#727.2)",
+      "second": null,
+      "gospel": "John 15:9-17 (#742.25)"
+    },
+    "Jan25": {
+      "title": "The Conversion of St. Paul, Apostle",
+      "first": "Acts 22:3-16 or Acts 9:1-22",
+      "responsal": "Ps 117:1bc, 2",
+      "second": null,
+      "gospel": "Mark 16:15-18"
+    },
+    "Jan26": {
+      "title": "Sts. Timothy and Titus, bishops",
+      "first": "2 Tim 1:1-8 or Titus 1:1-5",
+      "responsal": "Ps 96:1-2a, 2b-3, 7-8a, 10 (#721.5)",
+      "second": null,
+      "gospel": "Luke 10:1-9 (#724.8)"
+    },
+    "Jan27-OPT": {
+      "title": "St. Angela Merici, virgin",
+      "first": "1 Peter 4:7b-11 (#740.15)",
+      "responsal": "Ps 148:1bc-2, 11-13a, 13c-14 (#733.2)",
+      "second": null,
+      "gospel": "Mark 9:34b-37 (#742.15)"
+    },
+    "Jan28": {
+      "title": "St. Thomas Aquinas, priest and doctor of the Church",
+      "first": "Wisdom 7:7-10, 15-16 (#725.2)",
+      "responsal": "Ps 119:9, 10, 11, 12, 13, 14 (#727.3)",
+      "second": null,
+      "gospel": "Matt 23:8-12 (#730.4)"
+    },
+    "Jan31": {
+      "title": "St. John Bosco, priest",
+      "first": "Phil 4:4-9 (#740.10)",
+      "responsal": "Ps 103:1bc-2, 3-4, 8-9, 13-14, 17-18 (#739.6)",
+      "second": null,
+      "gospel": "Matt 18:1-5 (#742.7)"
+    },
+    "Feb2": {
+      "title": "The Presentation of the Lord",
+      "first": "Mal 3:1-4",
+      "responsal": "Ps 24:7, 8, 9, 10",
+      "second": "Heb 2:14-18",
+      "gospel": "Luke 2:22-40 or 2:22-32"
+    },
+    "Feb3-OPT": {
+      "title": "St. Ansgar, bishop",
+      "first": "Isa 52:7-10 (#719.5)",
+      "responsal": "Ps 96:1-2a, 2b-3, 7-8, 10 (#721.5)",
+      "second": null,
+      "gospel": "Mark 1:14-20 (#724.5)"
+    },
+    "Feb5": {
+      "title": "St. Agatha, virgin and martyr",
+      "first": "1 Cor 1:26-31 (#740.2)",
+      "responsal": "Ps 31:3cd-4, 6+8ab, 16bc+17 (#715.1)",
+      "second": null,
+      "gospel": "Luke 9:23-26 (#718.4)"
+    },
+    "Feb6": {
+      "title": "St. Paul Miki, priest and martyr, and Companions, martyrs",
+      "first": "Gal 2:19-20 (#740.5)",
+      "responsal": "Ps 126:1bc-2ab, 2cd-3, 4-5, 6 (#715.4)",
+      "second": null,
+      "gospel": "Matt 28:16-20 (#724.4)"
+    },
+    "Feb8-OPT": {
+      "title": "St. Josephine Bakhita, virgin (also \"International Day of Prayer and Awareness Against Human Trafficking\")",
+      "first": "1 Cor 7:25-35 (#734.1)",
+      "responsal": "Ps 45:11-12, 14-15, 16-17 (#733.1)",
+      "second": null,
+      "gospel": "Matt 25:1-13 (#736.2)"
+    },
+    "Feb10": {
+      "title": "St. Scholastica, virgin",
+      "first": "Songs 8:6-7 (#731.1)",
+      "responsal": "Ps 148:1bc-2, 11-13a, 13c-14 (#733.2)",
+      "second": null,
+      "gospel": "Luke 10:38-42 (#736.3)"
+    },
+    "Feb11-OPT": {
+      "title": "Our Lady of Lourdes (also \"World Day of the Sick\")",
+      "first": "Isa 66:10-14c",
+      "responsal": "Judith 13:18bcde, 19 (#709.2)",
+      "second": null,
+      "gospel": "John 2:1-11 (#712.11)"
+    },
+    "Feb14": {
+      "title": "Sts. Cyril, monk, and Methodius, bishop",
+      "first": "Acts 13:46-49 (#720.1)",
+      "responsal": "Ps 117:1bc, 2 (#721.8)",
+      "second": null,
+      "gospel": "Luke 10:1-9 (#724. 8)"
+    },
+    "Feb17-OPT": {
+      "title": "Seven Founders of the Order of Servites",
+      "first": "Rom 8:26-30 (#740.1)",
+      "responsal": "Ps 34:2-3, 4-5, 6-7, 8-9, 10-11 (#739.5)",
+      "second": null,
+      "gospel": "Matt 19:27-29 (#742.9)"
+    },
+    "Feb21-OPT": {
+      "title": "St. Peter Damian, bishop and doctor of the Church",
+      "first": "2 Tim 4:1-5 (#728.7)",
+      "responsal": "Ps 16:1-2+5, 7-8, 11 (#739.3)",
+      "second": null,
+      "gospel": "John 15:1-8 (#742.24)"
+    },
+    "Feb22": {
+      "title": "The Chair of St. Peter, Apostle",
+      "first": "1 Pet 5:1-4",
+      "responsal": "Ps 23:1-3a, 4, 5, 6",
+      "second": null,
+      "gospel": "Matt 16:13-19"
+    },
+    "Feb23": {
+      "title": "St. Polycarp, bishop and martyr",
+      "first": "Rev 2:8-11",
+      "responsal": "Ps 31:3cd-4, 6+8ab, 16bc+17 (#715.1)",
+      "second": null,
+      "gospel": "John 15:18-21 (#718.6)"
+    },
+    "Sep3-OPT": {
+      "title": "St. Gregory VII, pope, religious",
+      "first": "Acts 20:17-18a. 28-32, 36 (#720.2)",
+      "responsal": "Ps 110:1, 2, 3, 4 (#721.7)",
+      "second": null,
+      "gospel": "Matt 16:13-19 (#724.2)"
+    },
+    "Mar3": {
+      "title": "St. Katharine Drexel, virgin",
+      "first": "(see #731-736 or #737-742)",
+      "responsal": null,
+      "second": null,
+      "gospel": null
+    },
+    "Mar4-OPT": {
+      "title": "St. Casimir",
+      "first": "Phil 3:8-14 (#740.9)",
+      "responsal": "Ps 15:2-3ab, 3cd-4ab, 5 (#739.2)",
+      "second": null,
+      "gospel": "John 15:9-17 (#742.25)"
+    },
+    "Mar7": {
+      "title": "Sts. Perpetua and Felicity, martyrs",
+      "first": "Rom 8:31b-39 (#716.2)",
+      "responsal": "Ps 124:2-3, 4-5, 7-8 (#715.3)",
+      "second": null,
+      "gospel": "Matt 10:34-39 (#718.3)"
+    },
+    "Mar8-OPT": {
+      "title": "St. John of God, religious",
+      "first": "1 John 3:14-18 (#740.16)",
+      "responsal": "Ps 112:1bc-2, 3-4, 5-7a, 7b-8, 9 (#739.7)",
+      "second": null,
+      "gospel": "Matt 25:31-40 (#742.13)"
+    },
+    "Mar9-OPT": {
+      "title": "St. Frances of Rome, religious",
+      "first": "Prov 31:10-13, 19-20, 30-31 (#737.11)",
+      "responsal": "Ps 34:2-3, 4-5, 6-7, 8-9, 10-11 (#739.5)",
+      "second": null,
+      "gospel": "Matt 22:34-40 (#742.10)"
+    },
+    "Mar17-OPT": {
+      "title": "St. Patrick, bishop",
+      "first": "1 Peter 4:7b-11 (#740.15)",
+      "responsal": "Ps 96:1-2a, 2b-3, 7-8b, 10 (#721.5)",
+      "second": null,
+      "gospel": "Luke 5:1-11 (#724.7)"
+    },
+    "Mar18-OPT": {
+      "title": "St. Cyril of Jerusalem, bishop and doctor of the Church",
+      "first": "1 John 5:1-5 (#740.18)",
+      "responsal": "Ps 19:8, 9, 10, 11 (#727.1)",
+      "second": null,
+      "gospel": "John 15:1-8 (#742,24)"
+    },
+    "Mar23-OPT": {
+      "title": "St. Turibius of Mongrovejo, bishop",
+      "first": "2 Tim 1:13-14; 2:1-3 (#722.11)",
+      "responsal": "Ps 96:1-2a, 2b-3, 7-8c, 10 (#721.5)",
+      "second": null,
+      "gospel": "Matt 9:35-38 (#724.1)"
+    },
+    "Apr2-OPT": {
+      "title": "St. Francis of Paola, hermit",
+      "first": "Phil 3:8-14 (#740.9)",
+      "responsal": "Ps 16:1-2a+5, 7-8, 11 (#739.3)",
+      "second": null,
+      "gospel": "Luke 12:32-34 (#742.21)"
+    },
+    "Apr4-OPT": {
+      "title": "St. Isidore, bishop and doctor of the Church",
+      "first": "2 Cor 4:1-2, 5-7 (#722.6)",
+      "responsal": "Ps 37:3-4, 5-6, 30-31 (#727.2)",
+      "second": null,
+      "gospel": "Luke 6:43-45 (#730.6)"
+    },
+    "Apr5-OPT": {
+      "title": "St. Vincent Ferrer, priest",
+      "first": "2 Tim 4:1-5 (#722.12)",
+      "responsal": "Ps 40:2, 4, 7-8, 8-9, 10,11 (#721.3)",
+      "second": null,
+      "gospel": "Luke 12:35-40 (#742.22)"
+    },
+    "Apr7": {
+      "title": "St. John Baptist de la Salle, priest",
+      "first": "2 Tim 1:13-14; 2:1-3 (#722.11)",
+      "responsal": "Ps 1:1-2, 3, 4+6 (#739.1)",
+      "second": null,
+      "gospel": "Matt 18:1-5 (#742.7)"
+    },
+    "Apr11": {
+      "title": "St. Stanislaus, bishop and martyr",
+      "first": "Rev 12:10-12a (#714.3)",
+      "responsal": "Ps 34:2-3, 4-5, 6-7, 8-9 (#715.2)",
+      "second": null,
+      "gospel": "John 17:11b-19 (#718.7)"
+    },
+    "Apr13-OPT": {
+      "title": "St. Martin I, pope and martyr",
+      "first": "2 Tim 2:8-13; 3:10-12 (#716.5)",
+      "responsal": "Ps 126:1bc-2, 2-3, 4-5, 6 (#715.4)",
+      "second": null,
+      "gospel": "John 15:18-21 (#718.6)"
+    },
+    "Apr21-OPT": {
+      "title": "St. Anselm, bishop and doctor of the Church",
+      "first": "Eph 3:14-19 (#740.7)",
+      "responsal": "Ps 34:2-3, 4-5, 6-7, 8-9, 10-11 (#739.5)",
+      "second": null,
+      "gospel": "Matt 7:21-29 (#730.2)"
+    },
+    "Apr23-OPT": {
+      "title": "St. Adalbert, bishop and martyr",
+      "first": "2 Cor 6:4-10",
+      "responsal": "Ps 31:3cd-4, 6+8ab, 16bc+17",
+      "second": null,
+      "gospel": "John 10:11-16"
+    },
+    "Apr24-OPT": {
+      "title": "St. Fidelis of Sigmaringen, priest and martyr",
+      "first": "Col 1:24-29 (#722.9)",
+      "responsal": "Ps 34:2-3, 4-5, 6-7, 8-9 (#715.2)",
+      "second": null,
+      "gospel": "John 17:20-26 (#742.26)"
+    },
+    "Apr25": {
+      "title": "St. Mark, evangelist",
+      "first": "1 Pet 5:5b-14",
+      "responsal": "Ps 89:2-3, 6-7, 16-17",
+      "second": null,
+      "gospel": "Mark 16:15-20"
+    },
+    "Apr28-OPT": {
+      "title": "St. Louis Grignion de Montfort, priest",
+      "first": "1 Cor 1:18-25",
+      "responsal": "Ps 40:2+4, 7-8a, 8b-9, 10",
+      "second": null,
+      "gospel": "Matt 28:16-20"
+    },
+    "Apr29": {
+      "title": "St. Catherine of Siena, virgin and doctor of the Church",
+      "first": "1 John 1:5\u20142:2",
+      "responsal": "Ps 103:1-2, 3-4, 8-9, 13-14, 17-18 (#739.6)",
+      "second": null,
+      "gospel": "Matt 11:25-30 (#742.4)"
+    },
+    "Apr30-OPT": {
+      "title": "St. Pius V, pope, religious",
+      "first": "1 John 4:1-5 (#722.3)",
+      "responsal": "Ps 110:1, 2, 3, 4 (# 721.7)",
+      "second": null,
+      "gospel": "John 21:15-17 (#724.12)"
+    },
+    "May1-OPT": {
+      "title": "St. Joseph the Worker",
+      "first": "Gen 1:26\u20142:3 or Col 3:14-15, 17, 23-24",
+      "responsal": "Ps 90:2, 3-4, 12-13, 14+16",
+      "second": null,
+      "gospel": "Matt 13:54-58"
+    },
+    "May2": {
+      "title": "St. Athanasius, bishop and doctor of the Church",
+      "first": "1 John 5:1-5 (#716.10)",
+      "responsal": "Ps 37:3-4, 5-6, 30-31 (#727.2)",
+      "second": null,
+      "gospel": "Matt 10:22-25"
+    },
+    "May3": {
+      "title": "Sts. Philip and James, Apostles",
+      "first": "1 Cor 15:1-8",
+      "responsal": "Ps 19:2-3, 4-5",
+      "second": null,
+      "gospel": "John 14:6-14"
+    },
+    "May10": {
+      "title": "St. Damien de Veuster, priest",
+      "first": "(see #719-724, or #737-742)",
+      "responsal": null,
+      "second": null,
+      "gospel": null
+    },
+    "May10-OPT": {
+      "title": "St. John of Avila, priest and doctor of the Church",
+      "first": "Acts 13:46-49 (#720.1)",
+      "responsal": "Ps 23:1b-3, 4, 5, 6 (#721.2)",
+      "second": null,
+      "gospel": "Matt 5:13-19 (730.1)"
+    },
+    "May12-OPT": {
+      "title": "St. Pancras, martyr",
+      "first": "Rev 19:1, 5-9a (#738.3)",
+      "responsal": "Ps 103:1-2, 3-4, 8-9, 13-14, 17-18 (#739.6)",
+      "second": null,
+      "gospel": "Matt 11:25-30 (#742.4)"
+    },
+    "May13-OPT": {
+      "title": "Our Lady of Fatima",
+      "first": "Isa 61:9-11 (#707.9)",
+      "responsal": "Ps 45:11-12, 14-15, 16-17 (#709.3)",
+      "second": null,
+      "gospel": "Luke 11:27-28"
+    },
+    "May14": {
+      "title": "St. Matthias, Apostle",
+      "first": "Acts 1:15-17, 20-26",
+      "responsal": "Ps 113:1-2, 3-4, 5-6, 7-8",
+      "second": null,
+      "gospel": "John 15:9-17"
+    },
+    "May15": {
+      "title": "St. Isidore",
+      "first": "(see #737-742)",
+      "responsal": null,
+      "second": null,
+      "gospel": null
+    },
+    "May18-OPT": {
+      "title": "St. John I, pope and martyr",
+      "first": "Rev 3:14b, 20-22 (#738.2)",
+      "responsal": "Ps 23:1-3a, 4, 5, 6 (#721.2)",
+      "second": null,
+      "gospel": "Luke 22:24-30 (#724.9)"
+    },
+    "May20-OPT": {
+      "title": "St. Bernardine of Siena, priest",
+      "first": "Acts 4:8-12",
+      "responsal": "Ps 40:2, 4, 7-8, 8-9, 10, 11 (#721.3)",
+      "second": null,
+      "gospel": "Luke 9:57-62 (#742.19)"
+    },
+    "May21-OPT": {
+      "title": "St. Christopher Magallanes, priest, and Companions, martyrs",
+      "first": "Rev 7:9-17 (#714.2)",
+      "responsal": "Ps 34:2-3, 4-5, 6-7, 8-9 (#715.2)",
+      "second": null,
+      "gospel": "John 12:24-26 (#718.5)"
+    },
+    "May22-OPT": {
+      "title": "St. Rita of Cascia, religious",
+      "first": "Phil 4:4-9 (#740.10)",
+      "responsal": "Ps 1:1-2, 3, 4+6 (#739.1)",
+      "second": null,
+      "gospel": "Luke 6:27-38 (#742.18)"
+    },
+    "May25-OPT": {
+      "title": "St. Mary Magdalene de' Pazzi, virgin",
+      "first": "1 Cor 7:25-35 (#734.1)",
+      "responsal": "Ps 148:1-2, 11-13, 13-14 (#733.2)",
+      "second": null,
+      "gospel": "Mark 3:31-35 (#742.14)"
+    },
+    "May26": {
+      "title": "St. Philip Neri, priest",
+      "first": "Phil 4:4-9 (#740.10)",
+      "responsal": "Ps 34:2-3, 4-5, 6-7, 8-9, 10-11 (#739.5)",
+      "second": null,
+      "gospel": "John 17:20-26 (#742.26)"
+    },
+    "May27-OPT": {
+      "title": "St. Augustine of Canterbury, bishop",
+      "first": "1 Thess 2:2b-8 (#722.10)",
+      "responsal": "Ps 96:1-2a, 2b-3, 7-8a, 10 (#721.5)",
+      "second": null,
+      "gospel": "Matt 9:35-38 (#724.1)"
+    },
+    "May29-OPT": {
+      "title": "St. Paul VI, pope",
+      "first": "1 Cor 9:16-19, 22-23 (#722.4)",
+      "responsal": "Ps 96:1-2a, 2b-3, 7-8a, 10 (#721.5)",
+      "second": null,
+      "gospel": "Matt 16:13-19 (#724.2)"
+    },
+    "May31": {
+      "title": "The Visitation of the Blessed Virgin Mary",
+      "first": "Zeph 3:14-18a or Rom 12:9-16",
+      "responsal": "Isa 12:2-3, 4bcd, 5-6",
+      "second": null,
+      "gospel": "Luke 1:39-56"
+    },
+    "Mon. after Pentecost": {
+      "title": "Blessed Virgin Mary, Mother of the Church",
+      "first": "Gen 3:9-15, 20 or Acts 1:12-14",
+      "responsal": "Ps 87:1-2, 3+5, 6-7",
+      "second": null,
+      "gospel": "John 19:25-34"
+    },
+    "Sat. after 2nd Sun. after Pentecost-OPT": {
+      "title": "The Immaculate Heart of the Blessed Virgin Mary",
+      "first": "Isa 61:9-11 (#707.9)",
+      "responsal": "1 Sam 2:1, 4-5, 6-7, 8abcd (#709.1)",
+      "second": null,
+      "gospel": "Luke 2:41-51"
+    },
+    "Jun1": {
+      "title": "St. Justin, martyr",
+      "first": "1 Cor 1:18-25 (#722.2)",
+      "responsal": "Ps 34:2-3, 4-5, 6-7, 8-9 (#715.2)",
+      "second": null,
+      "gospel": "Matt 5:13-19 (#730.1)"
+    },
+    "Jun2-OPT": {
+      "title": "Sts. Marcellinus and Peter, martyrs",
+      "first": "2 Cor 6:4-10 (#716.4)",
+      "responsal": "Ps 124:2-3, 4-5, 7b-8 (#715.3)",
+      "second": null,
+      "gospel": "John 17:11b-19 (#718.7)"
+    },
+    "Jun3": {
+      "title": "St. Charles Lwanga and companions, martyrs",
+      "first": "2 Mac 7:1-2, 9-14 (#713.3)",
+      "responsal": "Ps 124:2-3, 4-5, 7b-8 (#715.3)",
+      "second": null,
+      "gospel": "Matt 5:1-12a (#742.1)"
+    },
+    "Jun5": {
+      "title": "St. Boniface, bishop and martyr",
+      "first": "Acts 26:19-23 (#720.3)",
+      "responsal": "Ps 117:1bc, 2 (#721.8)",
+      "second": null,
+      "gospel": "John 10:11-16 (#724.10)"
+    },
+    "Jun6-OPT": {
+      "title": "St. Norbert, bishop",
+      "first": "Ezek 34:11-16 (#719.9)",
+      "responsal": "Ps 23:1-3a, 4, 5, 6 (#721.2)",
+      "second": null,
+      "gospel": "Luke 14:25-33 (#742.23)"
+    },
+    "Jun9-OPT": {
+      "title": "St. Ephrem, deacon and doctor of the Church",
+      "first": "Col 3:12-17 (#740.11)",
+      "responsal": "Ps 37:3-4, 5-6, 30-31 (#727.2)",
+      "second": null,
+      "gospel": "Luke 6:43-45 (#730.6)"
+    },
+    "Jun11": {
+      "title": "St. Barnabas, Apostle",
+      "first": "Acts 11:21b-26; 13:1-3",
+      "responsal": "Ps 98:1, 2-3ab, 3cd-4, 5-6",
+      "second": null,
+      "gospel": "Matt 10:7-13"
+    },
+    "Jun13": {
+      "title": "St. Anthony of Padua, priest and doctor of the Church",
+      "first": "Isa 61:1-3d (#719.6)",
+      "responsal": "Ps 89:2-3, 4-5, 21-22, 25+27 (#721.4)",
+      "second": null,
+      "gospel": "Luke 10:1-9 (#724.8)"
+    },
+    "Jun19-OPT": {
+      "title": "St. Romuald, abbot",
+      "first": "Phil 3:8-14 (#740.9)",
+      "responsal": "Ps 131:1bcde, 2, 3 (#739.9)",
+      "second": null,
+      "gospel": "Luke 14:25-33 (#742.23)"
+    },
+    "Jun21": {
+      "title": "St. Aloysius Gonzaga, religious",
+      "first": "1 John 5:1-5 (#740.18)",
+      "responsal": "Ps 16:1-2a+5, 7-8, 11 (#739.3)",
+      "second": null,
+      "gospel": "Matt 22:34-40 (#742.10)"
+    },
+    "Jun22-OPT": {
+      "title": "St. John Fisher, bishop and martyr, and St. Thomas More, martyr",
+      "first": "1 Peter 4:12-19 (#716.9)",
+      "responsal": "Ps 126:1bc-2ab, 2cd-3, 4-5, 6 (#715.4)",
+      "second": null,
+      "gospel": "Matt 10:34-39 (#718.3)"
+    },
+    "Jun27-OPT": {
+      "title": "St. Cyril of Alexandria, bishop and doctor of the Church",
+      "first": "2 Tim 4:1-5 (#722.12)",
+      "responsal": "Ps 89:2-3, 4-5, 21-22, 25+27 (#721.4)",
+      "second": null,
+      "gospel": "Matt 5:13-19 (#730.1)"
+    },
+    "Jun28": {
+      "title": "St. Irenaeus, bishop and martyr, and doctor of the Church (as of 1/21/22)",
+      "first": "2 Tim 2:22b-26",
+      "responsal": "Ps 37:3-4, 5-6, 30-31 (#727.2)",
+      "second": null,
+      "gospel": "John 17:20-26 (#742.26)"
+    },
+    "Jun30-OPT": {
+      "title": "The First Martyrs of Holy Roman Church",
+      "first": "Rom 8:31b-39 (#716.2)",
+      "responsal": "Ps 124:2-3, 4-5, 7b-8 (#715.3)",
+      "second": null,
+      "gospel": "Matt 24:4-13"
+    },
+    "Jul1": {
+      "title": "St. Junipero Serra, priest",
+      "first": "(see #719-724, or #737-742)",
+      "responsal": null,
+      "second": null,
+      "gospel": null
+    },
+    "Jul3": {
+      "title": "St. Thomas, Apostle",
+      "first": "Eph 2:19-22",
+      "responsal": "Ps 117:1bc, 2",
+      "second": null,
+      "gospel": "John 20:24-29"
+    },
+    "Jul4 (USA Jul5)-OPT": {
+      "title": "St. Elizabeth of Portugal",
+      "first": "1 John 3:14-18 (#740.16)",
+      "responsal": "Ps 112:1-2, 3-4, 5-6,7-8, 9 (#739,7)",
+      "second": null,
+      "gospel": "Matt 25:31-46 or 25:31-40 (#742.13)"
+    },
+    "Jul4": {
+      "title": "Independence Day",
+      "first": "(see #882-886, or #887-891)",
+      "responsal": null,
+      "second": null,
+      "gospel": null
+    },
+    "Jul5-OPT": {
+      "title": "St. Anthony Mary Zaccaria, priest",
+      "first": "2 Tim 1:13-14; 2:1-3 (#722.11)",
+      "responsal": "Ps 1:1-2, 3, 4+6 (#739.1)",
+      "second": null,
+      "gospel": "Mark 10:13-16 (#742.16)"
+    },
+    "Jul5": {
+      "title": "Our Lady of Refuge: Patroness of the Californias",
+      "first": "Est C:12, 14-15, 25-30 or Eph 2:4-10",
+      "responsal": "_",
+      "second": null,
+      "gospel": "John 2:1-11 or Luke 1:39-55"
+    },
+    "Jul6-OPT": {
+      "title": "St. Maria Goretti, virgin and martyr",
+      "first": "1 Cor 6:13c-15a, 17-20",
+      "responsal": "Ps 31:3cd-4, 6+8ab, 16bc+17 (#715.1)",
+      "second": null,
+      "gospel": "John 12:24-26 (#718.5)"
+    },
+    "Jul9-OPT": {
+      "title": "St. Augustine Zhao Rong, priest, and Companions, Chinese martyrs",
+      "first": "1 John 5:1-5 (716.10)",
+      "responsal": "Ps 126:1-2ab, 2cd-3, 4-5, 6 #715.4)",
+      "second": null,
+      "gospel": "Jn 12:24-26 (#718.5)"
+    },
+    "Jul11": {
+      "title": "St. Benedict, abbot",
+      "first": "Prov 2:1-9",
+      "responsal": "Ps 34:2-3, 4-5, 6-7, 8-9, 10-11 (#739.5)",
+      "second": null,
+      "gospel": "Matt 19:27-29 (#742.9)"
+    },
+    "Jul13-OPT": {
+      "title": "St. Henry",
+      "first": "Mic 6:6-8 (#737.17)",
+      "responsal": "Ps 1:1-2, 3, 4+6 (#739.1)",
+      "second": null,
+      "gospel": "Matt 7:21-27 (#742.3)"
+    },
+    "Jul14 ->18-OPT": {
+      "title": "St. Camillus de Lellis, priest",
+      "first": null,
+      "responsal": null,
+      "second": null,
+      "gospel": null
+    },
+    "Jul14": {
+      "title": "St. Kateri Tekakwitha, virgin",
+      "first": "(see #731-736)",
+      "responsal": null,
+      "second": null,
+      "gospel": null
+    },
+    "Jul15": {
+      "title": "St. Bonaventure, bishop and doctor of the Church",
+      "first": "Eph 3:14-19 (#740.7)",
+      "responsal": "Ps 119:9, 10, 11, 12, 13, 14 (#727.3)",
+      "second": null,
+      "gospel": "Matt 23:8-12 (#724.3)"
+    },
+    "Jul16-OPT": {
+      "title": "Our Lady of Mount Carmel",
+      "first": "Zac 2:14-17 (#707.11)",
+      "responsal": "Luke 1:46-47, 48-49, 50-51, 52-53, 54-55 (#709.5)",
+      "second": null,
+      "gospel": "Matt 12:46-50 (#712.3)"
+    },
+    "Jul18": {
+      "title": "St. Camillus de Lellis, priest",
+      "first": "1 John 3:14-18 (#740.16)",
+      "responsal": "Ps 112:1-2, 3-4, 5-7a, 7b-8, 9 (#739.7)",
+      "second": null,
+      "gospel": "John 15:9-17 (#742.25)"
+    },
+    "Jul20-OPT": {
+      "title": "St. Apollinaris, bishop and martyr",
+      "first": "Ezek 34:11-16 (#719.9)",
+      "responsal": "Ps 23:1-3a, 4, 5, 6 (#721.2)",
+      "second": null,
+      "gospel": "John 10:11-16 (#724.10)"
+    },
+    "Jul21-OPT": {
+      "title": "St. Lawrence of Brindisi, priest and doctor of the Church",
+      "first": "2 Cor 4:1-2, 5-7 (#722.6)",
+      "responsal": "Ps 40:2+4ab, 7-8a, 8b-9, 10 (#721.3)",
+      "second": null,
+      "gospel": "Mark 4:1-10, 13-20 (#730.5)"
+    },
+    "Jul22": {
+      "title": "St. Mary Magdalene*",
+      "first": "Cant 3:1-4b or 2 Cor 5:14-17",
+      "responsal": "Ps 63:2, 3-4, 5-6, 8-9",
+      "second": null,
+      "gospel": "John 20:1-2, 11-18"
+    },
+    "Jul23-OPT": {
+      "title": "St. Bridget of Sweden, religious",
+      "first": "Gal 2:19-20 (#740.5)",
+      "responsal": "Ps 34:2-3, 4-5, 6-7, 8-9, 10-11 (#739.5)",
+      "second": null,
+      "gospel": "John 15:1-8 (#742.24)"
+    },
+    "Jul24-OPT": {
+      "title": "St. Sharbel Makhluf, priest",
+      "first": "Sir 3:17-24 (#737.13)",
+      "responsal": "Ps 15:2-3ab, 3cd-4ab, 5 (#739.2)",
+      "second": null,
+      "gospel": "Matt 19:27-29 (#742.9)"
+    },
+    "Jul25": {
+      "title": "St. James, Apostle",
+      "first": "2 Cor 4:7-15",
+      "responsal": "Ps 126:1bc-2ab, 2cd-3, 4-5, 6",
+      "second": null,
+      "gospel": "Matt 20:20-28"
+    },
+    "Jul26": {
+      "title": "Sts. Joachim and Anne, parents of the Blessed Virgin Mary",
+      "first": "Sir 44:1, 10-15",
+      "responsal": "Ps 132:11, 13-14, 17-18",
+      "second": null,
+      "gospel": "Matt 13:16-17"
+    },
+    "Jul29": {
+      "title": "Sts. Martha, Mary, and Lazarus*",
+      "first": "1 John 4:7-16 (#740.17)",
+      "responsal": "Ps 34:2-3, 4-5, 6-7, 8-9, 10-11 (#739.5)",
+      "second": null,
+      "gospel": "John 11:19-27 or Luke 10:38-42"
+    },
+    "Jul30-OPT": {
+      "title": "St. Peter Chrysologus, bishop and doctor of the Church",
+      "first": "Eph 3:8-12 (#728.4)",
+      "responsal": "Ps 119:9, 10, 11, 12, 13, 14 (#727.3)",
+      "second": null,
+      "gospel": "Luke 6:43-45 (#730.6)"
+    },
+    "Jul31": {
+      "title": "St. Ignatius of Loyola, priest",
+      "first": "1 Cor 10:31\u201411:1",
+      "responsal": "Ps 34:2-3, 4-5, 6-7, 8-9, 10-11 (#739.5)",
+      "second": null,
+      "gospel": "Luke 14:25-33 (#742.23)"
+    },
+    "Aug1": {
+      "title": "St. Alphonsus Liguori, bishop and doctor of the Church",
+      "first": "Rom 8:1-4",
+      "responsal": "Ps 119:9, 10, 11, 12, 13, 14 (# 727.3)",
+      "second": null,
+      "gospel": "Matt 5:13-19 (#730.1)"
+    },
+    "Aug2-OPT": {
+      "title": "St. Peter Julian Eymard, priest",
+      "first": "Acts 4:32-35",
+      "responsal": "Ps 34:2-3, 4-5, 6-7, 8-9, 10-11",
+      "second": null,
+      "gospel": "John 15:1-8"
+    },
+    "Aug4": {
+      "title": "St. John Mary Vianney, priest",
+      "first": "Ezek 3:17-21 (#719.8)",
+      "responsal": "Ps 117:1bc, 2 (#721.8)",
+      "second": null,
+      "gospel": "Matt 9:35\u201410:1"
+    },
+    "Aug5-OPT": {
+      "title": "The Dedication of the Basilica of St. Mary Major in Rome",
+      "first": "Rev 21:1-5a (#708.3)",
+      "responsal": "Judith 13:18, 19 (#709.2)",
+      "second": null,
+      "gospel": "Luke 11:27-28 (#712.10)"
+    },
+    "Aug6": {
+      "title": "The Transfiguration of the Lord",
+      "first": "Dan 7:9-10, 13-14",
+      "responsal": "Ps 97:1-2, 5-6, 9",
+      "second": "2 Pet 1:16-19",
+      "gospel": "A: Matt 17:1-9 B: Mark 9:2-10 C: Luke 9:28b-36"
+    },
+    "Aug7-OPT": {
+      "title": "St. Cajetan, priest",
+      "first": "Sir 2:7-13 (#737.12)",
+      "responsal": "Ps 112:1-2, 3-4, 5-6, 7-8, 9 (#739.7)",
+      "second": null,
+      "gospel": "Luke 12:32-34 (#742.21)"
+    },
+    "Aug8": {
+      "title": "St. Dominic, priest",
+      "first": "1 Cor 2:1-10a (#728.2)",
+      "responsal": "Ps 96:1-2a, 2b-3, 7-8a, 10 (#721.5)",
+      "second": null,
+      "gospel": "Luke 9:57-62 (#742.19)"
+    },
+    "Aug9-OPT": {
+      "title": "St. Teresa Benedicta of the Cross, virgin and martyr",
+      "first": "Hos 2:16bc, 17cd, 21-22 (#731.2)",
+      "responsal": "Ps 45:11-12, 14-15, 16-17 (#733.1)",
+      "second": null,
+      "gospel": "Matt 25:1-13 (#736.2)"
+    },
+    "Aug10": {
+      "title": "St. Lawrence, deacon and martyr",
+      "first": "2 Cor 9:6-10",
+      "responsal": "Ps 112:1-2, 5-6, 7-8, 9",
+      "second": null,
+      "gospel": "John 12:24-26"
+    },
+    "Aug11": {
+      "title": "St. Clare, virgin",
+      "first": "Phil 3:8-14 (#740.9)",
+      "responsal": "Ps 16:1b-2a, 5, 7-8, 11 (#739.3)",
+      "second": null,
+      "gospel": "Matt 19:27-29 (#742.9)"
+    },
+    "Aug12-OPT": {
+      "title": "St. Jane Frances de Chantal, religious [previously Dec. 12 or Aug. 18]",
+      "first": "Prov 31:10-13, 19-20, 30-31 (#737.11)",
+      "responsal": "Ps 131:1bcde, 2, 3 (#739.9)",
+      "second": null,
+      "gospel": "Mark 3:31-35 (#742.14)"
+    },
+    "Aug13-OPT": {
+      "title": "St. Pontian, pope and martyr, and St. Hippolytus, priest and martyr",
+      "first": "1 Peter 4:12-19 (#716.9)",
+      "responsal": "Ps 124:2-3, 4-5, 7b-8 (#715.3)",
+      "second": null,
+      "gospel": "John 15:18-21 (#718.6)"
+    },
+    "Aug14": {
+      "title": "St. Maximilian Mary Kolbe, priest and martyr",
+      "first": "Wis 3:1-9, or 1 John 3:14-18",
+      "responsal": "Ps 116:10-11, 12-13, 16ac-17",
+      "second": null,
+      "gospel": "John 15:12-16"
+    },
+    "Aug16-OPT": {
+      "title": "St. Stephen of Hungary",
+      "first": "Deut 6:3-9 (#737.3)",
+      "responsal": "Ps 112:1bc-2, 3-4, 5-6, 7-8, 9 (#739.7)",
+      "second": null,
+      "gospel": "Matt 25:14-30 or 25:14-23 (#742.12)"
+    },
+    "Aug19-OPT": {
+      "title": "St. John Eudes, priest",
+      "first": "Eph 3:14-19 (#740.7)",
+      "responsal": "Ps 131:1bcde, 2, 3 (#739.9)",
+      "second": null,
+      "gospel": "Matt 11:25-30 (#742.4)"
+    },
+    "Aug20": {
+      "title": "St. Bernard, abbot and doctor of the Church",
+      "first": "Sir 15:1-6 (#725.3)",
+      "responsal": "Ps 119:9, 10, 11, 12, 13, 14 (#727.3)",
+      "second": null,
+      "gospel": "John 17:20-26 (#742.26)"
+    },
+    "Aug21": {
+      "title": "St. Pius X, pope",
+      "first": "1 Thess 2:2b-8 (#722.10)",
+      "responsal": "Ps 89:2-3, 4-5, 21-22, 25+27 (#721.4)",
+      "second": null,
+      "gospel": "John 21:15-17 (#724.12)"
+    },
+    "Aug22": {
+      "title": "The Queenship of the Blessed Virgin Mary",
+      "first": "Isa 9:1-6 (#707.8)",
+      "responsal": "Ps 113:1-2, 3-4, 5-6, 7-8 (#709.4)",
+      "second": null,
+      "gospel": "Luke 1:26-38 (#712.4)"
+    },
+    "Aug23-OPT": {
+      "title": "St. Rose of Lima, virgin",
+      "first": "2 Cor 10:17\u201411:2 (#734.2)",
+      "responsal": "Ps 148:1bc-2, 11-13a, 13c-14 (#733.2)",
+      "second": null,
+      "gospel": "Matt 13:44-46 (#742.5)"
+    },
+    "Aug24": {
+      "title": "St. Bartholomew, Apostle",
+      "first": "Rev 21:9b-14",
+      "responsal": "Ps 145:10-11, 12-13, 17-18",
+      "second": null,
+      "gospel": "John 1:45-51"
+    },
+    "Aug25-OPT": {
+      "title": "St. Joseph Calasanz, priest",
+      "first": "1 Cor 12:31\u201413:13 or 13:4-13 (#740.3)",
+      "responsal": "Ps 34:2-3, 4-5, 6-7, 8-9, 10-11 (#739.5)",
+      "second": null,
+      "gospel": "Matt 18:1-5 (#742.7)"
+    },
+    "Aug27": {
+      "title": "St. Monica",
+      "first": "Sir 26:1-4, 13-16 (#737.14)",
+      "responsal": "Ps 131:1bcde, 2, 3 (#739.9)",
+      "second": null,
+      "gospel": "Luke 7:11-17"
+    },
+    "Aug28": {
+      "title": "St. Augustine, bishop and doctor of the Church",
+      "first": "1 John 4:7-16 (#740.17)",
+      "responsal": "Ps 119:9, 10, 11, 12, 13, 14 (#727.3)",
+      "second": null,
+      "gospel": "Matt 23:8-12 (#730.4)"
+    },
+    "Aug29": {
+      "title": "The Passion/Martyrdom of St. John the Baptist",
+      "first": "Jer 1:17-19",
+      "responsal": "Ps 71:1-2, 3-4a, 5-6ab, 15ab+17",
+      "second": null,
+      "gospel": "Mark 6:17-29"
+    },
+    "Sep3": {
+      "title": "St. Gregory the Great, pope and doctor of the Church",
+      "first": "2 Cor 4:1-2, 5-7 (#722.6)",
+      "responsal": "Ps 96:1-2a, 2b-3, 7-8, 10 (#721.5)",
+      "second": null,
+      "gospel": "Luke 22:24-30 (#724.9)"
+    },
+    "Sep5 (new, as of 12/24/2024)-OPT": {
+      "title": "St. Teresa of Calcutta, Virgin",
+      "first": "Isa 58:6-11 (#737.15)",
+      "responsal": "Ps 34:2-3, 4-5, 6-7, 8-9, 10-11 (#739.5)",
+      "second": null,
+      "gospel": "Matt 25:31-46 or 25:31-40 (#742.13)"
+    },
+    "Sep8": {
+      "title": "The Nativity of the Blessed Virgin Mary",
+      "first": "Micah 5:1-4a or Rom 8:28-30",
+      "responsal": "Ps 13:6ab, 6c",
+      "second": null,
+      "gospel": "Matt 1:1-16, 18-23 or 1:18-23"
+    },
+    "Sep9": {
+      "title": "St. Peter Claver, priest and religious",
+      "first": "Isa 58:6-11 (#737.15)",
+      "responsal": "Ps 1:1-2, 3, 4+6 (#739.1)",
+      "second": null,
+      "gospel": "Matt 25:31-40 (#742.13)"
+    },
+    "Sep12-OPT": {
+      "title": "The Most Holy Name of the Blessed Virgin Mary",
+      "first": "Gal 4:4-7 (#710.3)",
+      "responsal": "Luke 1:46-47, 48-49, 50-51, 52-53, 54-55 (#709.5)",
+      "second": null,
+      "gospel": "Luke 1:39-47 (#712.5)"
+    },
+    "Sep13": {
+      "title": "St. John Chrysostom, bishop and doctor of the Church",
+      "first": "Eph 4:1-7, 11-13 (#722.8)",
+      "responsal": "Ps 40:2+4, 7-8a, 8b-9, 10 (#721.3)",
+      "second": null,
+      "gospel": "Mark 4:1-10, 13-20 or 4:1-9 (#730.5)"
+    },
+    "Sep14": {
+      "title": "The Exaltation of the Holy Cross",
+      "first": "Num 21:4b-9",
+      "responsal": "Ps 78:1bc-2, 34-35, 36-37, 38",
+      "second": "Phil 2:6-11",
+      "gospel": "John 3:13-17"
+    },
+    "Sep15": {
+      "title": "Our Lady of Sorrows",
+      "first": "Heb 5:7-9",
+      "responsal": "Ps 31:2-3b, 3cd-4, 5-6, 15-16, 20",
+      "second": "[opt. Sequence: Stabat Mater]",
+      "gospel": "John 19:25-27 or Luke 2:33-35"
+    },
+    "Sep16": {
+      "title": "St. Cornelius, pope and martyr, and St. Cyprian, bishop and martyr",
+      "first": "2 Cor 4:7-15 (#716.3)",
+      "responsal": "Ps 126:1bc-2ab, 2cd-3, 4-5, 6 (#715.4)",
+      "second": null,
+      "gospel": "John 17:11b-19 (#718.7)"
+    },
+    "Sep17-OPT": {
+      "title": "St. Hildegard of Bingen, virgin and doctor of the Church",
+      "first": "Songs 8:6-7 (#731.1)",
+      "responsal": "Ps 45:11-12, 14-15, 16-17 (#733.1)",
+      "second": null,
+      "gospel": "Matt 25:1-13 (#742.11)"
+    },
+    "Sep19-OPT": {
+      "title": "St. Januarius, bishop and martyr",
+      "first": "Hebr 10:32-36 (#716.6)",
+      "responsal": "Ps 126:1bc-2ab, 2cd-3, 4-5, 6 (#715.4)",
+      "second": null,
+      "gospel": "John 12:24-26 (#718.5)"
+    },
+    "Sep20": {
+      "title": "St. Andrew Kim Taegon, priest and martyr, St. Paul Chong Hasang, catechist and martyr, and their companions, martyrs",
+      "first": "Wis 3:1-9, or Rom 8:31b-39",
+      "responsal": "Ps 126:1bc-2ab, 2cd-3, 4-5, 6",
+      "second": null,
+      "gospel": "Luke 9:23-26"
+    },
+    "Sep21": {
+      "title": "St. Matthew, Apostle and evangelist",
+      "first": "Eph 4:1-7, 11-13",
+      "responsal": "Ps 19:2-3, 4-5",
+      "second": null,
+      "gospel": "Matt 9:9-13"
+    },
+    "Sep23": {
+      "title": "St. Pius of Pietrelcina, priest (Padre Pio)",
+      "first": "Gal 2:19-20 (#740.5)",
+      "responsal": "Ps 128:1-2, 3, 4-5 (#739.8)",
+      "second": null,
+      "gospel": "Matt 16:24-27 (#742.6)"
+    },
+    "Sep26-OPT": {
+      "title": "Sts. Cosmas and Damian, martyrs",
+      "first": "Wis 3:1-9 (#713.5)",
+      "responsal": "Ps 126:1bc-2ab, 2cd-3, 4-5, 6 (#715.4)",
+      "second": null,
+      "gospel": "Matt 10:28-33 (#718.2)"
+    },
+    "Sep27": {
+      "title": "St. Vincent de Paul, priest",
+      "first": "1 Cor 1:26-31 (#740.2)",
+      "responsal": "Ps 112:1bc-2, 3-4, 5-7, 7-8, 9 (#739.7)",
+      "second": null,
+      "gospel": "Matt 9:35-38 (#724.1)"
+    },
+    "Sep28-OPT": {
+      "title": "St. Wenceslaus, martyr",
+      "first": "1 Petr 3:14-17 (#716.8)",
+      "responsal": "Ps 126:1-2ab, 2cd-3, 4-5, 6 (#715.4)",
+      "second": null,
+      "gospel": "Matt 10:34-39 (#718.3)"
+    },
+    "Sep29": {
+      "title": "Sts. Michael, Gabriel, and Raphael, archangels",
+      "first": "Dan 7:9-10, 13-14 or Rev 12:7-12a",
+      "responsal": "Ps 138:1-2ab, 2cde-3, 4-5",
+      "second": null,
+      "gospel": "John 1:47-51"
+    },
+    "Sep30": {
+      "title": "St. Jerome, priest and doctor of the Church",
+      "first": "2 Tim 3:14-17",
+      "responsal": "Ps 119:9, 10, 11, 12, 13, 14 (#727.3)",
+      "second": null,
+      "gospel": "Matt 13:47-52 (#730.3)"
+    },
+    "Oct1": {
+      "title": "St. Th\u00e9r\u00e8se of the Child Jesus, virgin and doctor of the Church",
+      "first": "Isa 66:10-14c (#531)",
+      "responsal": "Ps 131:1bcde, 2, 3 (#739.9)",
+      "second": null,
+      "gospel": "Matt 18:1-5 (#742.7)"
+    },
+    "Oct2": {
+      "title": "The Holy Guardian Angels",
+      "first": "Exod 23:20-23",
+      "responsal": "Ps 91:1-2, 3-4ab, 4c-6, 10-11",
+      "second": null,
+      "gospel": "Matt 18:1-5, 10"
+    },
+    "Oct4": {
+      "title": "St. Francis of Assisi, religious",
+      "first": "Gal 6:14-18",
+      "responsal": "Ps 16:1b-2a+5, 7-8, 11 (#739.3)",
+      "second": null,
+      "gospel": "Matt 11:25-30 (#742.4)"
+    },
+    "Oct5": {
+      "title": "Bl. Francis Xavier Seelos",
+      "first": "(see #719-724)",
+      "responsal": null,
+      "second": null,
+      "gospel": null
+    },
+    "Oct5-OPT": {
+      "title": "St. Maria Faustina (Helena) Kowalska, virgin",
+      "first": "Eph 3:14-19 (740.7)",
+      "responsal": "Ps 103:1bc-2, 3-4, 8-9, 13-14, 17-18a (#739.6)",
+      "second": null,
+      "gospel": "Matt 11:25-30 (#742.4)"
+    },
+    "Oct6-OPT": {
+      "title": "St. Bruno, priest",
+      "first": "Phil 3:8-14 (#740.9)",
+      "responsal": "Ps 1:1-2, 3, 4+6 (#739.1)",
+      "second": null,
+      "gospel": "Luke 9:57-62 (#742.19)"
+    },
+    "Oct6": {
+      "title": "Bl. Marie-Rose Durocher, virgin",
+      "first": "(see #731-736, or #737-742)",
+      "responsal": null,
+      "second": null,
+      "gospel": null
+    },
+    "Oct7": {
+      "title": "Our Lady of the Rosary",
+      "first": "Acts 1:12-14 (#708.1)",
+      "responsal": "Luke 1:46-47, 48-49, 50-51, 52-53, 54-55 (#709.5)",
+      "second": null,
+      "gospel": "Luke 1:26-38 (#712.4)"
+    },
+    "Oct9-OPT": {
+      "title": "St. John Leonardi, priest",
+      "first": "2 Cor 4:1-2, 5-7 (#722.6)",
+      "responsal": "Ps 96:1-2, 2-3, 7-8, 10 (#721.5)",
+      "second": null,
+      "gospel": "Luke 5:1-11 (#724.7)"
+    },
+    "Oct11-OPT": {
+      "title": "St. John XXIII, pope",
+      "first": "Ezek 34:11-16 (#719.9)",
+      "responsal": "Ps 23:1-3a, 4, 5, 6 (#721.2)",
+      "second": null,
+      "gospel": "John 21:15-17 (#724.12)"
+    },
+    "Oct14-OPT": {
+      "title": "St. Callistus I, pope and martyr",
+      "first": "1 Petr 5:1-4 (#722.13)",
+      "responsal": "Ps 40:2+4ab. 7-8a, 8b-9, 10 (#721.3)",
+      "second": null,
+      "gospel": "Luke 22:24-30 (#724.9)"
+    },
+    "Oct15": {
+      "title": "St. Teresa of Jesus, virgin and doctor of the Church",
+      "first": "Rom 8:22-27",
+      "responsal": "Ps 19:8, 9, 10, 11 (#727.1)",
+      "second": null,
+      "gospel": "John 15:1-8 (#742.24)"
+    },
+    "Oct16-OPT": {
+      "title": "St. Margaret Mary Alacoque, virgin",
+      "first": "Eph 3:14-19 (#740.7)",
+      "responsal": "Ps 23:1b-3a, 4, 5, 6 (#739.4)",
+      "second": null,
+      "gospel": "Matt 11:25-30 (#742.4)"
+    },
+    "Oct17": {
+      "title": "St. Ignatius of Antioch, bishop and martyr",
+      "first": "Phil 3:17\u20144:1",
+      "responsal": "Ps 34:2-3, 4-5, 6-7, 8-9 (#715.2)",
+      "second": null,
+      "gospel": "John 12:24-26 (#718.5)"
+    },
+    "Oct18": {
+      "title": "St. Luke, evangelist",
+      "first": "2 Tim 4:10-17b",
+      "responsal": "Ps 145:10-11, 12-13, 17-18",
+      "second": null,
+      "gospel": "Luke 10:1-9"
+    },
+    "Oct19": {
+      "title": "Sts. Jean de Br\u00e9beuf and Isaac Jogues, priests and martyrs, and Companions, martyrs",
+      "first": "2 Cor 4:7-15 (#716.3)",
+      "responsal": "Ps 126:1bc-2ab, 2cd-3, 4-5, 6 (#715.4)",
+      "second": null,
+      "gospel": "Matt 28:16-20 (#724.4)"
+    },
+    "Oct20": {
+      "title": "St. Paul of the Cross, priest",
+      "first": "1 Cor 1:18-25 (#722.2)",
+      "responsal": "Ps 117:1bc, 2 (#721.8)",
+      "second": null,
+      "gospel": "Matt 16:24-27 (#742.6)"
+    },
+    "Oct22-OPT": {
+      "title": "St. John Paul II, pope",
+      "first": "Isa 52:7-10 (#719.5)",
+      "responsal": "Ps 96:1-2a, 2b-3, 7-8a, 10 (#721.5)",
+      "second": null,
+      "gospel": "John 21:15-17 (#724.12)"
+    },
+    "Oct23-OPT": {
+      "title": "St. John of Capistrano, priest",
+      "first": "2 Cor 5:14-20 (#722.7)",
+      "responsal": "Ps 16:1b-2a+5, 7-8, 11 (#721.1)",
+      "second": null,
+      "gospel": "Luke 9:57-62 (#742.19)"
+    },
+    "Oct24-OPT": {
+      "title": "St. Anthony Mary Claret, bishop",
+      "first": "Isa 52:7-10 (#719.5)",
+      "responsal": "Ps 96:1-2a, 2b-3, 7-8a, 10 (#721.5)",
+      "second": null,
+      "gospel": "Mark 1:14-20 (#724.5)"
+    },
+    "Oct28": {
+      "title": "Sts. Simon and Jude, Apostles",
+      "first": "Eph 2:19-22",
+      "responsal": "Ps 19:2-3, 4-5",
+      "second": null,
+      "gospel": "Luke 6:12-19"
+    },
+    "Nov3-OPT": {
+      "title": "St. Martin de Porres, religious",
+      "first": "Phil 4:4-9 (#740.10)",
+      "responsal": "Ps 131:1bcde, 2, 3 (#739.9)",
+      "second": null,
+      "gospel": "Matt 22:34-40 (#742.10)"
+    },
+    "Nov4": {
+      "title": "St. Charles Borromeo, bishop",
+      "first": "Rom 12:3-13 (#722.1)",
+      "responsal": "Ps 89:2-3, 4-5, 21-22, 25+27 (#721.4)",
+      "second": null,
+      "gospel": "John 10:11-16 (#724.10)"
+    },
+    "Nov9": {
+      "title": "The Dedication of the Lateran Basilica in Rome",
+      "first": "Ezek 47:1-2, 8-9, 12 (#701.5)",
+      "responsal": "Ps 46:2-3, 5-6, 8-9 (#703.2)",
+      "second": "1 Cor 3:9c-11, 16-17 (#704.1)",
+      "gospel": "John 2:13-22 (#706.3)"
+    },
+    "Nov10": {
+      "title": "St. Leo the Great, pope and doctor of the Church",
+      "first": "Sir 39:6-10 (#725.4)",
+      "responsal": "Ps 37:3-4, 5-6, 30-31 (#727.2)",
+      "second": null,
+      "gospel": "Matt 16:13-19 (#724.2)"
+    },
+    "Nov11": {
+      "title": "St. Martin of Tours, bishop",
+      "first": "Isa 61:1-3abcd (#719.6)",
+      "responsal": "Ps 89:2-3, 4-5, 21-22, 25+27 (#721.4)",
+      "second": null,
+      "gospel": "Matt 25:31-40 (#742.13)"
+    },
+    "Nov12": {
+      "title": "St. Josaphat, bishop and martyr",
+      "first": "Eph 4:1-7, 11-13 (#722.8)",
+      "responsal": "Ps 1:1-2, 3, 4+6 (#739.1)",
+      "second": null,
+      "gospel": "John 17:20-26 (#742.26)"
+    },
+    "Nov13": {
+      "title": "St. Frances Xavier Cabrini, virgin",
+      "first": "(see #731-736 or #737-742)",
+      "responsal": null,
+      "second": null,
+      "gospel": null
+    },
+    "Nov15-OPT": {
+      "title": "St. Albert the Great, bishop and doctor of the Church",
+      "first": "Sir 15:1-6 (#725.3)",
+      "responsal": "Ps 119:9, 10, 11, 12, 13, 14 (#727.3)",
+      "second": null,
+      "gospel": "Matt 13:47-52 (#730.3)"
+    },
+    "Nov16-OPT": {
+      "title": "St. Gertrude, virgin",
+      "first": "Eph 3:14-19 (#740.7)",
+      "responsal": "Ps 23:1b-3a, 4, 5, 6 (#739.4)",
+      "second": null,
+      "gospel": "John 15:1-8 (#742.24)"
+    },
+    "Nov17": {
+      "title": "St. Elizabeth of Hungary, religious",
+      "first": "1 John 3:14-18 (#740.16)",
+      "responsal": "Ps 34:2-3, 4-5, 6-7, 8-9, 10-11 (#739.5)",
+      "second": null,
+      "gospel": "Luke 6:27-38 (#742.18)"
+    },
+    "Nov18-OPT": {
+      "title": "The Dedication of the Basilicas of Sts. Peter and Paul, Apostles",
+      "first": "Acts 28:11-16, 30-31",
+      "responsal": "Ps 98:1, 2-3ab, 3cd-4, 5-6",
+      "second": null,
+      "gospel": "Matt 14:22-33"
+    },
+    "Nov18": {
+      "title": "St. Rose Philippine Duchesne, virgin",
+      "first": "(see #731-736 or #737-742)",
+      "responsal": null,
+      "second": null,
+      "gospel": null
+    },
+    "Nov21": {
+      "title": "The Presentation of the Blessed Virgin Mary",
+      "first": "Zech 2:14-17 (#707.11)",
+      "responsal": "Luke 1:46-47, 48-49, 50-51, 52-53, 54-55 (#709.5)",
+      "second": null,
+      "gospel": "Matt 12:46-50 (#712.3)"
+    },
+    "Nov22": {
+      "title": "St. Cecilia, virgin and martyr",
+      "first": "Hos 2:16bc, 17cd, 21-22 (#731.2)",
+      "responsal": "Ps 45:11-12, 14-15, 16-17 (#733.1)",
+      "second": null,
+      "gospel": "Matt 25:1-13 (#736.2)"
+    },
+    "Nov23-OPT": {
+      "title": "St. Columban, abbot",
+      "first": "Is 52:7-10 (#719.5)",
+      "responsal": "Ps 96:1-2a, 2b-3, 7-8a, 10 (#721.5)",
+      "second": null,
+      "gospel": "Luke 9:57-62 (#742.19)"
+    },
+    "Nov23": {
+      "title": "Bl. Miguel Agust\u00edn Pro, priest and martyr",
+      "first": "(see #713-718, or #719-724)",
+      "responsal": null,
+      "second": null,
+      "gospel": null
+    },
+    "Nov24": {
+      "title": "St. Andrew Dung-Lac, priest and martyr, and Companions, martyrs",
+      "first": "Wis 3:1-9 (#713.5)",
+      "responsal": "Ps 126:1bc-2ab, 2cd-3, 4-5, 6 (#715.4)",
+      "second": null,
+      "gospel": "Matt 10:17-22 (#718.1)"
+    },
+    "Nov25-OPT": {
+      "title": "St. Catherine of Alexandria, virgin and martyr",
+      "first": "Rev 21:5-7 (#714.4)",
+      "responsal": "Ps 124:2-3, 4-5, 7-8 (#715.3)",
+      "second": null,
+      "gospel": "Matt 10:28-33 (#718.2)"
+    },
+    "Nov30": {
+      "title": "St. Andrew, Apostle",
+      "first": "Rom 10:9-18",
+      "responsal": "Ps 19:8, 9, 10, 11",
+      "second": null,
+      "gospel": "Matt 4:18-22"
+    },
+    "THANKSGIVING": {
+      "title": "Thanksgiving Day",
+      "first": "[see #943.1-4 or #944.1-3]",
+      "responsal": "[see #945.1-4]",
+      "second": null,
+      "gospel": "[see #947.1-8]"
+    },
+    "Dec3": {
+      "title": "St. Francis Xavier, priest",
+      "first": "1 Cor 9:16-19, 22-23 (#722.4)",
+      "responsal": "Ps 117:1bc, 2 (#721.8)",
+      "second": null,
+      "gospel": "Mark 16:15-20 (#724.6)"
+    },
+    "Dec4-OPT": {
+      "title": "St. John of Damascus, priest, religious, doctor of the Church",
+      "first": "2 Tim 1:13-14; 2:1-3 (#722.11)",
+      "responsal": "Ps 19:8, 9, 10, 11 (#727.1)",
+      "second": null,
+      "gospel": "Matt 25:14-30 (#742 .12)"
+    },
+    "Dec6-OPT": {
+      "title": "St. Nicholas, bishop",
+      "first": "Is 6:1-8 (#719.4)",
+      "responsal": "Ps 40:2+4, 7-8a, 8b-9, 10 (#721.3)",
+      "second": null,
+      "gospel": "Luke 10:1-9 (#724.8)"
+    },
+    "Dec7": {
+      "title": "St. Ambrose, bishop and doctor of the Church",
+      "first": "Eph 3:8-12 (#728.4)",
+      "responsal": "Ps 89:2-3, 4-5, 21-22, 25+27 (#721.4)",
+      "second": null,
+      "gospel": "John 10:11-16 (#724.10)"
+    },
+    "Dec9-OPT": {
+      "title": "St. Juan Diego Cuauhtlatoatzin",
+      "first": "1 Cor 1:26-31 (#740.2)",
+      "responsal": "Ps 131:1bcde, 2, 3 (#739.9)",
+      "second": null,
+      "gospel": "Matt 11:25-30 (#742.4)"
+    },
+    "Dec10-OPT": {
+      "title": "Our Lady of Loreto",
+      "first": "Isa 7:10-14; 8:10 (#707.7)",
+      "responsal": "Luke 1:46-47, 48-49, 50-51, 52-53, 54-55 (#709.5)",
+      "second": null,
+      "gospel": "Luke 1:26-38 (#712.4)"
+    },
+    "Dec11-OPT": {
+      "title": "St. Damasus I, pope",
+      "first": "Acts 20:17-18a, 28-32, 36 (#720.2)",
+      "responsal": "Ps 110:1, 2, 3, 4 (#721.7)",
+      "second": null,
+      "gospel": "John 15:9-17 (#724.11)"
+    },
+    "Dec12": {
+      "title": "Our Lady of Guadalupe",
+      "first": "Zech 2:14-17, or Rev 11:19a; 12:1-6a, 10ab",
+      "responsal": "Judith 13:18bcde, 19",
+      "second": null,
+      "gospel": "Luke 1:26-38, or Luke 1:39-47"
+    },
+    "Dec12-OPT": {
+      "title": "St. Jane Frances de Chantal, religious",
+      "first": null,
+      "responsal": null,
+      "second": null,
+      "gospel": null
+    },
+    "Dec13": {
+      "title": "St. Lucy, virgin and martyr",
+      "first": "2 Cor 10:17-11:2 (#734.2)",
+      "responsal": "Ps 31:3cd-4, 6+8ab, 16bc+17 (#715.1)",
+      "second": null,
+      "gospel": "Matt 25:1-13 (#736.2)"
+    },
+    "Dec14": {
+      "title": "St. John of the Cross, priest and doctor of the Church",
+      "first": "1 Cor 2:1-10a (#728.2)",
+      "responsal": "Ps 37:3-4, 5-6, 30-31 (#727.2)",
+      "second": null,
+      "gospel": "Luke 14:25-33 (#742.23)"
+    },
+    "Dec21-OPT": {
+      "title": "St. Peter Canisius, priest and doctor of the Church",
+      "first": "2 Tim 4:1-5 (#722.12)",
+      "responsal": "Ps 40:2+4, 7-8a, 8b-9, 10 (#721.3)",
+      "second": null,
+      "gospel": "Matt 5:13-19 (#730.1)"
+    },
+    "Dec23-OPT": {
+      "title": "St. John of Kanty, priest",
+      "first": "James 2:14-17 (#740.13)",
+      "responsal": "Ps 112:1bc-2, 3-4, 5-6, 7-8, 9 (#739.7)",
+      "second": null,
+      "gospel": "Luke 6:27-38 (#742.18)"
+    },
+    "Dec26": {
+      "title": "St. Stephen, the first martyr",
+      "first": "Acts 6:8-10; 7:54-59",
+      "responsal": "Ps 31:3cd-4, 6+8ab, 16bc+17",
+      "second": null,
+      "gospel": "Matt 10:17-22"
+    },
+    "Dec27": {
+      "title": "St. John, Apostle and evangelist",
+      "first": "1 John 1:1-4",
+      "responsal": "Ps 97:1-2, 5-6, 11-12",
+      "second": null,
+      "gospel": "John 20:1a+2-8"
+    },
+    "Dec28": {
+      "title": "The Holy Innocents, martyrs",
+      "first": "1 John 1:5\u20142:2",
+      "responsal": "Ps 124:2-3, 4-5, 7b-8",
+      "second": null,
+      "gospel": "Matt 2:13-18"
+    },
+    "Dec29-OPT": {
+      "title": "St. Thomas Becket, bishop and martyr",
+      "first": "2 Tim 2:8-13; 3:10-12 (#716.5)",
+      "responsal": "Ps 34:2-3, 4-5, 6-7, 8-9 (#715.2)",
+      "second": null,
+      "gospel": "Matt 16:24-27 (#742.6)"
+    },
+    "Dec31-OPT": {
+      "title": "St. Sylvester I, pope",
+      "first": "Ezek 34:11-16 (#719.9)",
+      "responsal": "Ps 23:1-3a, 4, 5, 6 (#721.2)",
+      "second": null,
+      "gospel": "Matt 16:13-19 (#724.2)"
+    }
   }
 }
