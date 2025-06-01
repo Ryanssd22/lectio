@@ -15,6 +15,7 @@ Verse Class:
 #!/usr/bin/env python
 import requests
 import re
+import inflect
 from bs4 import BeautifulSoup
 import json
 
@@ -23,19 +24,39 @@ def fixNewLine(string):
     return " ".join(string.split()).strip()
 
 
-class Verse:
-    def __init__(self, reading, category="NULL"):
-        self.reading = fixNewLine(reading)
-        self.category = category
-
-    def setCategory(self, category):
-        self.type = category
+class Readings:
+    def __init__(
+        self, title=None, first=None, responsal=None, second=None, gospel=None
+    ):
+        self.title = title
+        self.first = fixNewLine(first) if first not in [None, "x"] else None
+        self.responsal = fixNewLine(responsal) if responsal not in [None, "x"] else None
+        self.second = fixNewLine(second) if second not in [None, "x"] else None
+        self.gospel = fixNewLine(gospel) if gospel not in [None, "x"] else None
 
     def __repr__(self):
-        return f"{{{self.reading}, {self.category}}}"
+        string = ""
+        if self.title:
+            string += f"{self.title}:"
+        if self.first:
+            string += f" [FIRST: {self.first}]"
+        if self.responsal:
+            string += f" [RESPONSAL: {self.responsal}]"
+        if self.second:
+            string += f" [SECOND: {self.second}]"
+        if self.gospel:
+            string += f" [GOSPEL: {self.gospel}]"
+
+        return string
 
     def toDict(self):
-        return {"reading": self.reading, "category": self.category}
+        return {
+            "title": self.title,
+            "first": self.first,
+            "responsal": self.responsal,
+            "second": self.second,
+            "gospel": self.gospel,
+        }
 
 
 def printDict(dict):
@@ -57,6 +78,31 @@ def getDayOfWeek(date):
         day = "5"
     elif "Sat" in date:
         day = "6"
+    return day
+
+
+def getOrdinalNumber(number):
+    p = inflect.engine()
+    return p.number_to_words(p.ordinal(number))
+
+
+def getDayOfWeekString(number):
+    day = "N/A"
+    match number:
+        case 0:
+            day = "Monday"
+        case 1:
+            day = "Tuesday"
+        case 2:
+            day = "Wednesday"
+        case 3:
+            day = "Thursday"
+        case 4:
+            day = "Friday"
+        case 5:
+            day = "Saturday"
+        case 6:
+            day = "Sunday"
     return day
 
 
@@ -151,13 +197,14 @@ adventSundayRows.pop(0)
 for row in adventSundayRows:
     date = row[2]
     cycle = date[-1]
-    first = Verse(row[3], "FIR")
-    resp = Verse(row[4], "RES")
-    second = Verse(row[5], "SEC")
-    gospel = Verse(row[7], "GOS")
 
-    key = "0" + date[0] + "-7-" + cycle
-    AD[key] = [first, resp, second, gospel]
+    key = date[0] + "-7-" + cycle
+    title = f"{getOrdinalNumber(date[0])} Sunday of Advent"
+    title = title[0].upper() + title[1:]
+
+    AD[key] = Readings(
+        title, first=row[3], responsal=row[4], second=row[5], gospel=row[7]
+    )
 
 # Advent Weekday
 adventWeekdayTable = getTables(adventWeekday)
@@ -166,18 +213,17 @@ adventWeekdayRows.pop(18)
 adventWeekdayRows.pop(0)
 for row in adventWeekdayRows:
     date = row[2]
-    first = Verse(row[3], "FIR")
-    resp = Verse(row[4], "RES")
-    gospel = Verse(row[6], "GOS")
 
     key = ""
     if "December" in date:
         key = "Dec" + date[9:11]
     else:
         day = getDayOfWeek(date)
-        key = "0" + date[0] + "-" + day
+        key = date[0] + "-" + day
+        title = f"{getOrdinalNumber(date[0])} {getDayOfWeekString(int(day))} of Advent"
+    title = title[0].upper() + title[1:]
 
-    AD[key] = [first, resp, gospel]
+    AD[key] = Readings(title, first=row[3], responsal=row[4], gospel=row[6])
 
 # Christmas Sunday
 christmasSundayTables = getTables(christmasSunday)
@@ -185,10 +231,6 @@ christmasSundayRows = getRows(christmasSundayTables[0])
 christmasSundayRows.pop(0)
 for i, row in enumerate(christmasSundayRows):
     date = " ".join(row[2].split()).strip()
-    first = Verse(row[3], "FIR")
-    resp = Verse(row[4], "RES")
-    second = Verse(row[5], "SEC")
-    gospel = Verse(row[7], "GOS")
 
     if i == 4:  # Fix typo for Holy Family year A
         date = "The Holy Family - A"
@@ -234,7 +276,9 @@ for i, row in enumerate(christmasSundayRows):
             date = "BAPTISM-C"
             title = " The Baptism of the Lord (Opt. year C)"
 
-    CH[date] = [title, first, resp, second, gospel]
+    CH[date] = Readings(
+        title, first=row[3], responsal=row[4], second=row[5], gospel=row[7]
+    )
 
 # Christmas Weekday
 christmasWeekdayRows = getRows(adventWeekdayTable[1])
@@ -254,11 +298,7 @@ for i, row in enumerate(christmasWeekdayRows):
     else:
         date = "EPIPHANY-" + str(i - 11)
 
-    CH[date] = [
-        Verse(row[2], "FIR"),
-        Verse(row[3], "RES"),
-        Verse(row[5], "GOS"),
-    ]
+    CH[date] = Readings(first=row[2], responsal=row[3], gospel=row[5])
 
 # Ordinary Time Sundays
 ordinarySundayTableA = getTables(ordinarySundayA)
@@ -287,14 +327,16 @@ for i, rows in enumerate(ordinarySundayRows):
         if "Feast of the Baptism of the Lord" in date:
             date = "01"
         key = date[:2] + "-7-" + weekendYear
-        OT[key] = [
-            Verse(row[3], "FIR"),
-            Verse(row[4], "RES"),
-            Verse(row[5], "SEC"),
-            Verse(" ".join(row[7].split()).strip(), "GOS"),
-        ]
 
-# Ordinary time Weekday
+        otWeek = int(date[1]) if date[0] == "0" else int(date[:2])
+        title = f"{getOrdinalNumber(otWeek)} Sunday of Ordinary Time"
+        title = title[0].upper() + title[1:]
+
+        OT[key] = Readings(
+            title, first=row[3], responsal=row[4], second=row[5], gospel=row[7]
+        )
+
+# # Ordinary time Weekday
 ordinaryWeekdayTable1 = getTables(ordinaryWeekday1)
 ordinaryWeekdayTable2 = getTables(ordinaryWeekday2)
 ordinaryWeekdayRows = [
@@ -314,7 +356,13 @@ for i, rows in enumerate(ordinaryWeekdayRows):
 
             key = key + "-" + str(i + 1)
 
-            OT[key] = [Verse(row[2], "FIR"), Verse(row[3], "RES"), Verse(row[5], "GOS")]
+            otWeek = int(key[1]) if key[0] == "0" else int(key[:2])
+            title = f"{getOrdinalNumber(otWeek)} {getDayOfWeekString(int(key[3])-1)} of Ordinary Time"
+            title = title[0].upper() + title[1:]
+
+            OT[key] = Readings(
+                title=title, first=row[2], responsal=row[3], gospel=row[5]
+            )
 
 # Lent Sunday
 lentSundayTables = getTables(lentSunday)
@@ -324,24 +372,41 @@ for row in lentSundayRows:
     if len(row) == 8:
         date = row[2]
 
-        first = Verse(row[3], "FIR")
-        responsal = Verse(row[4], "RES")
-        second = Verse(row[5], "SEC")
-        gospel = Verse(row[7], "GOS")
+        first = row[3]
+        responsal = row[4]
+        second = row[5]
+        gospel = row[7]
         if "Palm Sunday" in date:
             for i in ["A", "B", "C"]:
                 gospelReading = row[7].split(f"{i}:")
                 gospelReading = gospelReading[1].split("\n")[0].strip()
-                key = "07-7" + "-" + i
+                key = "6-7" + "-" + i
                 if "Procession" in date:
+                    title = f"Palm Sunday Procession"
                     key = key + "-PROC"
+                    first = None
+                    responsal = None
+                    second = None
                 else:
+                    title = f"Palm Sunday"
                     key = key + "-MASS"
-                gospel = Verse(gospelReading, "GOS")
-                LE[key] = [first, responsal, second, gospel]
+                gospel = gospelReading
+                LE[key] = Readings(
+                    first=first, responsal=responsal, second=second, gospel=gospel
+                )
+
+                title = title[0].upper() + title[1:]
+                LE[key].title = title
         else:
-            key = "0" + date[0] + "-" + date[-1]
-            LE[key] = [first, responsal, second, gospel]
+            key = date[0] + "-7-" + date[-1]
+            LE[key] = Readings(
+                first=first, responsal=responsal, second=second, gospel=gospel
+            )
+
+            title = f"{getOrdinalNumber(key[0])} Sunday of Lent"
+            title = title[0].upper() + title[1:]
+            LE[key].title = title
+
 
 # Lent Weekdays
 lentWeekdayTables = getTables(lentWeekday)
@@ -352,15 +417,27 @@ for row in lentWeekdayRows:
         date = row[2]
         weekday = getDayOfWeek(date)
 
-        key = "0" + date[0] + "-7-" + weekday
+        key = date[0] + "-" + weekday
+        title = (
+            f"{getOrdinalNumber(key[0])} {getDayOfWeekString(int(weekday)-1)} of Lent"
+        )
+
         if "Ash" in date:
-            key = "00-" + str(ashWednesday)
+            key = "0-" + str(ashWednesday)
             ashWednesday += 1
-        if "Holy Week" in date:
+            title = f"{getDayOfWeekString(int(weekday)-1)} after Ash Wednesday"
+        elif "Holy Week" in date:
+            title = f"{getDayOfWeekString(int(weekday)-1)} of Holy Week"
             if "Chrism Mass" in date:
+                title = "Holy Thursday, Chrism Mass"
                 weekday = "4-MORN"
-            key = "06-" + weekday
-        LE[key] = [Verse(row[3], "FIR"), Verse(row[4], "RES"), Verse(row[6], "GOS")]
+            key = "6-" + weekday
+        elif "optional" in date:
+            title = f"{getOrdinalNumber(key[0])} Week of Lent - Optional Mass"
+            key = key[:2] + "OPT"
+
+        title = title[0].upper() + title[1:]
+        LE[key] = Readings(title, first=row[3], second=row[4], gospel=row[6])
 
 # Easter Sundays
 easterSundayTables = getTables(easterSunday)
@@ -371,30 +448,38 @@ for row in easterSundayRows:
         date = date.split("(")[0].strip()
 
         if "Holy Thursday" in date:
-            key = "00-4"
+            title = "Holy Thursday"
+            key = "0-4"
         elif "Good Friday" in date:
-            key = "00-5"
+            title = "Good Friday"
+            key = "0-5"
         elif "Easter Sunday" in date:
             if "Vigil" in date:
-                key = "00-6-VIGIL"
+                title = "Easter Sunday, Vigil"
+                key = "0-7-VIGIL"
             else:
-                key = "00-7"
+                title = "Easter Sunday"
+                title = "Easter Sunday"
+                key = "0-7"
         elif "Ascension of the Lord" in date:
+            title = "Ascension of the Lord"
             key = "ASCENSION-" + date[-1]
         elif "Pentecost" in date:
             if "Vigil" in date:
-                key = "07-7-VIGIL"
+                title = "Pentecost, Vigil"
+                key = "7-7-VIGIL"
             else:
-                key = "07-7-" + date[-1]
+                title = "Pentecost"
+                key = "7-7-" + date[-1]
         else:
-            key = "0" + str(int(date[0]) - 1) + "-7-" + date[-1]
+            key = str(int(date[0]) - 1) + "-7-" + date[-1]
+            title = f"{getOrdinalNumber(key[0])} Sunday of Easter"
 
-        EA[key] = [
-            Verse(row[3], "FIR"),
-            Verse(row[4], "RES"),
-            Verse(row[5], "SEC"),
-            Verse(row[7], "GOS"),
-        ]
+        title = title[0].upper() + title[1:]
+
+        EA[key] = Readings(
+            title, first=row[3], responsal=row[4], second=row[5], gospel=row[7]
+        )
 
 # Easter Weekday
 easterWeekdayTables = getTables(easterWeekday)
@@ -406,8 +491,14 @@ for row in easterWeekdayRows:
         if "Octave" in date:
             date = "1"
 
-        key = "0" + date[0] + "-" + weekday
-        EA[key] = [Verse(row[3], "FIR"), Verse(row[4], "RES"), Verse(row[6], "GOS")]
+        key = date[0] + "-" + weekday
+
+        title = (
+            f"{getOrdinalNumber(key[0])} {getDayOfWeekString(int(weekday)-1)} of Easter"
+        )
+        title = title[0].upper() + title[1:]
+
+        EA[key] = Readings(title, first=row[3], responsal=row[4], gospel=row[6])
 
 # Major Solemnities
 majorSolemnityTables = getTables(majorSolemnities)
@@ -427,19 +518,19 @@ for i, row in enumerate(pentecostSolemnities):
     match i / 3:
         case 0:
             solemnity = "TrinSun"
+            title = "Trinity Sunday"
         case 1:
             solemnity = "BodyBlood"
+            title = "Solemnity of the Most Holy Body and Blood of Christ"
         case 2:
             solemnity = "SacHeart"
+            title = "Solemnity of the Most Sacred Heart of Jesus"
 
     key = f"{solemnity}-{cycle}"
 
-    MAJSOLEM[key] = [
-        Verse(row[3], "FIR"),
-        Verse(row[4], "RES"),
-        Verse(row[5], "SEC"),
-        Verse(row[7], "GOS"),
-    ]
+    MAJSOLEM[key] = Readings(
+        title, first=row[3], responsal=row[4], second=row[5], gospel=row[7]
+    )
 
 majorSolemnityKeys = {
     "Presentation of the Lord": ["Feb2", "The Presentation of the Lord"],
@@ -484,13 +575,16 @@ for row in lordSolemnities:
             date = majorSolemnityKeys[key][0]
 
     key = date
-    MAJSOLEM[key] = [
-        title,
-        Verse(row[3], "FIR"),
-        Verse(row[4], "RES"),
-        Verse(row[5], "SEC"),
-        Verse(row[6], "GOS"),
-    ]
+    # MAJSOLEM[key] = [
+    #     title,
+    #     Verse(row[3], "FIR"),
+    #     Verse(row[4], "RES"),
+    #     Verse(row[5], "SEC"),
+    #     Verse(row[6], "GOS"),
+    # ]
+    MAJSOLEM[key] = Readings(
+        title, first=row[3], responsal=row[4], second=row[5], gospel=row[6]
+    )
 
 # Saint Proper
 saintTables = getTables(saintProper)
@@ -536,18 +630,22 @@ for row in saintRows:
         if rank == ".":
             key = key + "-OPT"
 
-        SAINTPROPER[key] = [title]
-        if row[5] not in ["x", "."]:
-            SAINTPROPER[key].append(Verse(row[5], "FIR"))
-        if row[6] not in ["x", "."]:
-            SAINTPROPER[key].append(Verse(row[5], "RES"))
-        if row[7] not in ["x", "."]:
-            SAINTPROPER[key].append(Verse(row[5], "SEC"))
-        if row[9] not in ["x", "."]:
-            SAINTPROPER[key].append(Verse(row[5], "GOS"))
+        SAINTPROPER[key] = Readings(
+            title, first=row[5], responsal=row[6], second=row[7], gospel=row[9]
+        )
 
-        if len(SAINTPROPER[key]) < 2:
-            del SAINTPROPER[key]
+        # SAINTPROPER[key] = [title]
+        # if row[5] not in ["x", "."]:
+        #     SAINTPROPER[key].append(Verse(row[5], "FIR"))
+        # if row[6] not in ["x", "."]:
+        #     SAINTPROPER[key].append(Verse(row[5], "RES"))
+        # if row[7] not in ["x", "."]:
+        #     SAINTPROPER[key].append(Verse(row[5], "SEC"))
+        # if row[9] not in ["x", "."]:
+        #     SAINTPROPER[key].append(Verse(row[5], "GOS"))
+        #
+        # if len(SAINTPROPER[key]) < 2:
+        #     del SAINTPROPER[key]
 
 
 print("ADVENT:")
@@ -574,10 +672,7 @@ print("\n")
 
 
 def parseDict(dict):
-    return {
-        key: [verse.toDict() if isinstance(verse, Verse) else verse for verse in dict]
-        for key, dict in dict.items()
-    }
+    return {key: dict[key].toDict() for key, reading in dict.items()}
 
 
 parsedLectionary = {
@@ -587,7 +682,7 @@ parsedLectionary = {
     "LENT": parseDict(LE),
     "EASTER": parseDict(EA),
     "SOLEMNITY": parseDict(MAJSOLEM),
-    "SAINTPROPER": parseDict(SAINTPROPER),
+    # "SAINTPROPER": parseDict(SAINTPROPER),
 }
 
 with open("lectionaryTemplate.json", "w") as f:
