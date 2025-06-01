@@ -32,19 +32,26 @@ def getEaster(yr):
     d = (yr + (yr // 4) - (yr // 100) + (yr // 400)) % 7
     x = (4 - d - p) % 7 + 1
     e = p + x
-    easter = datetime.datetime(year, 3, 21)
+    easter = datetime.datetime(yr, 3, 21)
     easter += datetime.timedelta(days=e)
     return easter
 
 
 def getAdventStart(yr):
-    christmas = datetime.datetime(year, 12, 25)
+    christmas = datetime.datetime(yr, 12, 25)
     return getPrevSunday(christmas, 4)
 
 
 def getEpiphany(yr):
-    jan6 = datetime.datetime(yr - 1, 12, 31)
-    return getNextSunday(jan6)
+    jan1 = datetime.datetime(yr, 1, 1)
+    return getNextSunday(jan1)
+
+def getHolyFamily(yr):
+    epiphany = getEpiphany(yr+1)
+    if datetime.date(yr, 12, 25).weekday() == 6:
+        return datetime.datetime(yr, 12, 30)
+    else:
+        return getPrevSunday(epiphany)
 
 
 def getAshWednesday(yr):
@@ -82,29 +89,78 @@ def getPentecostStartOT(pentecost, adventStart, weeksBeforeLent):
     return pentecostStart
 
 
-if len(sys.argv) != 2:
-    print(f"Usage: {sys.argv[0]} year")
-    sys.exit()
+class CalendarData:
+    def __init__(
+        self,
+        weekdayCycle,
+        sundayCycle,
+        holyFamily,
+        epiphany,
+        christmasEnd,
+        ashWednesday,
+        easter,
+        pentecost,
+        adventStart,
+        weeksBeforeLent,
+        pentecostStartOT,
+    ):
+        self.weekdayCycle = weekdayCycle
+        self.sundayCycle = sundayCycle
+        self.holyFamily = holyFamily
+        self.epiphany = epiphany
+        self.christmasEnd = christmasEnd
+        self.ashWednesday = ashWednesday
+        self.easter = easter
+        self.pentecost = pentecost
+        self.adventStart = adventStart
+        self.weeksBeforeLent = weeksBeforeLent
+        self.pentecostStartOT = pentecostStartOT
 
-year = int(sys.argv[1])
-weekdayCycle = year % 2
-sundayCycle = (year - 1) % 3 + 1  # 1 - A, 2 - B, 3 - C
-easterDate = getEaster(year)
-epiphany = getEpiphany(year)
-ashWednesday = getAshWednesday(year)
-pentecost = easterDate + datetime.timedelta(days=49)
-christmasEnd = getChristmasEnd(epiphany)
-adventStart = getAdventStart(year)
-weeksBeforeLent = getWeeksBeforeLent(ashWednesday, christmasEnd)
-pentecostStartOT = getPentecostStartOT(pentecost, adventStart, weeksBeforeLent)
 
-print("Weekday cycle:", weekdayCycle)
-print("Sunday cycle:", sundayCycle)
-print("Feast of Epiphany:", epiphany.strftime("%x"))
-print("End of Christmas (Baptism of our Lord):", christmasEnd.strftime("%x"))
-print("Ash Wednesday:", ashWednesday.strftime("%x"))
-print("Easter:", easterDate.strftime("%x"))
-print("Pentecost:", pentecost.strftime("%x"))
-print("Advent start:", adventStart.strftime("%x"))
-print("Weeks of OT before lent:", weeksBeforeLent)
-print("Starting OT after pentecost:", pentecostStartOT)
+def getCalendar(year):
+    weekdayCycle = year % 2
+    sundayCycle = (year - 1) % 3 + 1  # 1 - A, 2 - B, 3 - C
+    easterDate = getEaster(year)
+    epiphany = getEpiphany(year)
+    holyFamily = getHolyFamily(year) 
+    ashWednesday = getAshWednesday(year)
+    pentecost = easterDate + datetime.timedelta(days=49)
+    christmasEnd = getChristmasEnd(epiphany)
+    adventStart = getAdventStart(year)
+    weeksBeforeLent = getWeeksBeforeLent(ashWednesday, christmasEnd)
+    pentecostStartOT = getPentecostStartOT(pentecost, adventStart, weeksBeforeLent)
+
+    print("Weekday cycle:", weekdayCycle)
+    print("Sunday cycle:", sundayCycle)
+    print("Feast of the Holy Family:", holyFamily.strftime("%x"))
+    print("Feast of Epiphany:", epiphany.strftime("%x"))
+    print("End of Christmas (Baptism of our Lord):", christmasEnd.strftime("%x"))
+    print("Ash Wednesday:", ashWednesday.strftime("%x"))
+    print("Easter:", easterDate.strftime("%x"))
+    print("Pentecost:", pentecost.strftime("%x"))
+    print("Advent start:", adventStart.strftime("%x"))
+    print("Weeks of OT before lent:", weeksBeforeLent)
+    print("Starting OT after pentecost:", pentecostStartOT)
+
+    return CalendarData(
+        weekdayCycle,
+        sundayCycle,
+        holyFamily,
+        epiphany,
+        christmasEnd,
+        ashWednesday,
+        easterDate,
+        pentecost,
+        adventStart,
+        weeksBeforeLent,
+        pentecostStartOT,
+    )
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print(f"Usage: {sys.argv[0]} year")
+        sys.exit()
+
+    year = int(sys.argv[1])
+    getCalendar(year)

@@ -16,11 +16,16 @@ Verse Class:
 import requests
 import re
 from bs4 import BeautifulSoup
+import json
+
+
+def fixNewLine(string):
+    return " ".join(string.split()).strip()
 
 
 class Verse:
     def __init__(self, reading, category="NULL"):
-        self.reading = " ".join(reading.split()).strip()
+        self.reading = fixNewLine(reading)
         self.category = category
 
     def setCategory(self, category):
@@ -29,10 +34,13 @@ class Verse:
     def __repr__(self):
         return f"{{{self.reading}, {self.category}}}"
 
+    def toDict(self):
+        return {"reading": self.reading, "category": self.category}
+
 
 def printDict(dict):
     for row in dict:
-        print(f"{row:75} | {dict[row]}")
+        print(f"{row:30} | {dict[row]}")
 
 
 def getDayOfWeek(date):
@@ -124,13 +132,17 @@ ordinaryWeekday2 = (
 lentSunday = "https://catholic-resources.org/Lectionary/1998USL-Lent.htm"
 lentWeekday = "https://catholic-resources.org/Lectionary/2002USL-Weekdays-Lent.htm"
 easterSunday = "https://catholic-resources.org/Lectionary/1998USL-Easter.htm"
+easterWeekday = "https://catholic-resources.org/Lectionary/2002USL-Weekdays-Easter.htm"
+majorSolemnities = "https://catholic-resources.org/Lectionary/1998USL-Solemnities.htm"
+saintProper = "https://catholic-resources.org/Lectionary/2002USL-Sanctoral.htm"
 
 OT = {}
 LE = {}
 EA = {}
 AD = {}
 CH = {}
-MISC = {}
+MAJSOLEM = {}  # Major Solemnities that can supplant an OT Sunday
+SAINTPROPER = {}  # Memorials and feasts, cannot supplant any Sunday
 
 # Advent Sunday
 adventSundayTable = getTables(adventSunday)
@@ -183,33 +195,46 @@ for i, row in enumerate(christmasSundayRows):
 
     match i:
         case 0:
-            date = "01-7-VIGIL"
+            date = "CHRISTMAS-VIGIL"
+            title = "The Nativity of the Lord, Christmas Vigil"
         case 1:
-            date = "01-7-NIGHT"
+            date = "CHRISTMAS-NIGHT"
+            title = "The Nativity of the Lord, Christmas Night"
         case 2:
-            date = "01-7-DAWN"
+            date = "CHRISTMAS-DAWN"
+            title = "The Nativity of the Lord, Christmas Dawn"
         case 3:
-            date = "01-7-DAY"
+            date = "CHRISTMAS-DAY"
+            title = "The Nativity of the Lord, Christmas Day"
         case 4:
-            date = "02-7-A"
+            date = "HOLYFAMILY-A"
+            title = "The Holy Family of Jesus, Mary, and Joseph"
         case 5:
-            date = "02-7-B"
+            date = "HOLYFAMILY-B"
+            title = "The Holy Family of Jesus, Mary, and Joseph (Opt. year B)"
         case 6:
-            date = "02-7-C"
+            date = "HOLYFAMILY-C"
+            title = "The Holy Family of Jesus, Mary, and Joseph (Opt. year C)"
         case 7:
-            date = "Jan01"
+            date = "Jan1"
+            title = "Solemnity of the Blessed Virgin Mary, Mother of God"
         case 8:  # In US, this is always the epiphany
             date = "03-7"
+            title = "Second Sunday after Christmas"
         case 9:
             date = "EPIPHANY"
+            title = "The Epiphany of the Lord"
         case 10:
             date = "BAPTISM-A"
+            title = " The Baptism of the Lord"
         case 11:
             date = "BAPTISM-B"
+            title = " The Baptism of the Lord"
         case 12:
             date = "BAPTISM-C"
+            title = " The Baptism of the Lord"
 
-    CH[date] = [first, resp, second, gospel]
+    CH[date] = [title, first, resp, second, gospel]
 
 # Christmas Weekday
 christmasWeekdayRows = getRows(adventWeekdayTable[1])
@@ -327,13 +352,13 @@ for row in lentWeekdayRows:
         date = row[2]
         weekday = getDayOfWeek(date)
 
-        key = "0" + date[0] + "-" + weekday
+        key = "0" + date[0] + "-7-" + weekday
         if "Ash" in date:
             key = "00-" + str(ashWednesday)
             ashWednesday += 1
         if "Holy Week" in date:
             if "Chrism Mass" in date:
-                weekday = "4"
+                weekday = "4-MORN"
             key = "06-" + weekday
         LE[key] = [Verse(row[3], "FIR"), Verse(row[4], "RES"), Verse(row[6], "GOS")]
 
@@ -343,8 +368,27 @@ easterSundayRows = getRows(easterSundayTables[0])
 for row in easterSundayRows:
     if len(row) == 8 and row[2] != "Sunday or Feast":
         date = row[2]
+        date = date.split("(")[0].strip()
 
-        key = date
+        if "Holy Thursday" in date:
+            key = "00-4"
+        elif "Good Friday" in date:
+            key = "00-5"
+        elif "Easter Sunday" in date:
+            if "Vigil" in date:
+                key = "00-6-VIGIL"
+            else:
+                key = "00-7"
+        elif "Ascension of the Lord" in date:
+            key = "ASCENSION-" + date[-1]
+        elif "Pentecost" in date:
+            if "Vigil" in date:
+                key = "07-7-VIGIL"
+            else:
+                key = "07-7-" + date[-1]
+        else:
+            key = "0" + str(int(date[0]) - 1) + "-7-" + date[-1]
+
         EA[key] = [
             Verse(row[3], "FIR"),
             Verse(row[4], "RES"),
@@ -352,67 +396,160 @@ for row in easterSundayRows:
             Verse(row[7], "GOS"),
         ]
 
-# for i, table in enumerate(tables):
-#     rows = table.find_all("tr")
-#     for row in rows:
-#         cols = row.find_all("td")
-#         cols = [col.text.strip() for col in cols]
-#
-#         # cols[0] = Reading
-#         # cols[1] = Day/Feast
-#         # cols[ju2] = Year
-#         # cols[3] = Lec#
-#
-#         date = cols[1]
-#         date = date.replace(",", "")
-#
-#         # Determines type of reading
-#         category = ""
-#         match i:
-#             case 0:
-#                 category = "OLD"
-#             case 1:
-#                 category = "GOS"
-#             case 2:
-#                 category = "NEW"
-#             case 3:
-#                 category = "RESP"
-#
-#         # Determines weekendYear
-#         weekendYear = 0
-#         if cols[2] in ["1", "2"]:
-#             weekendYear = int(cols[2])
-#
-#         verse = Verse(cols[0], weekendYear, 0, category)
-#
-#         if not date in [".", "Day", "Day or Feast"]:
-#             cols.pop(3)
-#             cols.pop(1)
-#             if "Ord. Time" in date:
-#                 date = date.replace("Ord. Time ", "OT")
-#                 date = replaceDayOfWeek(date)
-#                 addReading(OT, date, verse)
-#             elif "Lent" in date:
-#                 date = date.replace("Lent ", "LE")
-#                 date = replaceDayOfWeek(date)
-#                 addReading(LE, date, verse)
-#             elif "Easter" in date:
-#                 date = date.replace("Easter ", "EA")
-#                 date = replaceDayOfWeek(date)
-#                 addReading(EA, date, verse)
-#             elif "Advent" in date:
-#                 date = date.replace("Advent ", "AD")
-#                 date = replaceDayOfWeek(date)
-#                 addReading(AD, date, verse)
-#             else:
-#                 addReading(MISC, date, verse, True)
-#
-# OT = dict(sorted(OT.items()))
-# AD = dict(sorted(AD.items()))
-# EA = dict(sorted(EA.items()))
-# LE = dict(sorted(LE.items()))
-# MISC = dict(sorted(MISC.items()))
-#
+# Easter Weekday
+easterWeekdayTables = getTables(easterWeekday)
+easterWeekdayRows = getRows(easterWeekdayTables[0])
+for row in easterWeekdayRows:
+    if row[2] != "Day":
+        date = row[2]
+        weekday = getDayOfWeek(date)
+        if "Octave" in date:
+            date = "1"
+
+        key = "0" + date[0] + "-" + weekday
+        EA[key] = [Verse(row[3], "FIR"), Verse(row[4], "RES"), Verse(row[6], "GOS")]
+
+# Major Solemnities
+majorSolemnityTables = getTables(majorSolemnities)
+pentecostSolemnities = getRows(majorSolemnityTables[0])
+pentecostSolemnities.pop(0)
+lordSolemnities = getRows(majorSolemnityTables[1])
+lordSolemnities.pop(0)
+for i, row in enumerate(pentecostSolemnities):
+    key = ""
+    match i % 3:
+        case 0:
+            cycle = "A"
+        case 1:
+            cycle = "B"
+        case 2:
+            cycle = "C"
+    match i / 3:
+        case 0:
+            solemnity = "TrinSun"
+        case 1:
+            solemnity = "BodyBlood"
+        case 2:
+            solemnity = "SacHeart"
+
+    key = f"{solemnity}-{cycle}"
+
+    MAJSOLEM[key] = [
+        Verse(row[3], "FIR"),
+        Verse(row[4], "RES"),
+        Verse(row[5], "SEC"),
+        Verse(row[7], "GOS"),
+    ]
+
+majorSolemnityKeys = {
+    "Presentation of the Lord": ["Feb2", "The Presentation of the Lord"],
+    "St. Joseph": [
+        "Mar19",
+        "Solemnity of St. Joseph, Spouse of the Blessed Virgin Mary",
+    ],
+    "Annunciation of the Lord": ["Mar25", "The Annunciation of the Lord"],
+    "St. John the Baptist: Vigil": [
+        "Jun23-VIGIL",
+        "The Nativity of St. John the Baptist: Vigil",
+    ],
+    "St. John the Baptist: Day": ["Jun24", "The Nativity of St. John the Baptist"],
+    "Peter and Paul, Apostles: Vigil": [
+        "Jun28-VIGIL",
+        "Solemnity of St. Peter and St. Paul, Apostles: Vigil",
+    ],
+    "Peter and Paul, Apostles: Day": [
+        "Jun29",
+        "Solemnity of St. Peter and St. Paul, Apostles",
+    ],
+    "Transfiguration": ["Aug6", "The Transfiguration of the Lord"],
+    "Mary: Vigil": ["Aug14-VIGIL", "The Assumption of the Blessed Virgin Mary: Vigil"],
+    "Mary: Day": ["Aug15", "The Assumption of the Blessed Virgin Mary"],
+    "Exaltation": ["Sep14", "The Exaltation of the Cross"],
+    "All Saints": ["Nov1", "All Saints"],
+    "Faithful Departed": ["Nov2", "The Commemortaion of All the Faithful Departed"],
+    "Lateran Basilica": ["Nov9", "The Dedication of the Lateran Basilica"],
+    "Immaculate Conception": [
+        "Dec8",
+        "The Immaculate Conception of the Blessed Virgin Mary",
+    ],
+}
+
+for row in lordSolemnities:
+    date = row[1]
+    title = ""
+
+    for key in majorSolemnityKeys:
+        if key in date:
+            title = majorSolemnityKeys[key][1]
+            date = majorSolemnityKeys[key][0]
+
+    key = date
+    MAJSOLEM[key] = [
+        title,
+        Verse(row[3], "FIR"),
+        Verse(row[4], "RES"),
+        Verse(row[5], "SEC"),
+        Verse(row[6], "GOS"),
+    ]
+
+# Saint Proper
+saintTables = getTables(saintProper)
+saintRows = getRows(saintTables[0])
+saintMonths = {
+    "Jan. ": "Jan",
+    "Feb. ": "Feb",
+    "March ": "Mar",
+    "April ": "Apr",
+    "May ": "May",
+    "June ": "Jun",
+    "July ": "Jul",
+    "Aug. ": "Aug",
+    "Sept. ": "Sep",
+    "Oct. ": "Oct",
+    "Nov. ": "Nov",
+    "Dec. ": "Dec",
+}
+for row in saintRows:
+    if not row[1] == "Date" and row[3] != "Solemnity":
+        date = row[1]
+        date = date.split("+")[0].strip()
+        date = fixNewLine(date)
+        title = fixNewLine(row[2])
+        rank = row[3]
+
+        key = date
+        if "Thanksgiving" in title:
+            key = "THANKSGIVING"
+        if "St. Gregory" in title:
+            key = "Sept. 3"
+        if "St. Paul of the Cross" in title:
+            key = "Oct. 20"
+        if "St. Francis Xavier" in title:
+            key = "Dec. 3"
+        if "St. Vincnet" in title:
+            key = "Jan23-2"
+
+        for month in saintMonths:
+            if month in saintMonths:
+                key = key.replace(month, saintMonths[month])
+
+        if rank == ".":
+            key = key + "-OPT"
+
+        SAINTPROPER[key] = [title]
+        if row[5] not in ["x", "."]:
+            SAINTPROPER[key].append(Verse(row[5], "FIR"))
+        if row[6] not in ["x", "."]:
+            SAINTPROPER[key].append(Verse(row[5], "RES"))
+        if row[7] not in ["x", "."]:
+            SAINTPROPER[key].append(Verse(row[5], "SEC"))
+        if row[9] not in ["x", "."]:
+            SAINTPROPER[key].append(Verse(row[5], "GOS"))
+
+        if len(SAINTPROPER[key]) < 2:
+            del SAINTPROPER[key]
+
+
 print("ADVENT:")
 printDict(AD)
 print("\n")
@@ -428,5 +565,30 @@ print("\n")
 print("EASTER:")
 printDict(EA)
 print("\n")
-print("MISCELLANEOUS:")
-printDict(MISC)
+print("MAJOR SOLEMNITIES:")
+printDict(MAJSOLEM)
+print("\n")
+print("PROPER OF SAINTS:")
+printDict(SAINTPROPER)
+print("\n")
+
+
+def parseDict(dict):
+    return {
+        key: [verse.toDict() if isinstance(verse, Verse) else verse for verse in dict]
+        for key, dict in dict.items()
+    }
+
+
+parsedLectionary = {
+    "ADVENT": parseDict(AD),
+    "CHRISTMAS": parseDict(CH),
+    "ORDINARY": parseDict(OT),
+    "LENT": parseDict(LE),
+    "EASTER": parseDict(EA),
+    "SOLEMNITY": parseDict(MAJSOLEM),
+    "SAINTPROPER": parseDict(SAINTPROPER),
+}
+
+with open("lectionaryTemplate.json", "w") as f:
+    json.dump(parsedLectionary, f, indent=2)
