@@ -44,7 +44,7 @@ weeksBeforeLent
 pentecostStartOT
 """
 
-
+# Sets each date's saeson (Christmas, Lent, Ordinary time, etc.)
 currentDate = datetime.datetime(year, 1, 1)
 liturgySeasons = {}
 while currentDate < datetime.datetime(year + 1, 1, 1):
@@ -67,9 +67,14 @@ while currentDate < datetime.datetime(year + 1, 1, 1):
 
 liturgy = {}
 
-# Christmas
 christmasLectionary = lectionary["CHRISTMAS"]
+adventLectionary = lectionary["ADVENT"]
 for date in liturgySeasons:
+    # ####################
+    # ||                ||
+    # ||   CHRISTMAS    ||
+    # ||                ||
+    # ####################
     if liturgySeasons[date] == "CHRISTMAS":
         liturgy[date] = []
         match date.month:
@@ -79,16 +84,15 @@ for date in liturgySeasons:
                 month = "Dec"
         dateSearch = f"{month}{date.day}"
 
-        # Default Christmas Readings
-        if date == datetime.datetime(year, 12, 25):
+        if date == datetime.datetime(year, 12, 25):  # CHRISTMAS
             liturgy[date] = [
                 christmasLectionary["CHRISTMAS-VIGIL"],
                 christmasLectionary["CHRISTMAS-NIGHT"],
                 christmasLectionary["CHRISTMAS-DAWN"],
                 christmasLectionary["CHRISTMAS-DAY"],
             ]
-        elif date == calendar.holyFamily:
-            nextSundayCycle = (calendar.sundayCycle + 1) % 3
+        elif date == calendar.holyFamily:  # HOLY FAMILY
+            nextSundayCycle = calendar.sundayCycle % 3 + 1
             keySearch = f"HOLYFAMILY-{sundayCycleIntToChar(nextSundayCycle)}"
             if nextSundayCycle == 1:
                 liturgy[date] = [christmasLectionary[keySearch]]
@@ -97,14 +101,20 @@ for date in liturgySeasons:
                     christmasLectionary["HOLYFAMILY-A"],
                     christmasLectionary[keySearch],
                 ]
-        elif dateSearch in christmasLectionary and (
+        elif dateSearch in christmasLectionary and (  # CHRISTMASDAYS
             date < calendar.epiphany or date > datetime.datetime(year, 12, 25)
         ):
             liturgy[date].append(christmasLectionary[dateSearch])
-        elif date == calendar.christmasEnd:
+        elif date == calendar.christmasEnd:  # BAPTISM OF OUR LORD
             keySearch = f"BAPTISM-{sundayCycleIntToChar(calendar.sundayCycle)}"
-            liturgy[date].append(christmasLectionary[keySearch])
-        else:
+            if calendar.sundayCycle == 1:
+                liturgy[date].append(christmasLectionary["BAPTISM-A"])
+            else:
+                liturgy[date] = [
+                    christmasLectionary["BAPTISM-A"],
+                    christmasLectionary[keySearch],
+                ]
+        else:  # EPIPHANY
             if date == calendar.epiphany:
                 liturgy[date].append(christmasLectionary["EPIPHANY"])
             else:
@@ -113,7 +123,21 @@ for date in liturgySeasons:
                     christmasLectionary[f"EPIPHANY-{daysFromEpiphany}"]
                 )
 
+    # ####################
+    # ||                ||
+    # ||     ADVENT     ||
+    # ||                ||
+    # ####################
+    if liturgySeasons[date] == "ADVENT":
+        # Sundays
+        if date.weekday() == 6:
+            weeksSinceStart = int((date - calendar.adventStart).days / 7 + 1)
+            keySearch = (
+                f"0{weeksSinceStart}-7-{sundayCycleIntToChar(calendar.sundayCycle)}"
+            )
+            liturgy[date] = [adventLectionary[keySearch]]
 
-for date in liturgySeasons:
-    if liturgySeasons[date] == "CHRISTMAS":
+
+for date in liturgy:
+    if liturgySeasons[date] == "ADVENT":
         print(f"{date.strftime('%x')} - {liturgy[date]}")

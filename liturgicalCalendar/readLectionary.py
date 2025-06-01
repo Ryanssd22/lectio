@@ -229,10 +229,10 @@ for i, row in enumerate(christmasSundayRows):
             title = " The Baptism of the Lord"
         case 11:
             date = "BAPTISM-B"
-            title = " The Baptism of the Lord"
+            title = " The Baptism of the Lord (Opt. year B)"
         case 12:
             date = "BAPTISM-C"
-            title = " The Baptism of the Lord"
+            title = " The Baptism of the Lord (Opt. year C)"
 
     CH[date] = [title, first, resp, second, gospel]
 
