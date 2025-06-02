@@ -46,8 +46,9 @@ def getEpiphany(yr):
     jan1 = datetime.datetime(yr, 1, 1)
     return getNextSunday(jan1)
 
+
 def getHolyFamily(yr):
-    epiphany = getEpiphany(yr+1)
+    epiphany = getEpiphany(yr + 1)
     if datetime.date(yr, 12, 25).weekday() == 6:
         return datetime.datetime(yr, 12, 30)
     else:
@@ -118,11 +119,11 @@ class CalendarData:
 
 
 def getCalendar(year):
-    weekdayCycle = year % 2
+    weekdayCycle = 2 if year % 2 == 0 else 1
     sundayCycle = (year - 1) % 3 + 1  # 1 - A, 2 - B, 3 - C
     easterDate = getEaster(year)
     epiphany = getEpiphany(year)
-    holyFamily = getHolyFamily(year) 
+    holyFamily = getHolyFamily(year)
     ashWednesday = getAshWednesday(year)
     pentecost = easterDate + datetime.timedelta(days=49)
     christmasEnd = getChristmasEnd(epiphany)

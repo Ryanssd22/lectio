@@ -85,6 +85,7 @@ liturgy = {}
 christmasLectionary = lectionary["CHRISTMAS"]
 adventLectionary = lectionary["ADVENT"]
 ordinaryLectionary = lectionary["ORDINARY"]
+lentLectionary = lectionary["LENT"]
 for date in liturgySeasons:
     dayOfTheWeek = date.isoweekday()
     # ####################
@@ -174,7 +175,7 @@ for date in liturgySeasons:
     # ####################
     if liturgySeasons[date] == "ORDINARY":
         if date < calendar.ashWednesday:
-            weeksSinceStart = int((date - calendar.epiphany).days / 7 + 1)
+            weeksSinceStart = int((date - calendar.epiphany).days / 7)
         else:
             weeksSinceStart = int(
                 (date - calendar.pentecost).days / 7 + calendar.pentecostStartOT
@@ -187,9 +188,34 @@ for date in liturgySeasons:
             keySearch = (
                 f"{weeksSinceStart}-7-{sundayCycleIntToChar(calendar.sundayCycle)}"
             )
-            liturgy[date] = [ordinaryLectionary[keySearch]]
+            readings = ordinaryLectionary[keySearch]
+            title = f"{getOrdinalNumber(weeksSinceStart)} Sunday of Ordinary Time"
+        else:
+            keySearch = f"{weeksSinceStart}-{dayOfTheWeek}-{calendar.weekdayCycle}"
+            readings = ordinaryLectionary[keySearch]
+
+        liturgy[date] = [readings]
+
+    # ####################
+    # ||                ||
+    # ||      LENT      ||
+    # ||                ||
+    # ####################
+    if liturgySeasons[date] == "LENT":
+        weeksSinceAsh = int((date - calendar.ashWednesday).days / 7)
+
+        if dayOfTheWeek == 7:
+            if weeksSinceAsh + 1 == 6:
+                keySearch = f"6-7-{sundayCycleIntToChar(calendar.sundayCycle)}"
+                liturgy[date] = [
+                    lentLectionary[keySearch + "-MASS"],
+                    lentLectionary[keySearch + "-PROC"],
+                ]
+            else:
+                keySearch = f"{weeksSinceAsh + 1}-7-{sundayCycleIntToChar(calendar.sundayCycle)}"
+                liturgy[date] = lentLectionary[keySearch]
 
 
 for date in liturgy:
-    if liturgySeasons[date] == "ORDINARY":
+    if liturgySeasons[date] == "LENT":
         print(f"{date.strftime('%x')} - {liturgy[date]}")
