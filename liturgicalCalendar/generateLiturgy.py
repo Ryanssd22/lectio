@@ -7,6 +7,8 @@ import sys
 import datetime
 from readCalendar import getCalendar
 
+from readLectionary import Readings, getOrdinalNumber, getDayOfWeekString
+
 
 def sundayCycleIntToChar(number):
     match number:
@@ -20,7 +22,20 @@ def sundayCycleIntToChar(number):
 
 
 with open("lectionaryTemplate.json", "r") as f:
-    lectionary = json.load(f)
+    jsonLectionary = json.load(f)
+    lectionary = {}
+    for season in jsonLectionary:
+        lectionary[season] = {
+            date: Readings(
+                reading["title"],
+                reading["first"],
+                reading["responsal"],
+                reading["second"],
+                reading["gospel"],
+            )
+            for date, reading in jsonLectionary[season].items()
+        }
+
 
 if len(sys.argv) < 2:
     year = datetime.datetime.now().year
@@ -69,7 +84,9 @@ liturgy = {}
 
 christmasLectionary = lectionary["CHRISTMAS"]
 adventLectionary = lectionary["ADVENT"]
+ordinaryLectionary = lectionary["ORDINARY"]
 for date in liturgySeasons:
+    dayOfTheWeek = date.isoweekday()
     # ####################
     # ||                ||
     # ||   CHRISTMAS    ||
@@ -129,15 +146,50 @@ for date in liturgySeasons:
     # ||                ||
     # ####################
     if liturgySeasons[date] == "ADVENT":
+        weeksSinceStart = int((date - calendar.adventStart).days / 7 + 1)
+        # Specific Dates
+        if date.day >= 17 and date.day <= 24:
+            keySearch = f"Dec{date.day}"
+            title = f"{getOrdinalNumber(weeksSinceStart)} {getDayOfWeekString(dayOfTheWeek - 1)} of Advent"
+            readings = adventLectionary[keySearch]
+            readings.title = title[0].upper() + title[1:]
+            liturgy[date] = [readings]
+
         # Sundays
-        if date.weekday() == 6:
-            weeksSinceStart = int((date - calendar.adventStart).days / 7 + 1)
+        elif dayOfTheWeek == 7:
             keySearch = (
-                f"0{weeksSinceStart}-7-{sundayCycleIntToChar(calendar.sundayCycle)}"
+                f"{weeksSinceStart}-7-{sundayCycleIntToChar(calendar.sundayCycle)}"
             )
             liturgy[date] = [adventLectionary[keySearch]]
 
+        # Weekdays
+        else:
+            keySearch = f"{weeksSinceStart}-{dayOfTheWeek}"
+            liturgy[date] = [adventLectionary[keySearch]]
+
+    # ####################
+    # ||                ||
+    # || ORDINARY TIME  ||
+    # ||                ||
+    # ####################
+    if liturgySeasons[date] == "ORDINARY":
+        if date < calendar.ashWednesday:
+            weeksSinceStart = int((date - calendar.epiphany).days / 7 + 1)
+        else:
+            weeksSinceStart = int(
+                (date - calendar.pentecost).days / 7 + calendar.pentecostStartOT
+            )
+
+        if weeksSinceStart < 10:
+            weeksSinceStart = "0" + str(weeksSinceStart)
+
+        if dayOfTheWeek == 7:
+            keySearch = (
+                f"{weeksSinceStart}-7-{sundayCycleIntToChar(calendar.sundayCycle)}"
+            )
+            liturgy[date] = [ordinaryLectionary[keySearch]]
+
 
 for date in liturgy:
-    if liturgySeasons[date] == "ADVENT":
+    if liturgySeasons[date] == "ORDINARY":
         print(f"{date.strftime('%x')} - {liturgy[date]}")
