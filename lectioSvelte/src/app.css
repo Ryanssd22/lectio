@@ -3,6 +3,6 @@
 @layer base {
 	body {
 		@apply bg-amber-50;
-		font-family: 'Inter';
+		font-family: 'Lora', 'Inter';
 	}
 }

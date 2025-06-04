@@ -60,7 +60,6 @@ def dateToLectionaryDate(date):
     }
     return f"{months[date.month]}{date.day}"
 
-
 directory = os.path.dirname(os.path.abspath(__file__))
 templatePath = os.path.join(directory, "lectionaryTemplate.json")
 with open(templatePath, "r") as f:

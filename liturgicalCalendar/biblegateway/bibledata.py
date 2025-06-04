@@ -18,15 +18,15 @@ BOOKS = {
     "Ezra": "Ezra",
     "Nehemiah": "Neh",
     "Tobit": "Tob",
-    "Judith": "Jdt",
+    "Judith": "Jdt",  # Judith
     "Esther": "Esth",
     "1 Maccabees": "1Macc",
     "2 Maccabees": "2Macc",
     "Job": "Job",
-    "Psalms": "Ps/Pss",
+    "Psalms": "Ps/Pss",  # Ps
     "Proverbs": "Prov",
     "Ecclesiastes": "Eccl",
-    "Song of Songs": "Song",
+    "Song of Songs": "Song",  # Songs
     "Wisdom": "Wis",
     "Sirach": "Sir",
     "Isaiah": "Isa",
@@ -67,9 +67,9 @@ BOOKS = {
     "Titus": "Titus",
     "Philemon": "Phlm",
     "Hebrews": "Heb",
-    "James": "Jas",
-    "1 Peter": "1Pet",
-    "2 Peter": "2Pet",
+    "James": "Jas",  # James
+    "1 Peter": "1Pet",  # 1 Peter
+    "2 Peter": "2Pet",  # 2 Peter
     "1 John": "1John",
     "2 John": "2John",
     "3 John": "3John",

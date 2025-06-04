@@ -23,7 +23,7 @@
 		<a href="/"> More Links </a>
 	</div>
 
-	<div class="text-center">
+	<div class="items-center text-center">
 		{@render children()}
 	</div>
 </div>
