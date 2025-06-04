@@ -26,16 +26,25 @@ def fixNewLine(string):
 
 class Readings:
     def __init__(
-        self, title=None, first=None, responsal=None, second=None, gospel=None
+        self,
+        title=None,
+        first=None,
+        responsal=None,
+        second=None,
+        gospel=None,
+        rank=None,
     ):
         self.title = title
         self.first = fixNewLine(first) if first not in [None, "x"] else None
         self.responsal = fixNewLine(responsal) if responsal not in [None, "x"] else None
         self.second = fixNewLine(second) if second not in [None, "x"] else None
         self.gospel = fixNewLine(gospel) if gospel not in [None, "x"] else None
+        self.rank = rank if rank else None
 
     def __repr__(self):
         string = ""
+        if self.rank:
+            string += f"{self.rank}: "
         if self.title:
             string += f"{self.title}:"
         if self.first:
@@ -56,6 +65,7 @@ class Readings:
             "responsal": self.responsal,
             "second": self.second,
             "gospel": self.gospel,
+            "rank": self.rank,
         }
 
 
@@ -84,6 +94,36 @@ def getDayOfWeek(date):
 def getOrdinalNumber(number):
     p = inflect.engine()
     return p.number_to_words(p.ordinal(number))
+
+
+def lectionaryDateToDate(lectionaryDate):
+    match lectionaryDate[:3]:
+        case "Jan":
+            month = 1
+        case "Feb":
+            month = 2
+        case "Mar":
+            month = 3
+        case "Apr":
+            month = 4
+        case "May":
+            month = 5
+        case "Jun":
+            month = 6
+        case "Jul":
+            month = 7
+        case "Aug":
+            month = 8
+        case "Sep":
+            month = 9
+        case "Oct":
+            month = 10
+        case "Nov":
+            month = 11
+        case "Dec":
+            month = 12
+    day = int(lectionaryDate[3:])
+    return datetime.datetime(month, day, year)
 
 
 def getDayOfWeekString(number):
@@ -276,13 +316,13 @@ if __name__ == "__main__":
                 title = "The Epiphany of the Lord"
             case 10:
                 date = "BAPTISM-A"
-                title = " The Baptism of the Lord"
+                title = "The Baptism of the Lord"
             case 11:
                 date = "BAPTISM-B"
-                title = " The Baptism of the Lord (Opt. year B)"
+                title = "The Baptism of the Lord (Opt. year B)"
             case 12:
                 date = "BAPTISM-C"
-                title = " The Baptism of the Lord (Opt. year C)"
+                title = "The Baptism of the Lord (Opt. year C)"
 
         CH[date] = Readings(
             title, first=row[3], responsal=row[4], second=row[5], gospel=row[7]
@@ -453,14 +493,18 @@ if __name__ == "__main__":
 
             if "Ash" in date:
                 key = "0-" + str(ashWednesday)
+                if ashWednesday == 3:
+                    title = "Ash Wednesday"
+                else:
+                    title = f"{getDayOfWeekString(ashWednesday-1)} after Ash Wednesday"
                 ashWednesday += 1
-                title = f"{getDayOfWeekString(int(weekday)-1)} after Ash Wednesday"
             elif "Holy Week" in date:
                 title = f"{getDayOfWeekString(int(weekday)-1)} of Holy Week"
                 if "Chrism Mass" in date:
-                    title = "Holy Thursday, Chrism Mass"
-                    weekday = "4-MORN"
-                key = "6-" + weekday
+                    title = "Morning of Holy Thursday, Chrism Mass"
+                    key = "CHRISM"
+                else:
+                    key = "6-" + weekday
             elif "optional" in date:
                 title = f"{getOrdinalNumber(key[0])} Week of Lent - Optional Mass"
                 key = key[:2] + "OPT"
@@ -477,7 +521,7 @@ if __name__ == "__main__":
             date = date.split("(")[0].strip()
 
             if "Holy Thursday" in date:
-                title = "Holy Thursday"
+                title = "Holy Thursday, Evening Mass of the Lord's Supper"
                 key = "0-4"
             elif "Good Friday" in date:
                 title = "Good Friday"
@@ -496,13 +540,15 @@ if __name__ == "__main__":
             elif "Pentecost" in date:
                 if "Vigil" in date:
                     title = "Pentecost, Vigil"
-                    key = "7-7-VIGIL"
+                    key = "PENTECOST-VIGIL"
                 else:
                     title = "Pentecost"
-                    key = "7-7-" + date[-1]
+                    key = "PENTECOST-" + date[-1]
             else:
                 key = str(int(date[0]) - 1) + "-7-" + date[-1]
-                title = f"{getOrdinalNumber(key[0])} Sunday of Easter"
+                if key[0] == 7:
+                    key = "8-7-" + date[-1]
+                title = f"{getOrdinalNumber(int(key[0])+1)} Sunday of Easter"
 
             title = title[0].upper() + title[1:]
 
@@ -545,7 +591,7 @@ if __name__ == "__main__":
         match i / 3:
             case 0:
                 solemnity = "TrinSun"
-                title = "Trinity Sunday"
+                title = "Solemnity of the Most Holy Trinity"
             case 1:
                 solemnity = "BodyBlood"
                 title = "Solemnity of the Most Holy Body and Blood of Christ"
@@ -567,12 +613,12 @@ if __name__ == "__main__":
         ],
         "Annunciation of the Lord": ["Mar25", "The Annunciation of the Lord"],
         "St. John the Baptist: Vigil": [
-            "Jun23-VIGIL",
+            "Jun24-VIGIL",
             "The Nativity of St. John the Baptist: Vigil",
         ],
         "St. John the Baptist: Day": ["Jun24", "The Nativity of St. John the Baptist"],
         "Peter and Paul, Apostles: Vigil": [
-            "Jun28-VIGIL",
+            "Jun29-VIGIL",
             "Solemnity of St. Peter and St. Paul, Apostles: Vigil",
         ],
         "Peter and Paul, Apostles: Day": [
@@ -581,7 +627,7 @@ if __name__ == "__main__":
         ],
         "Transfiguration": ["Aug6", "The Transfiguration of the Lord"],
         "Mary: Vigil": [
-            "Aug14-VIGIL",
+            "Aug15-VIGIL",
             "The Assumption of the Blessed Virgin Mary: Vigil",
         ],
         "Mary: Day": ["Aug15", "The Assumption of the Blessed Virgin Mary"],
@@ -605,13 +651,6 @@ if __name__ == "__main__":
                 date = majorSolemnityKeys[key][0]
 
         key = date
-        # MAJSOLEM[key] = [
-        #     title,
-        #     Verse(row[3], "FIR"),
-        #     Verse(row[4], "RES"),
-        #     Verse(row[5], "SEC"),
-        #     Verse(row[6], "GOS"),
-        # ]
         MAJSOLEM[key] = Readings(
             title, first=row[3], responsal=row[4], second=row[5], gospel=row[6]
         )
@@ -633,13 +672,46 @@ if __name__ == "__main__":
         "Nov. ": "Nov",
         "Dec. ": "Dec",
     }
+    # saintRanks = {
+    #     ".": "Optional Memorial",
+    #     "USA Opt.": "USA Optional Memorial",
+    #     "USA Mem.": "USA Memorial",
+    #     "USA Feast": "USA Feast",
+    #     "Feast": "Feast",
+    #     "Mem.": "Memorial",
+    #     "Calif. Proper": "California Proper",
+    #     "USA trans. from July 14": "USA Optional Memorial",
+    #     "Feast (as of 2016)": "Feast",
+    #     "Univ. Opt. / USA Mem.": "USA Memorial",
+    #     "19: Univ. 20: USA": "USA Memorial",
+    # }
+
+    def parseRank(rank):
+        returnString = ""
+        if rank == ".":
+            return "Optional Memorial"
+        elif "USA Mem." in rank or "20: USA" in rank:
+            return "USA Memorial"
+        elif "USA trans." in rank:
+            return "USA Optional Memorial"
+        elif "Calif." in rank:
+            return "California Proper"
+
+        if "USA" in rank:
+            returnString = "USA "
+        if "Feast" in rank:
+            return f"{returnString}Feast"
+        elif "Mem." in rank:
+            return f"{returnString}Memorial"
+        elif "Opt." in rank:
+            return f"{returnString}Optional Memorial"
+
     for row in saintRows:
         if not row[1] == "Date" and row[3] != "Solemnity":
             date = row[1]
             date = date.split("+")[0].strip()
             date = fixNewLine(date)
             title = fixNewLine(row[2])
-            rank = row[3]
 
             key = date
             if "Thanksgiving" in title:
@@ -652,17 +724,23 @@ if __name__ == "__main__":
                 key = "Dec. 3"
             if "St. Vincnet" in title:
                 key = "Jan23-2"
+            if "St. Camillus" in title:
+                key = "Jul18"
 
             for month in saintMonths:
                 if month in saintMonths:
                     key = key.replace(month, saintMonths[month])
 
-            if rank == ".":
-                key = key + "-OPT"
-
-            SAINTPROPER[key] = Readings(
-                title, first=row[5], responsal=row[6], second=row[7], gospel=row[9]
-            )
+            if key not in MAJSOLEM:
+                rank = parseRank(row[3])
+                SAINTPROPER[key] = Readings(
+                    title,
+                    first=row[5],
+                    responsal=row[6],
+                    second=row[7],
+                    gospel=row[9],
+                    rank=rank,
+                )
 
     # print("ADVENT:")
     # printDict(AD)
@@ -673,18 +751,18 @@ if __name__ == "__main__":
     # print("ORDINARY TIME:")
     # printDict(OT)
     # print("\n")
-    print("LENT:")
-    printDict(LE)
-    print("\n")
+    # print("LENT:")
+    # printDict(LE)
+    # print("\n")
     # print("EASTER:")
     # printDict(EA)
     # print("\n")
     # print("MAJOR SOLEMNITIES:")
     # printDict(MAJSOLEM)
     # print("\n")
-    # print("PROPER OF SAINTS:")
-    # printDict(SAINTPROPER)
-    # print("\n")
+    print("PROPER OF SAINTS:")
+    printDict(SAINTPROPER)
+    print("\n")
 
     def parseDict(dict):
         return {key: dict[key].toDict() for key, reading in dict.items()}
