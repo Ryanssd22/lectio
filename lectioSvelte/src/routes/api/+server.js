@@ -7,7 +7,7 @@ const execFileAsync = promisify(execFile);
 export async function GET() {
 	const scriptPath = path.resolve('src/scripts/generateLiturgy.py');
 	try {
-		const { stdout } = await execFileAsync('python', [scriptPath]);
+		const { stdout } = await execFileAsync('python3', [scriptPath]);
 		return new Response(JSON.stringify({ output: stdout }), {
 			headers: { 'Content-Type': 'application/json' }
 		});
