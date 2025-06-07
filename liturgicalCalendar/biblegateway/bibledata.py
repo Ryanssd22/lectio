@@ -23,7 +23,7 @@ BOOKS = {
     "1 Maccabees": "1Macc",
     "2 Maccabees": "2Macc",
     "Job": "Job",
-    "Psalms": "Ps/Pss",  # Ps
+    "Psalms": "Ps",  # Ps
     "Proverbs": "Prov",
     "Ecclesiastes": "Eccl",
     "Song of Songs": "Song",  # Songs
@@ -75,6 +75,84 @@ BOOKS = {
     "3 John": "3John",
     "Jude": "Jude",
     "Revelation": "Rev",
+}
+
+LECTIONARYTOBIBLEGATEWAY = {
+    # Old Testament
+    "Gen": "GENESIS",
+    "Exod": "EXODUS",
+    "Lev": "LEVITICUS",
+    "Num": "NUMBERS",
+    "Deut": "DEUTERONOMY",
+    "Josh": "JOSH",
+    "Judg": "JUDGES",
+    "Ruth": "RUTH",
+    "1 Sam": "1 SAMUEL",
+    "2 Samuel": "2 SAMUEL",
+    "1 Kings": "1 KINGS",
+    "2 Kings": "2 KINGS",
+    "1 Chr": "1 CHRONICLES",
+    "2 Chr": "2 CHRONICLES",
+    "Ezra": "EZRA",
+    "Neh": "NEHEMIAH",
+    "Tob": "TOBIT",
+    "Judith": "JUDITH",  # Judith
+    "Esth": "ESTHER",
+    "1 Macc": "1 MACCABEES",
+    "2 Macc": "2 MACCABEES",
+    "Job": "JOB",
+    "Ps": "PSALMS",  # Ps
+    "Prov": "PROVERBS",
+    "Eccl": "ECCLESIASTES",
+    "Songs": "SONG OF SONGS",  # Songs
+    "Wis": "WISDOM",
+    "Sir": "SIRACH",
+    "Isa": "ISAIAH",
+    "Jer": "JEREMIAH",
+    "Lam": "LAMENTATIONS",
+    "Bar": "BARUCH",
+    "Ezek": "EZEKIEL",
+    "Dan": "DANIEL",
+    "Hos": "HOSEA",
+    "Joel": "JOEL",
+    "Amos": "AMOS",
+    "Obad": "OBADIAH",
+    "Jonah": "JONAH",
+    "Mic": "MICAH",
+    "Nah": "NAHUM",
+    "Hab": "HABAKKUK",
+    "Zeph": "ZEPHANIAH",
+    "Hag": "HAGGAI",
+    "Zech": "ZECHARIAH",
+    "Mal": "MALACHI",
+    # New Testament
+    "Matt": "MATTHEW",
+    "Mark": "MARK",
+    "Luke": "LUKE",
+    "John": "JOHN",
+    "Acts": "ACTS",
+    "Rom": "ROMANS",
+    "1 Cor": "1 CORINTHIANS",
+    "2 Cor": "2 CORINTHIANS",
+    "Gal": "GALATIANS",
+    "Eph": "EPHESIANS",
+    "Phil": "PHILIPPIANS",
+    "Col": "COLOSSIANS",
+    "1 Thess": "1 THESSALONIANS",
+    "2 Thess": "2 THESSALONIANS",
+    "1 Tim": "1 TIMOTHY",
+    "2 Tim": "2 TIMOTHY",
+    "Titus": "TITUS",
+    "Phil": "PHILEMON",
+    "Heb": "HEBREWS",
+    "James": "Jas",  # James
+    "1 Peter": "1Pet",  # 1 Peter
+    "2 Peter": "2Pet",  # 2 Peter
+    "1 John": "1 JOHN",
+    "2 John": "2 JOHN",
+    "3 John": "3 JOHN",
+    "Jude": "JUDE",
+    "Rev": "REVELATION",
 }
 
 BOOKCHAPTERS = {

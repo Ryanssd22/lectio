@@ -57,9 +57,22 @@ def downloadBook(book, translation):
             for paragraph in paragraphs:
                 verses = paragraph.find_all(class_=re.compile(BOOKABRV))
                 for verse in verses:
-                    parsedVerse = "".join(
-                        verse.find_all(string=True, recursive=False)
-                    ).strip()
+                    for sup in verse.find_all("sup", class_="versenum"):
+                        sup.decompose()
+                    parsedVerse = verse.get_text(separator=" ", strip=True)
+                    # Remove all bracket blocks
+                    parsedVerse = re.sub(r"\[.*?\]", "", parsedVerse)
+                    # Remove all parentheses
+                    parsedVerse = re.sub(r"\(.*?\)", "", parsedVerse)
+                    # Fix some commas
+                    parsedVerse = re.sub(r" ,", ",", parsedVerse)
+                    # Fix some periods
+                    parsedVerse = re.sub(r" \.", ".", parsedVerse)
+                    # Fix some question marks
+                    parsedVerse = re.sub(r" \?", "?", parsedVerse)
+                    # Clean up multiple spaces
+                    parsedVerse = re.sub(r"\s+", " ", parsedVerse).strip()
+
                     classList = verse.get("class")
                     className = next(
                         (cls for cls in classList if re.match(BOOKABRV, cls)), None
@@ -133,7 +146,12 @@ def updateProgressBar():
 
 def clean(text):
     """Removes trailing whitespace and any uncommon characters"""
-    cleanStr = re.sub(r"[^\w\s.,!?;:'\"()\[\]{}\-—]", "", text)
+    # Convert curly quotes to straight quotes
+    text = text.replace("“", '"')
+    text = text.replace("”", '"')
+
+    # Then clean with your existing pattern
+    cleanStr = re.sub(r'[^\w\s.,!?;:\'"()[\]{}—-]', "", text)
     return re.sub(r"\s+", " ", cleanStr).strip()
 
 
@@ -154,6 +172,7 @@ for book in BOOKS:
     threads.append(thread)
     rawBible[book] = -1
     thread.start()
+
 
 print(f"Downloading {TRANSLATION} from BibleGateway:", flush=True)
 

@@ -9,7 +9,6 @@ import os
 from readCalendar import getCalendar, getNextSunday
 
 from readLectionary import (
-    Readings,
     getOrdinalNumber,
     getDayOfWeekString,
     lectionaryDateToDate,
@@ -64,20 +63,20 @@ def dateToLectionaryDate(date):
 directory = os.path.dirname(os.path.abspath(__file__))
 templatePath = os.path.join(directory, "lectionaryTemplate.json")
 with open(templatePath, "r") as f:
-    jsonLectionary = json.load(f)
-    lectionary = {}
-    for season in jsonLectionary:
-        lectionary[season] = {
-            date: Readings(
-                reading["title"],
-                reading["first"],
-                reading["responsal"],
-                reading["second"],
-                reading["gospel"],
-                reading["rank"],
-            )
-            for date, reading in jsonLectionary[season].items()
-        }
+    lectionary = json.load(f)
+    # lectionary = {}
+    # for season in jsonLectionary:
+    # lectionary[season] = {
+    # date: Readings(
+    #     reading["title"],
+    #     reading["first"],
+    #     reading["responsal"],
+    #     reading["second"],
+    #     reading["gospel"],
+    #     reading["rank"],
+    # )
+    # for date, reading in jsonLectionary[season].items()
+    # }
 
 
 if len(sys.argv) < 2:
@@ -198,7 +197,7 @@ for date in liturgySeasons:
             keySearch = f"Dec{date.day}"
             title = f"{getOrdinalNumber(weeksSinceStart)} {getDayOfWeekString(dayOfTheWeek - 1)} of Advent"
             readings = adventLectionary[keySearch]
-            readings.title = title[0].upper() + title[1:]
+            readings["title"] = title[0].upper() + title[1:]
             liturgy[date] = [readings]
 
         # Sundays
@@ -272,7 +271,7 @@ for date in liturgySeasons:
         weeksSinceEaster = int((date - calendar.easter).days / 7 + 1)
 
         if date == calendar.easter - datetime.timedelta(days=1):
-            liturgy[date] = [Readings("No Mass")]
+            liturgy[date] = [{"title": "No Mass"}]
         elif date == calendar.easter - datetime.timedelta(days=2):  # Good Friday
             liturgy[date] = [easterLectionary["0-5"]]
         elif date == calendar.easter:  # Easter
@@ -377,7 +376,7 @@ for date in liturgySeasons:
     # ####################
     if lectionaryDate in saintLectionary:
         readings = saintLectionary[lectionaryDate]
-        if dayOfTheWeek == 7:
+        if dayOfTheWeek == 7 or "Opt" in readings["rank"]:
             liturgy[date].append(readings)
         else:
             liturgy[date].insert(0, readings)
@@ -390,9 +389,8 @@ for date in liturgy:
 parsedLiturgy = {}
 for date, readings in liturgy.items():
     # print(readings[0].toDict())
-    dateReadings = [reading.toDict() for reading in readings]
-    parsedLiturgy[date.strftime("%Y-%m-%d")] = dateReadings
+    parsedLiturgy[date.strftime("%Y-%m-%d")] = readings
 
 os.makedirs("./liturgies", exist_ok=True)
-with open(f"./liturgies/liturgy{year}.json", "w") as f:
-    json.dump(parsedLiturgy, f, indent=2)
+with open(f"./liturgies/liturgy{year}.json", "w", encoding="utf-8") as f:
+    json.dump(parsedLiturgy, f, indent=2, ensure_ascii=False)
