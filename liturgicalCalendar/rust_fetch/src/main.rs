@@ -35,9 +35,10 @@ struct Readings {
 }
 
 fn main() {
-    // let args: Vec<String> = env::args().collect();
+    let args: Vec<String> = env::args().collect();
 
-    // let year = args[1].split("-").next().unwrap().parse().unwrap();
+    let date = &args[1];
+    let year = date.split("-").next().unwrap().parse().unwrap();
     let bible = match read_bible("NABRE") {
         Ok(content) => content,
         Err(e) => {
@@ -46,7 +47,7 @@ fn main() {
         }
     };
 
-    let liturgy = match read_liturgy(2025) {
+    let liturgy = match read_liturgy(year) {
         Ok(content) => content,
         Err(e) => {
             eprintln!("Error reading liturgy: {e}");
@@ -54,7 +55,7 @@ fn main() {
         }
     };
 
-    let mut searched_liturgy = match parse_liturgy(&liturgy, "2025-06-06") {
+    let mut searched_liturgy = match parse_liturgy(&liturgy, &date) {
         Ok(content) => content,
         Err(e) => {
             eprintln!("Error parsing liturgy: {e}");
@@ -84,8 +85,8 @@ fn print_reading(reading_option: Option<Reading>, title: &str) {
                 }
             }
         }
+        println!("\n");
     }
-    println!();
 }
 
 // Reads a bible.txt
