@@ -1,15 +1,25 @@
 use std::fs;
 use std::io;
-use std::env;
 use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
+use clap::Parser;
+use chrono::prelude::*;
+use chrono::NaiveDate;
+use regex::Regex;
 // use std::path::Path;
+
+#[derive(Deserialize, Debug, Clone)]
+struct Range_End {
+    chapter: u32,
+    verse: u32,
+}
 
 #[derive(Deserialize, Debug, Clone)]
 struct Verse {
     chapter: u32,
     verse: u32,
     translation: Option<String>,
+    range_end: Option<Range_End>,
 }
 
 #[derive(Deserialize, Debug, Clone)]
@@ -34,10 +44,27 @@ struct Readings {
     rank: Option<String>,
 }
 
-fn main() {
-    let args: Vec<String> = env::args().collect();
+#[derive(Parser)]
+#[command(version, about, long_about = None)]
+struct Cli {
+    #[arg(short, long, help = "Date of the liturgy to search")]
+    date: Option<String>,
+}
 
-    let date = &args[1];
+fn main() {
+    let cli = Cli::parse();
+
+    let date = cli.date.unwrap_or(today_date());
+    let date = match valid_date(&date) {
+        Ok(content) => content,
+        Err(e) => {
+            eprintln!("{date} date error: {e}");
+            return;
+        }
+    };
+
+    println!("\nDate: {}", &date);
+
     let year = date.split("-").next().unwrap().parse().unwrap();
     let bible = match read_bible("NABRE") {
         Ok(content) => content,
@@ -64,14 +91,31 @@ fn main() {
     };
     search_bible(&bible, &mut searched_liturgy);
 
-    for readings in searched_liturgy {
-        println!("\n{}:", readings.title);
+    // for readings in searched_liturgy {
+    //     println!("{}:", readings.title);
+    //
+    //     print_reading(readings.first, "First Reading");
+    //     print_reading(readings.responsal, "Responsal");
+    //     print_reading(readings.second, "Second Reading");
+    //     print_reading(readings.gospel, "Gospel");
+    // }
+}
 
-        print_reading(readings.first, "First Reading");
-        print_reading(readings.responsal, "Responsal");
-        print_reading(readings.second, "Second Reading");
-        print_reading(readings.gospel, "Gospel");
+fn valid_date(date: &String) -> Result<&String, String> {
+    let re = Regex::new(r"^\d{4}-\d{2}-\d{2}$").unwrap();
+
+    if !re.is_match(date) {
+        Err("Not in correct format: YYYY-MM-DD".to_string())
+    } else if !NaiveDate::parse_from_str(date, "%Y-%m-%d").is_ok() {
+        Err("Date does not exist".to_string())
+    } else {
+        Ok(date)
     }
+}
+
+fn today_date() -> String {
+    let local = Local::now();
+    return local.format("%Y-%m-%d").to_string();
 }
 
 fn print_reading(reading_option: Option<Reading>, title: &str) {
@@ -79,13 +123,14 @@ fn print_reading(reading_option: Option<Reading>, title: &str) {
         println!("{}:\n{}", title, reading.rawReading);
 
         for verses in reading.reading {
+            println!("VERSE:");
             for verse in verses.verses {
                 if let Some(verse_translation) = verse.translation {
                     print!("{} ", verse_translation);
                 }
             }
+            println!("\n");
         }
-        println!("\n");
     }
 }
 
@@ -131,7 +176,7 @@ fn search_bible(bible:&str, liturgy:&mut Vec<Readings>) {
 // Searches bible for verses to complete Reading
 fn search_reading(bible:&str, reading:&mut Reading) {
     for verses in &mut reading.reading {
-        let verses_text = search_verses(bible, verses);
+        search_verses(bible, verses);
         // println!("{:?}", verses);
     }
 }
@@ -146,19 +191,27 @@ fn search_verses<'a>(bible:&'a str, verses:&mut Verses) -> Vec<&'a str> {
         let chapter = verse.chapter;
         let verse_number = verse.verse;
         let book_index = bible_lines.iter().skip(book_start);
-        // println!("Searching: {book}, {chapter}:{verse_number}");
+        println!("Searching: {book}, {chapter}:{verse_number}");
 
-        for line in book_index {
-            if line.starts_with(&(chapter.to_string())) {
-                let split_text: Vec<&str> = line.split(':').collect();
-                if let Some(chapter_text) = split_text.get(1) {
-                    if chapter_text.starts_with(&(verse_number.to_string())) {
-                        let space_split = line.split_once(' ');
-                        let (_, verse_text) = space_split.unwrap_or(("", ""));
-                        result.push(verse_text);
+        if let Some(range_end) = &verse.range_end {
+            println!("RANGE END: {:#?}", range_end);
+            let end_chapter = range_end.chapter;
+            let end_verse = range_end.verse;
 
-                        verse.translation = Some(verse_text.to_string());
-                        break;
+            println!("NEW VERSES: {:#?}", verse)
+        } else {
+            for line in book_index {
+                if line.starts_with(&(chapter.to_string())) {
+                    let split_text: Vec<&str> = line.split(':').collect();
+                    if let Some(chapter_text) = split_text.get(1) {
+                        if chapter_text.starts_with(&(verse_number.to_string())) {
+                            let space_split = line.split_once(' ');
+                            let (_, verse_text) = space_split.unwrap_or(("", ""));
+                            result.push(verse_text);
+
+                            verse.translation = Some(verse_text.to_string());
+                            break;
+                        }
                     }
                 }
             }

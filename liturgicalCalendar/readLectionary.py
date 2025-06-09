@@ -28,20 +28,23 @@ def fixNewLine(string):
     return " ".join(string.split()).strip()
 
 
-parse_free_list = [
-    "Good Friday",
-    "Easter Sunday",
-    "Pentecost",
-    "4th Week of Easter - Mon",
-]
+parse_free_list = {
+    "Good Friday": "Gen 1:1",
+    "Easter Sunday": "Gen 1:1",
+    "Pentecost, Vigil": "Gen 11:1-9 or Exod 19:3-8 or Ezek 37:1-14 or Joel 3:1-5",
+    "Fourth Monday of Easter": "Gen 1:1",
+}
 
 
-def readings_verse_parse(verseString, date):
-    if date:
-        for ban in parse_free_list:
-            if ban in date:
-                return None
+def readings_verse_parse(verseString, title):
+    print("VERSE:", verseString)
     updatedVerse = fixNewLine(verseString) if verseString not in [None, "x"] else None
+    # if title:
+    #     for ban in parse_free_list:
+    #         if ban in title:
+    #             print(f"BANNED! {title}: {parse_free_list[ban]}")
+    #             # return parse_free_list[ban]
+    #             updatedVerse = parse_free_list[ban]
     if not updatedVerse:
         return None
 
@@ -78,10 +81,10 @@ class Readings:
         date=None,
     ):
         self.title = title
-        self.first = readings_verse_parse(first, date)
-        self.responsal = readings_verse_parse(responsal, date)
-        self.second = readings_verse_parse(second, date)
-        self.gospel = readings_verse_parse(gospel, date)
+        self.first = readings_verse_parse(first, title)
+        self.responsal = readings_verse_parse(responsal, title)
+        self.second = readings_verse_parse(second, title)
+        self.gospel = readings_verse_parse(gospel, title)
         self.rank = rank if rank else None
 
     def __repr__(self):
@@ -308,7 +311,7 @@ def parse_bible_citation_structured(
     if not citation or not citation.strip():
         return []
 
-    print(f"Input: {citation}")
+    # print(f"Input: {citation}")
 
     # Clean the citation text
     cleaned = clean_citation_text(citation)
@@ -832,6 +835,10 @@ def getEaster():
         if len(row) == 8 and row[2] != "Sunday or Feast":
             date = row[2]
             date = date.split("(")[0].strip()
+            first = row[3]
+            responsal = row[4]
+            second = row[5]
+            gospel = row[7]
 
             if "Holy Thursday" in date:
                 title = "Holy Thursday, Evening Mass of the Lord's Supper"
@@ -843,6 +850,8 @@ def getEaster():
                 if "Vigil" in date:
                     title = "Easter Sunday, Vigil"
                     key = "0-7-VIGIL"
+                    first = "Gen 1:1-2:2 or Gen 22:1-18 or Exod 14:15-15:1 or Isa 54:5-14 or Isa 55:1-11 or Bar 3:9-15, 32-4:4 or Ezek 36:16-17, 18-28"
+                    responsal = "Ps 104:1-2, 5-6, 10+12, 13-14, 24+35 or Ps 33:4-5, 6-7, 12-13, 20-22 or Ps 16:5+8, 9-10, 11 or Exod 15:1-2, 3-4, 5-6, 17-18 or Ps 30:2+4, 5-6, 11-12a+13b or Isa 12:2-3, 4bcd, 5-6 or Ps 19:8, 9, 10, 11 or Ps 42:3, 5; 43:3, 4 or Ps 51:12-13, 14-15, 18-19"
                 else:
                     title = "Easter Sunday"
                     title = "Easter Sunday"
@@ -854,8 +863,10 @@ def getEaster():
                 if "Vigil" in date:
                     title = "Pentecost, Vigil"
                     key = "PENTECOST-VIGIL"
+                    first = "Gen 11:1-9"
+                    responsal = "Ps 33:10"
                 else:
-                    title = "Pentecost"
+                    title = f"Pentecost (Year {date[-1]})"
                     key = "PENTECOST-" + date[-1]
             else:
                 key = str(int(date[0]) - 1) + "-7-" + date[-1]
@@ -867,10 +878,10 @@ def getEaster():
 
             EA[key] = Readings(
                 title,
-                first=row[3],
-                responsal=row[4],
-                second=row[5],
-                gospel=row[7],
+                first=first,
+                responsal=responsal,
+                second=second,
+                gospel=gospel,
                 date=date,
             )
 
