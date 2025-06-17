@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
+import os
 import re
 import sys
-import multiprocessing
 import threading
 import time
-import os
 
 import requests
+from bibledata import BOOKCHAPTERS, BOOKS
 from bs4 import BeautifulSoup
-
-from bibledata import BOOKS, BOOKCHAPTERS
+from bs4.element import NavigableString
 
 rawBible = {}  # Where all the raw strings will be stored
 bibleProgress = {"active": True}
@@ -59,6 +58,12 @@ def downloadBook(book, translation):
                 for verse in verses:
                     for sup in verse.find_all("sup", class_="versenum"):
                         sup.decompose()
+                    for bold in verse.find_all("b", class_="inline-h3"):
+                        # bold.insert_before("*")
+                        # bold.insert_after("*")
+                        bold_text = bold.get_text()
+                        bold.replace_with(soup.new_string(f"*{bold_text}*"))
+                    # bold.decompose()
                     parsedVerse = verse.get_text(separator=" ", strip=True)
                     # Remove all bracket blocks
                     parsedVerse = re.sub(r"\[.*?\]", "", parsedVerse)
@@ -151,7 +156,7 @@ def clean(text):
     text = text.replace("”", '"')
 
     # Then clean with your existing pattern
-    cleanStr = re.sub(r'[^\w\s.,!?;:\'"()[\]{}—-]', "", text)
+    cleanStr = re.sub(r'[^\w\s.,!?;:\'"()[\]{}—*-]', "", text)
     return re.sub(r"\s+", " ", cleanStr).strip()
 
 
@@ -172,6 +177,13 @@ for book in BOOKS:
     threads.append(thread)
     rawBible[book] = -1
     thread.start()
+
+# thread = threading.Thread(
+#     target=downloadBook, args=("Genesis", TRANSLATION), daemon=True
+# )
+# threads.append(thread)
+# rawBible["Genesis"] = -1
+# thread.start()
 
 
 print(f"Downloading {TRANSLATION} from BibleGateway:", flush=True)
