@@ -131,17 +131,17 @@ def getCalendar(year):
     weeksBeforeLent = getWeeksBeforeLent(ashWednesday, christmasEnd)
     pentecostStartOT = getPentecostStartOT(pentecost, adventStart, weeksBeforeLent)
 
-    # print("Weekday cycle:", weekdayCycle)
-    # print("Sunday cycle:", sundayCycle)
-    # print("Feast of the Holy Family:", holyFamily.strftime("%x"))
-    # print("Feast of Epiphany:", epiphany.strftime("%x"))
-    # print("End of Christmas (Baptism of our Lord):", christmasEnd.strftime("%x"))
-    # print("Ash Wednesday:", ashWednesday.strftime("%x"))
-    # print("Easter:", easterDate.strftime("%x"))
-    # print("Pentecost:", pentecost.strftime("%x"))
-    # print("Advent start:", adventStart.strftime("%x"))
-    # print("Weeks of OT before lent:", weeksBeforeLent)
-    # print("Starting OT after pentecost:", pentecostStartOT)
+    print("Weekday cycle:", weekdayCycle)
+    print("Sunday cycle:", sundayCycle)
+    print("Feast of the Holy Family:", holyFamily.strftime("%x"))
+    print("Feast of Epiphany:", epiphany.strftime("%x"))
+    print("End of Christmas (Baptism of our Lord):", christmasEnd.strftime("%x"))
+    print("Ash Wednesday:", ashWednesday.strftime("%x"))
+    print("Easter:", easterDate.strftime("%x"))
+    print("Pentecost:", pentecost.strftime("%x"))
+    print("Advent start:", adventStart.strftime("%x"))
+    print("Weeks of OT before lent:", weeksBeforeLent)
+    print("Starting OT after pentecost:", pentecostStartOT)
 
     return CalendarData(
         weekdayCycle,

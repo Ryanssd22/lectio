@@ -4,18 +4,10 @@ use std::collections::HashMap;
 use std::env;
 use std::fs;
 use std::path::Path;
+use once_cell::sync::Lazy;
 
 use crate::config::get_storage_path;
 
-// #[derive(Debug, Clone, Serialize, Deserialize)]
-// pub struct Reading {
-//     title: String,
-//     first: String,
-//     responsal: String,
-//     second: String,
-//     gospel: String,
-//     rank: String,
-// }
 #[derive(Deserialize, Debug, Clone, Serialize)]
 pub struct RangeEnd {
     chapter: u32,
@@ -90,6 +82,8 @@ impl LiturgicalSeason {
 
 type LectionaryTemplate = HashMap<String, HashMap<String, Readings>>;
 
+static LECTIONARYTEMPLATE: &str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/data/lectionaryTemplate.json"));
+
 pub struct LiturgyGenerator {
     lectionary: LectionaryTemplate,
     calendar: Calendar,
@@ -98,8 +92,9 @@ pub struct LiturgyGenerator {
 
 impl LiturgyGenerator {
     pub fn new(year: i32) -> Result<Self, Box<dyn std::error::Error>> {
-        let template_path = get_storage_path().join("lectionaryTemplate.json");
-        let lectionary_data = fs::read_to_string(template_path)?;
+        // let template_path = get_storage_path().join("lectionaryTemplate.json");
+        // let lectionary_data = fs::read_to_string(template_path)?;
+        let lectionary_data = LECTIONARYTEMPLATE;
         let lectionary: LectionaryTemplate = serde_json::from_str(&lectionary_data)?;
         
         // This would normally come from readCalendar.rs equivalent
@@ -115,19 +110,33 @@ impl LiturgyGenerator {
     fn get_calendar(year: i32) -> Calendar {
         // Placeholder implementation - this would be replaced with actual calendar calculation
         // from the readCalendar module equivalent
-        Calendar {
-            weekday_cycle: 1,
-            sunday_cycle: ((year - 2021) % 3 + 1) as u8,
+        let easter = calendar_utils::calculate_easter(year);
+        let calendar = Calendar {
+            weekday_cycle: calendar_utils::calculate_weekday_cycle(year),
+            sunday_cycle: calendar_utils::calculate_sunday_cycle(year),
             holy_family: NaiveDate::from_ymd_opt(year, 12, 30).unwrap(),
             epiphany: NaiveDate::from_ymd_opt(year, 1, 6).unwrap(),
             christmas_end: NaiveDate::from_ymd_opt(year, 1, 13).unwrap(),
-            ash_wednesday: NaiveDate::from_ymd_opt(year, 2, 14).unwrap(),
-            easter: NaiveDate::from_ymd_opt(year, 3, 31).unwrap(),
-            pentecost: NaiveDate::from_ymd_opt(year, 5, 19).unwrap(),
-            advent_start: NaiveDate::from_ymd_opt(year, 11, 28).unwrap(),
+            ash_wednesday: calendar_utils::calculate_ash_wednesday(easter),
+            easter: easter, 
+            pentecost: calendar_utils::calculate_pentecost(easter), 
+            advent_start: calendar_utils::calculate_advent_start(year), 
             weeks_before_lent: 6,
             pentecost_start_ot: 9,
-        }
+        };
+        println!("Weekday Cycle: {}", calendar.weekday_cycle);
+        println!("Sunday Cycle: {}", calendar.sunday_cycle);
+        println!("Holy Family: {}", calendar.holy_family);
+        println!("Epiphany: {}", calendar.epiphany);
+        println!("End of christmas: {}", calendar.christmas_end);
+        println!("Ash Wednesday: {}", calendar.ash_wednesday);
+        println!("Easter: {}", calendar.easter);
+        println!("Pentecost: {}", calendar.pentecost);
+        println!("Advent start: {}", calendar.advent_start);
+        println!("Weeks before lent: {}", calendar.weeks_before_lent);
+        println!("Pentecost start OT: {}", calendar.pentecost_start_ot);
+
+        calendar
     }
 
     fn sunday_cycle_to_char(cycle: u8) -> char {
@@ -811,5 +820,9 @@ pub mod calendar_utils {
         // Year B begins with Advent in the year before a year that leaves remainder 1 when divided by 3
         // Year C begins with Advent in the year before a year that leaves remainder 2 when divided by 3
         ((year - 1) % 3 + 1) as u8
+    }
+
+    pub fn calculate_weekday_cycle(year: i32) -> u8 {
+        ((year + 1) % 2 + 1) as u8
     }
 }
