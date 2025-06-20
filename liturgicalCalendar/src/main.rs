@@ -145,7 +145,11 @@ fn run_lectio() {
     let print_all = cli.print_all;
     let json = cli.json;
 
-    let date = cli.date.unwrap_or(today_date());
+    let mut date_chosen = true;
+    let date = match cli.date {
+        Some(content) => content,
+        None => {date_chosen = false; today_date()},
+    };
     let date = match valid_date(&date) {
         Ok(content) => content,
         Err(e) => {
@@ -158,21 +162,6 @@ fn run_lectio() {
 
     let year: i32 = date.split("-").next().unwrap().parse().unwrap();
 
-    // let liturgy = match read_liturgy(year) {
-    //     Ok(content) => content,
-    //     Err(e) => {
-    //         // eprintln!("Error reading liturgy: {e}");
-    //         match generate_liturgy(year) {
-    //             Ok(content) => {content},
-    //             Err(e) => {
-    //                 eprintln!("{e}");
-    //                 return;
-    //             }
-    //         }
-    //     }
-    // };
-
-
     let (liturgy, season) = match generate_liturgy(year) {
         Ok(content) => {content},
         Err(e) => {
@@ -182,11 +171,6 @@ fn run_lectio() {
     };
 
     let season = season.get(date).unwrap();
-
-    // let season = match search_season(date) {
-    //     Ok(content) => content,
-    //     Err(_) => "N/A".to_string(),
-    // };
 
     let bible = match read_bible(&translation) {
         Ok(content) => content,
@@ -202,12 +186,18 @@ fn run_lectio() {
 
     if json {
         let mut liturgy_json: HashMap<String, Vec<Readings>> = serde_json::from_str(&liturgy).expect("N/A");
-        for (date, liturgy) in &mut liturgy_json {
-            // println!("{:#?}", liturgy);
-            // print!(".");
-            search_bible(&bible, liturgy);
+        if date_chosen {
+            let mut chosen_liturgy = liturgy_json.get_mut(date).unwrap();
+            search_bible(&bible, &mut chosen_liturgy);
+            println!("{:#?}", chosen_liturgy);
+        } else {
+            for (date, liturgy) in &mut liturgy_json {
+                // println!("{:#?}", liturgy);
+                // print!(".");
+                search_bible(&bible, liturgy);
+            }
+            println!("{:#?}", liturgy_json);
         }
-        println!("{:#?}", liturgy_json);
     } else {
         let mut searched_liturgy = match parse_liturgy(&liturgy, &date) {
             Ok(content) => content,
