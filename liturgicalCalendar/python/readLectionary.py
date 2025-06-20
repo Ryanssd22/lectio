@@ -21,7 +21,7 @@ from bs4 import BeautifulSoup
 import json
 import copy
 
-from biblegateway.bibledata import LECTIONARYTOBIBLEGATEWAY
+from bibledata import LECTIONARYTOBIBLEGATEWAY
 
 
 def fixNewLine(string):
@@ -453,7 +453,10 @@ def addReading(dict, date, reading, misc=False):
 
 
 def getTables(link):
-    site = requests.get(link)
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+    }
+    site = requests.get(link, headers=headers)
     soup = BeautifulSoup(site.text, "html.parser")
     tables = soup.find_all("table")
     return tables

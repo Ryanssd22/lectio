@@ -172,16 +172,16 @@ fn run_lectio() {
     //     }
     // };
 
+
     let (liturgy, season) = match generate_liturgy(year) {
         Ok(content) => {content},
         Err(e) => {
-            eprintln!("{e}");
+            eprintln!("Liturgy couldn't be generated: {e}");
             return;
         }
     };
 
     let season = season.get(date).unwrap();
-    println!("SEASON: {:?}", season);
 
     // let season = match search_season(date) {
     //     Ok(content) => content,

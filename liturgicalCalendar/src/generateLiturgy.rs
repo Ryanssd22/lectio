@@ -98,7 +98,6 @@ pub struct LiturgyGenerator {
 
 impl LiturgyGenerator {
     pub fn new(year: i32) -> Result<Self, Box<dyn std::error::Error>> {
-        // let template_path = Path::new("lectionaryTemplate.json");
         let template_path = get_storage_path().join("lectionaryTemplate.json");
         let lectionary_data = fs::read_to_string(template_path)?;
         let lectionary: LectionaryTemplate = serde_json::from_str(&lectionary_data)?;
