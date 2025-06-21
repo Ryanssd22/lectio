@@ -1,8 +1,6 @@
 use std::fs;
 use std::io;
-use std::io::Write;
-use std::env;
-use std::path::{Path, PathBuf};
+// use std::io::Write;
 use std::process::{Command, Stdio};
 use std::collections::HashMap;
 use serde::{Deserialize};
@@ -11,7 +9,7 @@ use chrono::prelude::*;
 use chrono::NaiveDate;
 use regex::Regex;
 use colored::Colorize;
-use inquire::{Select, ui::{RenderConfig, Styled, Color, StyleSheet}};
+use inquire::{Select, ui::{RenderConfig, Color, StyleSheet}};
 
 mod biblescrape;
 use biblescrape::BibleDownloader;
@@ -19,8 +17,8 @@ use biblescrape::BibleDownloader;
 mod config;
 use crate::config::get_storage_path;
 
-mod generateLiturgy;
-use generateLiturgy::{LiturgyGenerator, LiturgicalSeason};
+mod generate_liturgy;
+use generate_liturgy::{LiturgyGenerator, LiturgicalSeason};
 
 #[derive(Deserialize, Debug, Clone)]
 struct RangeEnd {
@@ -44,7 +42,8 @@ struct Verses {
 
 #[derive(Deserialize, Debug, Clone)]
 struct Reading {
-    rawReading: String,
+    #[serde(rename = "rawReading")]
+    raw_reading: String,
     reading: Vec<Verses>,
 }
 
@@ -96,7 +95,10 @@ fn main() {
                     return;
                 }
             };
-            rt.block_on(run_bible_scrape(&translation.to_uppercase()));
+            match rt.block_on(run_bible_scrape(&translation.to_uppercase())) {
+                Ok(_) => {},
+                Err(e) => eprintln!("Error running threads! {e}"),
+            };
         }
         None => {run_lectio();}
     };
@@ -120,22 +122,12 @@ async fn run_bible_scrape(translation: &str) -> Result<(), Box<dyn std::error::E
     }
 
     let bibles_path = get_storage_path().join("bibles/");
-    fs::create_dir_all(&bibles_path);
+    fs::create_dir_all(&bibles_path)?;
     let file_path = bibles_path.join(format!("{}.txt", translation));
-    fs::write(&file_path, bible_string);
+    fs::write(&file_path, bible_string)?;
 
     println!("Saved in {:#?}", bibles_path);
     Ok(())
-}
-
-fn has_python() -> bool {
-    Command::new("python")
-        .arg("--version")
-        .stdout(Stdio::null())
-        .stderr(Stdio::null())
-        .status()
-        .map(|status| status.success())
-        .unwrap_or(false)
 }
 
 fn run_lectio() {
@@ -240,24 +232,24 @@ fn run_lectio() {
     }
 }
 
-fn search_season(date: &str) -> Result<String, String> {
-    let year: String = date.chars().take(4).collect();
-    // let liturgy_season_path = format!("./liturgies/liturgy{}season.json", year); 
-    let liturgy_season_path = get_storage_path().join("liturgies").join(format!("liturgy{}season.json", year));
-    let liturgy_season_str= match fs::read_to_string(&liturgy_season_path) {
-        Ok(content) => content,
-        Err(e) => return Err(format!("Failed to read file: {}", e)),
-    };
-    let liturgy_season_json: HashMap<String, String> = match serde_json::from_str(&liturgy_season_str) {
-        Ok(content) => content,
-        Err(e) => return Err(format!("Failed to parse json: {}", e)),
-    };
-    let season = liturgy_season_json.get(date);
-    if season.is_none() {
-        return Err(format!("Date not found in {}", &liturgy_season_path.display()));
-    }
-    return Ok(season.unwrap().to_string());
-}
+// fn search_season(date: &str) -> Result<String, String> {
+//     let year: String = date.chars().take(4).collect();
+//     // let liturgy_season_path = format!("./liturgies/liturgy{}season.json", year); 
+//     let liturgy_season_path = get_storage_path().join("liturgies").join(format!("liturgy{}season.json", year));
+//     let liturgy_season_str= match fs::read_to_string(&liturgy_season_path) {
+//         Ok(content) => content,
+//         Err(e) => return Err(format!("Failed to read file: {}", e)),
+//     };
+//     let liturgy_season_json: HashMap<String, String> = match serde_json::from_str(&liturgy_season_str) {
+//         Ok(content) => content,
+//         Err(e) => return Err(format!("Failed to parse json: {}", e)),
+//     };
+//     let season = liturgy_season_json.get(date);
+//     if season.is_none() {
+//         return Err(format!("Date not found in {}", &liturgy_season_path.display()));
+//     }
+//     return Ok(season.unwrap().to_string());
+// }
 
 fn generate_liturgy(year: i32) -> Result<(String, HashMap<String, LiturgicalSeason>), Box<dyn std::error::Error>> {
     let generator = LiturgyGenerator::new(year)?;
@@ -296,7 +288,7 @@ fn today_date() -> String {
 
 fn print_reading(reading_option: Option<Reading>, title: &str, season: &LiturgicalSeason) {
     if let Some(reading) = reading_option {
-        let formatted_title = &format!("{} {}", title.bold(), format!("({})", reading.rawReading).italic()).underline();
+        let formatted_title = &format!("{} {}", title.bold(), format!("({})", reading.raw_reading).italic()).underline();
         println!("{}", formatted_title);
         // println!("{}:\n{}", title.bold(), reading.rawReading.underline());
 
@@ -330,17 +322,17 @@ fn parse_season_string(string: &str, season: &LiturgicalSeason) -> String {
         LiturgicalSeason::Lent => string.purple(),
         LiturgicalSeason::Easter => string.yellow(),
         LiturgicalSeason::Advent => string.purple(), 
-        _ => string.red(),
     };
     formatted_string.bold().to_string()
 }
 
 // Formats a verse. Bolds asterisks
 fn format_verse(input: &str) -> Result<String, Box<dyn std::error::Error>> {
-    let mut result = input;
+    // let mut result = input;
+    let result = input;
 
     //Handles asterisks at end of verse
-    let re = Regex::new(r"$\*")?;
+    // let re = Regex::new(r"$\*")?;
 
 
     //Handles bolding asterisks
@@ -487,16 +479,16 @@ fn search_verses<'a>(bible:&'a str, verses:&mut Verses) -> Vec<&'a str> {
     return result;
 }
 
-fn get_os() -> String {
-    if cfg!(target_os = "windows") {
-        "windows".to_string()
-    } else if cfg!(target_os = "macos") {
-        "macos".to_string()
-    } else if cfg!(target_os = "linux") {
-        "linux".to_string()
-    } else {
-        "unknown".to_string()
-    }
-}
+// fn get_os() -> String {
+//     if cfg!(target_os = "windows") {
+//         "windows".to_string()
+//     } else if cfg!(target_os = "macos") {
+//         "macos".to_string()
+//     } else if cfg!(target_os = "linux") {
+//         "linux".to_string()
+//     } else {
+//         "unknown".to_string()
+//     }
+// }
 
 

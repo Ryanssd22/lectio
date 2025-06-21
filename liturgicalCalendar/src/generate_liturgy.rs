@@ -30,7 +30,8 @@ pub struct Verses {
 
 #[derive(Deserialize, Debug, Clone, Serialize)]
 pub struct Reading {
-    rawReading: String,
+    #[serde(rename = "rawReading")]
+    raw_reading: String,
     reading: Vec<Verses>,
 }
 
@@ -114,27 +115,27 @@ impl LiturgyGenerator {
         let calendar = Calendar {
             weekday_cycle: calendar_utils::calculate_weekday_cycle(year),
             sunday_cycle: calendar_utils::calculate_sunday_cycle(year),
-            holy_family: NaiveDate::from_ymd_opt(year, 12, 30).unwrap(),
-            epiphany: NaiveDate::from_ymd_opt(year, 1, 6).unwrap(),
-            christmas_end: NaiveDate::from_ymd_opt(year, 1, 13).unwrap(),
+            holy_family: calendar_utils::calculate_holy_family(year),
+            epiphany: calendar_utils::calculate_epiphany(year),
+            christmas_end: calendar_utils::calculate_christmas_end(year),
             ash_wednesday: calendar_utils::calculate_ash_wednesday(easter),
             easter: easter, 
             pentecost: calendar_utils::calculate_pentecost(easter), 
             advent_start: calendar_utils::calculate_advent_start(year), 
-            weeks_before_lent: 6,
-            pentecost_start_ot: 9,
+            weeks_before_lent: calendar_utils::calculate_weeks_before_lent(year),
+            pentecost_start_ot: calendar_utils::calculate_pentecost_start_ot(year),
         };
-        println!("Weekday Cycle: {}", calendar.weekday_cycle);
-        println!("Sunday Cycle: {}", calendar.sunday_cycle);
-        println!("Holy Family: {}", calendar.holy_family);
-        println!("Epiphany: {}", calendar.epiphany);
-        println!("End of christmas: {}", calendar.christmas_end);
-        println!("Ash Wednesday: {}", calendar.ash_wednesday);
-        println!("Easter: {}", calendar.easter);
-        println!("Pentecost: {}", calendar.pentecost);
-        println!("Advent start: {}", calendar.advent_start);
-        println!("Weeks before lent: {}", calendar.weeks_before_lent);
-        println!("Pentecost start OT: {}", calendar.pentecost_start_ot);
+        // println!("Weekday Cycle: {}", calendar.weekday_cycle);
+        // println!("Sunday Cycle: {}", calendar.sunday_cycle);
+        // println!("Holy Family: {}", calendar.holy_family);
+        // println!("Epiphany: {}", calendar.epiphany);
+        // println!("End of christmas: {}", calendar.christmas_end);
+        // println!("Ash Wednesday: {}", calendar.ash_wednesday);
+        // println!("Easter: {}", calendar.easter);
+        // println!("Pentecost: {}", calendar.pentecost);
+        // println!("Advent start: {}", calendar.advent_start);
+        // println!("Weeks before lent: {}", calendar.weeks_before_lent);
+        // println!("Pentecost start OT: {}", calendar.pentecost_start_ot);
 
         calendar
     }
@@ -714,19 +715,19 @@ impl LiturgyGenerator {
     }
 }
 
-fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let args: Vec<String> = env::args().collect();
-    let year = if args.len() < 2 {
-        chrono::Utc::now().year()
-    } else {
-        args[1].parse::<i32>()?
-    };
-
-    let generator = LiturgyGenerator::new(year)?;
-    generator.save_to_files()?;
-    
-    Ok(())
-}
+// fn main() -> Result<(), Box<dyn std::error::Error>> {
+//     let args: Vec<String> = env::args().collect();
+//     let year = if args.len() < 2 {
+//         chrono::Utc::now().year()
+//     } else {
+//         args[1].parse::<i32>()?
+//     };
+//
+//     let generator = LiturgyGenerator::new(year)?;
+//     generator.save_to_files()?;
+//     
+//     Ok(())
+// }
 
 #[cfg(test)]
 mod tests {
@@ -824,5 +825,93 @@ pub mod calendar_utils {
 
     pub fn calculate_weekday_cycle(year: i32) -> u8 {
         ((year + 1) % 2 + 1) as u8
+    }
+
+    pub fn calculate_epiphany(year: i32) -> NaiveDate {
+        let jan1 = NaiveDate::from_ymd_opt(year, 1, 1).unwrap();
+        let mut epiphany = jan1;
+
+        loop {
+            epiphany = epiphany + chrono::Duration::days(1);
+            if epiphany.weekday() == chrono::Weekday::Sun {
+                break;
+            }
+        }
+
+        epiphany
+    }
+
+    pub fn calculate_holy_family(year: i32) -> NaiveDate {
+        let epiphany = calculate_epiphany(year + 1);
+        let mut holy_family = epiphany;
+        if NaiveDate::from_ymd_opt(year, 12, 25).unwrap().weekday() == chrono::Weekday::Sun {
+            return NaiveDate::from_ymd_opt(year, 12, 30).unwrap();
+        } else {
+            loop {
+                holy_family = holy_family - chrono::Duration::days(1);
+                if holy_family.weekday() == chrono::Weekday::Sun {
+                    return holy_family; 
+                }
+            }
+        }
+    }
+
+    pub fn calculate_christmas_end(year: i32) -> NaiveDate {
+        let epiphany = calculate_epiphany(year);
+        let mut christmas_end = epiphany;
+        if christmas_end.day() == 6 || christmas_end.day() == 7 {
+            return christmas_end + chrono::Duration::days(1);
+        } else {
+            loop {
+                christmas_end = christmas_end + chrono::Duration::days(1);
+                if christmas_end.weekday() == chrono::Weekday::Sun {
+                    return christmas_end;
+                }
+            }
+        }
+
+    }
+    
+    pub fn calculate_weeks_before_lent(year: i32) -> u8 {
+        let mut weeks: u8 = 0;
+        let easter = calculate_easter(year);
+        let mut sunday_index = calculate_ash_wednesday(easter);
+        let christmas_end = calculate_christmas_end(year);
+
+        while sunday_index > christmas_end {
+            loop {
+                sunday_index = sunday_index - chrono::Duration::days(1);
+                if sunday_index.weekday() == chrono::Weekday::Sun {
+                    break;
+                }
+            } 
+            weeks = weeks + 1;
+        }
+        
+        return weeks;
+    }
+
+    pub fn calculate_pentecost_start_ot(year: i32) -> u8 {
+        let mut weeks: u8 = 0;
+        let mut sunday_index = calculate_advent_start(year);
+        let easter = calculate_easter(year);
+        let pentecost = calculate_pentecost(easter);
+
+        while sunday_index > pentecost {
+            loop {
+                sunday_index = sunday_index - chrono::Duration::days(1);
+                if sunday_index.weekday() == chrono::Weekday::Sun {
+                    break;
+                }
+            } 
+            weeks = weeks + 1;
+        }
+
+        let weeks_before_lent = calculate_weeks_before_lent(year);
+        if weeks + calculate_weeks_before_lent(year) == 34 {
+            return weeks_before_lent + 1;
+        } else {
+            return weeks_before_lent + 2;
+        }
     }
 }

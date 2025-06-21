@@ -3,6 +3,12 @@ name = "lectio"
 version = "0.1.0"
 edition = "2024"
 description = "Searches the given bible readings for a specific date"
+license = "MIT"
+repository = "https://github.com/Ryanssd22/lectio"
+homepage = "https://github.com/Ryanssd22/lectio"
+keywords = ["cli", "bible", "reading"]
+categories = ["command-line-utilities"]
+authors = ["Ryan Simeon benedictrsimeon@gmail.com"]
 
 [dependencies]
 anyhow = "1.0.98"
