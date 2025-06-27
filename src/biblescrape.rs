@@ -54,6 +54,8 @@ static BOOK_CHAPTERS: Lazy<HashMap<&'static str, i32>> = Lazy::new(|| {
     m.insert("Haggai", 2);
     m.insert("Zechariah", 14);
     m.insert("Malachi", 4);
+    m.insert("1 Maccabees", 16);
+    m.insert("2 Maccabees", 15);
     m.insert("Matthew", 28);
     m.insert("Mark", 16);
     m.insert("Luke", 24);
@@ -127,6 +129,8 @@ pub static BOOKS: Lazy<HashMap<&'static str, &'static str>> = Lazy::new(|| {
     m.insert("Haggai", "Hag");
     m.insert("Zechariah", "Zech");
     m.insert("Malachi", "Mal");
+    m.insert("1 Maccabees", "1Macc");
+    m.insert("2 Maccabees", "2Macc");
     m.insert("Matthew", "Matt");
     m.insert("Mark", "Mark");
     m.insert("Luke", "Luke");
