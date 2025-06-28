@@ -266,7 +266,7 @@ fn print_reading(reading_option: Option<Reading>, title: &str, season: &Liturgic
                         Ok(content) => content,
                         Err(_) => verse_translation.clone(),
                     };
-                    full_verse.push_str(&format!("{} ", &formatted_verse));
+                    full_verse.push_str(&format!("{}: {} ", &verse.verse, &formatted_verse));
                 } else {
                     print!("{} {}:{} not found", verses.book, &verse.chapter, &verse.verse);
                     break;

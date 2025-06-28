@@ -12,16 +12,17 @@ Verse Class:
     category (FIR, SEC, GOS, RES, ALL, NULL)
 """
 
+import copy
+import json
+import re
+from typing import Dict, List, Optional, Tuple, Union
+
+import inflect
+
 #!/usr/bin/env python
 import requests
-import re
-import inflect
-from typing import Dict, List, Union, Optional, Tuple
-from bs4 import BeautifulSoup
-import json
-import copy
-
 from bibledata import LECTIONARYTOBIBLEGATEWAY
+from bs4 import BeautifulSoup
 
 
 def fixNewLine(string):
@@ -80,7 +81,7 @@ class Readings:
         rank=None,
         date=None,
     ):
-        self.title = title
+        self.title = formatTitle(title)
         self.first = readings_verse_parse(first, title)
         self.responsal = readings_verse_parse(responsal, title)
         self.second = readings_verse_parse(second, title)
@@ -113,6 +114,12 @@ class Readings:
             "gospel": self.gospel,
             "rank": self.rank,
         }
+
+
+def formatTitle(title):
+    if title[-1] == "*":
+        title = title[:-1]
+    return title
 
 
 # Compile regex patterns once for better performance
@@ -454,7 +461,7 @@ def addReading(dict, date, reading, misc=False):
 
 def getTables(link):
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
     }
     site = requests.get(link, headers=headers)
     soup = BeautifulSoup(site.text, "html.parser")
@@ -1069,6 +1076,7 @@ def getProperSaints():
             date = date.split("+")[0].strip()
             date = fixNewLine(date)
             title = fixNewLine(row[2])
+            title = re.sub(r"\s*\([^)]*\)$", "", title)
 
             key = date
             if "Thanksgiving" in title:

@@ -5,6 +5,7 @@ use std::env;
 use std::fs;
 use std::path::Path;
 use once_cell::sync::Lazy;
+use regex::Regex;
 
 use crate::config::get_storage_path;
 
@@ -943,14 +944,14 @@ fn search_reading(bible:&str, reading:&mut Reading) {
     }
 }
 
-fn search_verses<'a>(bible:&'a str, verses:&mut Verses) -> Vec<&'a str> {
+fn search_verses<'a>(bible:&'a str, verses:&mut Verses) -> Vec<String> {
     let book = &verses.book;
     let bible_lines: Vec<&str> = bible.lines().collect();
     let book_start = match bible_lines.clone().into_iter().position(|line| line == book) {
         Some(content) => content,
         None => {return Vec::new();},
     };
-    let mut result: Vec<&str> = Vec::new();
+    let mut result: Vec<String> = Vec::new();
     let mut new_verses_vector: Vec<Verse> = Vec::new();
 
     for verse in &mut verses.verses {
@@ -958,6 +959,7 @@ fn search_verses<'a>(bible:&'a str, verses:&mut Verses) -> Vec<&'a str> {
         let verse_number = verse.verse;
         let chapter_number = verse.chapter;
         let mut book_index = bible_lines.iter().skip(book_start);
+        let end_asterisk_regex = Regex::new(r"\s*\*[^*]*\*$").unwrap();
         // println!("Searching: {book}, {chapter}:{verse_number}");
 
         if let Some(range_end) = &verse.range_end {
@@ -973,6 +975,9 @@ fn search_verses<'a>(bible:&'a str, verses:&mut Verses) -> Vec<&'a str> {
                 let current_chapter = line_split[0].parse::<u32>().unwrap_or(0); 
                 if current_chapter == 0 {break;}
                 let (unparsed_current_verse, result) = line_split[1].split_once(' ').unwrap();
+
+                let result = end_asterisk_regex.replace_all(&result.to_string(), "").trim().to_string();
+
                 // let current_verse = space_split[0].parse::<u32>().unwrap();
                 let current_verse = unparsed_current_verse.parse::<u32>().unwrap();
 
@@ -1007,9 +1012,10 @@ fn search_verses<'a>(bible:&'a str, verses:&mut Verses) -> Vec<&'a str> {
                         if verse_text.starts_with(&(verse_number.to_string())) {
                             let space_split = line.split_once(' ');
                             let (_, verse_text) = space_split.unwrap_or(("", ""));
-                            result.push(verse_text);
+                            let formatted_text = end_asterisk_regex.replace_all(verse_text, "").trim().to_string();
+                            result.push(formatted_text.clone());
 
-                            verse.translation = Some(verse_text.to_string());
+                            verse.translation = Some(formatted_text.to_string());
                             break;
                         }
                     }

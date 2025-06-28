@@ -10,10 +10,14 @@ keywords = ["cli", "bible", "reading"]
 categories = ["command-line-utilities"]
 authors = ["Ryan Simeon benedictrsimeon@gmail.com"]
 
-[lib]
-name = "lectio_wasm"
-path = "src/wasm.rs"
-crate-type = ["cdylib", "rlib"]
+[[bin]]
+name = "lectio"
+path = "src/main.rs"
+
+# [lib]
+# name = "lectio_wasm"
+# path = "src/wasm.rs"
+# crate-type = ["cdylib", "rlib"]
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 tokio = { version = "1.0", features = ["full", "macros"] }
