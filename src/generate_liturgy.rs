@@ -1,5 +1,7 @@
 use chrono::{Datelike, Duration, NaiveDate, Weekday};
 use serde::{Deserialize, Serialize};
+use inflector::Inflector;
+use number_names::{ordinal};
 use std::collections::HashMap;
 use std::env;
 use std::fs;
@@ -110,8 +112,6 @@ impl LiturgyGenerator {
     }
 
     fn get_calendar(year: i32) -> Calendar {
-        // Placeholder implementation - this would be replaced with actual calendar calculation
-        // from the readCalendar module equivalent
         let easter = calendar_utils::calculate_easter(year);
         let calendar = Calendar {
             weekday_cycle: calendar_utils::calculate_weekday_cycle(year),
@@ -198,13 +198,16 @@ impl LiturgyGenerator {
     }
 
     fn get_ordinal_number(n: u32) -> String {
-        let suffix = match n % 10 {
-            1 if n % 100 != 11 => "st",
-            2 if n % 100 != 12 => "nd", 
-            3 if n % 100 != 13 => "rd",
-            _ => "th",
-        };
-        format!("{}{}", n, suffix)
+        // let suffix = match n % 10 {
+        //     1 if n % 100 != 11 => "st",
+        //     2 if n % 100 != 12 => "nd", 
+        //     3 if n % 100 != 13 => "rd",
+        //     _ => "th",
+        // };
+        // format!("{}{}", n, suffix)
+        // let o = Osize::from1(n as usize).to_string();
+        let o = ordinal(n as u64).to_title_case();
+        o
     }
 
     fn get_day_of_week_string(day: u32) -> &'static str {
