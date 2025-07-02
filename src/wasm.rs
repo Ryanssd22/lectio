@@ -4,6 +4,7 @@ use generate_liturgy::{LiturgyGenerator, LiturgicalSeason, search_bible, Reading
 use wasm_bindgen::prelude::*;
 use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
+use chrono::{NaiveDate};
 
 // Built in bible translations
 static NABRE: &str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/data/bibles/NABRE.txt"));
@@ -14,7 +15,7 @@ static HWP: &str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/data/bible
 #[derive(Deserialize, Serialize, Debug, Clone)]
 struct LiturgyAndSeason {
     liturgy: Vec<Readings>,
-    season: LiturgicalSeason,
+    season: HashMap<String, LiturgicalSeason>,
 }
 
 #[wasm_bindgen]
@@ -41,7 +42,7 @@ pub fn wasm_generate_liturgy(date: &str, bible: &str) -> String {
 
     let liturgy_and_season = LiturgyAndSeason {
         liturgy: search_liturgy,
-        season: *season.get(date).unwrap(),
+        season: season,
     };
 
     let serialized_liturgy = match serde_json::to_string_pretty(&liturgy_and_season) {
