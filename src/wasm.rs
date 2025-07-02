@@ -2,12 +2,20 @@ pub mod config;
 pub mod generate_liturgy;
 use generate_liturgy::{LiturgyGenerator, LiturgicalSeason, search_bible, Readings};
 use wasm_bindgen::prelude::*;
+use std::collections::HashMap;
+use serde::{Deserialize, Serialize};
 
 // Built in bible translations
 static NABRE: &str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/data/bibles/NABRE.txt"));
 static RSVCE: &str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/data/bibles/RSVCE.txt"));
 static DRA: &str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/data/bibles/DRA.txt"));
 static HWP: &str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/data/bibles/HWP.txt"));
+
+#[derive(Deserialize, Serialize, Debug, Clone)]
+struct LiturgyAndSeason {
+    liturgy: Vec<Readings>,
+    season: LiturgicalSeason,
+}
 
 #[wasm_bindgen]
 pub fn wasm_generate_liturgy(date: &str, bible: &str) -> String {
@@ -31,7 +39,12 @@ pub fn wasm_generate_liturgy(date: &str, bible: &str) -> String {
     let mut search_liturgy = liturgy[date].clone();
     search_bible(bible, &mut search_liturgy);
 
-    let serialized_liturgy = match serde_json::to_string_pretty(&search_liturgy) {
+    let liturgy_and_season = LiturgyAndSeason {
+        liturgy: search_liturgy,
+        season: *season.get(date).unwrap(),
+    };
+
+    let serialized_liturgy = match serde_json::to_string_pretty(&liturgy_and_season) {
         Ok(liturgy) => liturgy,
         Err(e) => return "".to_string(),
     };
@@ -45,6 +58,7 @@ mod wasm_tests {
 
     #[test]
     fn test_generate_liturgy() {
-        wasm_generate_liturgy("2025-06-26", "NABRE");
+        wasm_generate_liturgy("2025-06-29", "NABRE");
     }
+
 }

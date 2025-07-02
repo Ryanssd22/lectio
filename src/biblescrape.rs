@@ -30,6 +30,8 @@ static BOOK_CHAPTERS: Lazy<HashMap<&'static str, i32>> = Lazy::new(|| {
     m.insert("2 Chronicles", 36);
     m.insert("Ezra", 10);
     m.insert("Nehemiah", 13);
+    m.insert("Tobit", 14);
+    m.insert("Judith", 16);
     m.insert("Esther", 10);
     m.insert("Job", 42);
     m.insert("Psalms", 150);
@@ -37,9 +39,11 @@ static BOOK_CHAPTERS: Lazy<HashMap<&'static str, i32>> = Lazy::new(|| {
     m.insert("Ecclesiastes", 12);
     m.insert("Song of Solomon", 8);
     m.insert("Wisdom", 19);
+    m.insert("Sirach", 51);
     m.insert("Isaiah", 66);
     m.insert("Jeremiah", 52);
     m.insert("Lamentations", 5);
+    m.insert("Baruch", 6);
     m.insert("Ezekiel", 48);
     m.insert("Daniel", 12);
     m.insert("Hosea", 14);
@@ -105,6 +109,8 @@ pub static BOOKS: Lazy<HashMap<&'static str, &'static str>> = Lazy::new(|| {
     m.insert("2 Chronicles", "2Chr");
     m.insert("Ezra", "Ezra");
     m.insert("Nehemiah", "Neh");
+    m.insert("Tobit", "Tob");
+    m.insert("Judith", "Judith");
     m.insert("Esther", "Esth");
     m.insert("Job", "Job");
     m.insert("Psalms", "Ps");
@@ -112,9 +118,11 @@ pub static BOOKS: Lazy<HashMap<&'static str, &'static str>> = Lazy::new(|| {
     m.insert("Ecclesiastes", "Eccl");
     m.insert("Song of Solomon", "Song");
     m.insert("Wisdom", "Wis");
+    m.insert("Sirach", "Sir");
     m.insert("Isaiah", "Isa");
     m.insert("Jeremiah", "Jer");
     m.insert("Lamentations", "Lam");
+    m.insert("Baruch", "Bar");
     m.insert("Ezekiel", "Ezek");
     m.insert("Daniel", "Dan");
     m.insert("Hosea", "Hos");

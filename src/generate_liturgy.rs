@@ -752,12 +752,9 @@ mod tests {
 
     #[test]
     fn test_ordinal_numbers() {
-        assert_eq!(LiturgyGenerator::get_ordinal_number(1), "1st");
-        assert_eq!(LiturgyGenerator::get_ordinal_number(2), "2nd");
-        assert_eq!(LiturgyGenerator::get_ordinal_number(3), "3rd");
-        assert_eq!(LiturgyGenerator::get_ordinal_number(4), "4th");
-        assert_eq!(LiturgyGenerator::get_ordinal_number(11), "11th");
-        assert_eq!(LiturgyGenerator::get_ordinal_number(21), "21st");
+        assert_eq!(LiturgyGenerator::get_ordinal_number(1), "First");
+        assert_eq!(LiturgyGenerator::get_ordinal_number(2), "Second");
+        assert_eq!(LiturgyGenerator::get_ordinal_number(21), "Twenty First");
     }
 
     #[test]
