@@ -636,8 +636,9 @@ impl LiturgyGenerator {
 
             if let Ok(saint_date) = Self::parse_lectionary_date_to_date(date_str, self.year) {
                 let day_of_week = saint_date.weekday();
+                let rank = reading.rank.clone().unwrap_or(String::new());
                 
-                if day_of_week == Weekday::Sun || reading.rank.clone().unwrap_or(String::new()).contains("Opt") {
+                if day_of_week == Weekday::Sun || rank.contains("Opt") || rank.contains("Mem") {
                     liturgy.entry(saint_date).or_insert_with(Vec::new).push(reading.clone());
                 } else {
                     liturgy.entry(saint_date).or_insert_with(Vec::new).insert(0, reading.clone());
