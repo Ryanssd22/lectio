@@ -117,8 +117,9 @@ class Readings:
 
 
 def formatTitle(title):
-    if title[-1] == "*":
-        title = title[:-1]
+    if title:
+        if title[-1] == "*":
+            title = title[:-1]
     return title
 
 

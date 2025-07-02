@@ -84,7 +84,7 @@ LECTIONARYTOBIBLEGATEWAY = {
     "Lev": "LEVITICUS",
     "Num": "NUMBERS",
     "Deut": "DEUTERONOMY",
-    "Josh": "JOSH",
+    "Josh": "JOSHUA",
     "Judg": "JUDGES",
     "Ruth": "RUTH",
     "1 Sam": "1 SAMUEL",
