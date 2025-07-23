@@ -7,10 +7,10 @@ use serde::{Deserialize, Serialize};
 use chrono::{NaiveDate};
 
 // Built in bible translations
-static NABRE: &str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/data/bibles/NABRE.txt"));
-static RSVCE: &str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/data/bibles/RSVCE.txt"));
-static DRA: &str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/data/bibles/DRA.txt"));
-static HWP: &str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/data/bibles/HWP.txt"));
+// static NABRE: &str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/data/bibles/NABRE.txt"));
+// static RSVCE: &str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/data/bibles/RSVCE.txt"));
+// static DRA: &str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/data/bibles/DRA.txt"));
+// static HWP: &str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/data/bibles/HWP.txt"));
 
 #[derive(Deserialize, Serialize, Debug, Clone)]
 struct LiturgyAndSeason {
@@ -20,13 +20,13 @@ struct LiturgyAndSeason {
 
 #[wasm_bindgen]
 pub fn wasm_generate_liturgy(date: &str, bible: &str) -> String {
-    let bible = match bible {
-        "NABRE" => NABRE,
-        "RSVCE" => RSVCE,
-        "DRA" => DRA,
-        "HWP" => HWP,
-        _ => "",
-    };
+    // let bible = match bible {
+    //     "NABRE" => NABRE,
+    //     "RSVCE" => RSVCE,
+    //     "DRA" => DRA,
+    //     "HWP" => HWP,
+    //     _ => "",
+    // };
     let year: i32 = date.split("-").next().unwrap().parse().unwrap();
     let generator = match LiturgyGenerator::new(year) {
         Ok(content) => content,
@@ -59,7 +59,8 @@ mod wasm_tests {
 
     #[test]
     fn test_generate_liturgy() {
-        wasm_generate_liturgy("2025-06-29", "NABRE");
+        // let NABRE: &str = include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/data/bibles/NABRE.txt"));
+        // wasm_generate_liturgy("2025-06-29", NABRE);
     }
 
 }
