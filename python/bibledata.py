@@ -104,7 +104,7 @@ LECTIONARYTOBIBLEGATEWAY = {
     "Ps": "PSALMS",  # Ps
     "Prov": "PROVERBS",
     "Eccl": "ECCLESIASTES",
-    "Songs": "SONG OF SONGS",  # Songs
+    "Cant": "SONG OF SOLOMON",  # Songs
     "Wis": "WISDOM",
     "Sir": "SIRACH",
     "Isa": "ISAIAH",

@@ -116,7 +116,7 @@ pub static BOOKS: Lazy<HashMap<&'static str, &'static str>> = Lazy::new(|| {
     m.insert("Psalms", "Ps");
     m.insert("Proverbs", "Prov");
     m.insert("Ecclesiastes", "Eccl");
-    m.insert("Song of Solomon", "Song");
+    m.insert("Song of Solomon", "Cant");
     m.insert("Wisdom", "Wis");
     m.insert("Sirach", "Sir");
     m.insert("Isaiah", "Isa");
