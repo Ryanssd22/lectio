@@ -406,7 +406,7 @@
         "rawReading": "Jas 5:7-10",
         "reading": [
           {
-            "book": "Jas",
+            "book": "JAMES",
             "verses": [
               {
                 "chapter": 5,
@@ -10462,7 +10462,7 @@
         "rawReading": "2 Kgs 4:8-11, 14-16a",
         "reading": [
           {
-            "book": "2 Kgs",
+            "book": "2Kgs",
             "verses": [
               {
                 "chapter": 4,
@@ -11094,7 +11094,7 @@
         "rawReading": "1 Kgs 3:5, 7-12",
         "reading": [
           {
-            "book": "1 Kgs",
+            "book": "1Kgs",
             "verses": [
               {
                 "chapter": 3,
@@ -11362,7 +11362,7 @@
         "rawReading": "1 Kgs 19:9a, 11-13a",
         "reading": [
           {
-            "book": "1 Kgs",
+            "book": "1Kgs",
             "verses": [
               {
                 "chapter": 19,
@@ -16024,7 +16024,7 @@
         "rawReading": "2 Kgs 4:42-44",
         "reading": [
           {
-            "book": "2 Kgs",
+            "book": "2Kgs",
             "verses": [
               {
                 "chapter": 4,
@@ -16356,7 +16356,7 @@
         "rawReading": "1 Kgs 19:4-8",
         "reading": [
           {
-            "book": "1 Kgs",
+            "book": "1Kgs",
             "verses": [
               {
                 "chapter": 19,
@@ -16896,7 +16896,7 @@
         "rawReading": "Jas 1:17-18, 21b-22, 27",
         "reading": [
           {
-            "book": "Jas",
+            "book": "JAMES",
             "verses": [
               {
                 "chapter": 1,
@@ -17048,7 +17048,7 @@
         "rawReading": "Jas 2:1-5",
         "reading": [
           {
-            "book": "Jas",
+            "book": "JAMES",
             "verses": [
               {
                 "chapter": 2,
@@ -17196,7 +17196,7 @@
         "rawReading": "Jas 2:14-18",
         "reading": [
           {
-            "book": "Jas",
+            "book": "JAMES",
             "verses": [
               {
                 "chapter": 2,
@@ -17340,7 +17340,7 @@
         "rawReading": "Jas 3:16\u20144:3",
         "reading": [
           {
-            "book": "Jas",
+            "book": "JAMES",
             "verses": [
               {
                 "chapter": 3,
@@ -17464,7 +17464,7 @@
         "rawReading": "Jas 5:1-6",
         "reading": [
           {
-            "book": "Jas",
+            "book": "JAMES",
             "verses": [
               {
                 "chapter": 5,
@@ -18268,7 +18268,7 @@
         "rawReading": "1 Kgs 17:10-16",
         "reading": [
           {
-            "book": "1 Kgs",
+            "book": "1Kgs",
             "verses": [
               {
                 "chapter": 17,
@@ -19846,7 +19846,7 @@
         "rawReading": "1 Kgs 8:41-43",
         "reading": [
           {
-            "book": "1 Kgs",
+            "book": "1Kgs",
             "verses": [
               {
                 "chapter": 8,
@@ -19978,7 +19978,7 @@
         "rawReading": "1 Kgs 17:17-24",
         "reading": [
           {
-            "book": "1 Kgs",
+            "book": "1Kgs",
             "verses": [
               {
                 "chapter": 17,
@@ -20382,7 +20382,7 @@
         "rawReading": "1 Kgs 19:16b, 19-21",
         "reading": [
           {
-            "book": "1 Kgs",
+            "book": "1Kgs",
             "verses": [
               {
                 "chapter": 19,
@@ -22857,7 +22857,7 @@
         "rawReading": "2 Kgs 5:14-17",
         "reading": [
           {
-            "book": "2 Kgs",
+            "book": "2Kgs",
             "verses": [
               {
                 "chapter": 5,
@@ -52672,7 +52672,7 @@
         "rawReading": "1 Kgs 2:1-4, 10-12",
         "reading": [
           {
-            "book": "1 Kgs",
+            "book": "1Kgs",
             "verses": [
               {
                 "chapter": 2,
@@ -52930,7 +52930,7 @@
         "rawReading": "1 Kgs 3:4-13",
         "reading": [
           {
-            "book": "1 Kgs",
+            "book": "1Kgs",
             "verses": [
               {
                 "chapter": 3,
@@ -53049,7 +53049,7 @@
         "rawReading": "1 Kgs 8:1-7, 9-13",
         "reading": [
           {
-            "book": "1 Kgs",
+            "book": "1Kgs",
             "verses": [
               {
                 "chapter": 8,
@@ -53168,7 +53168,7 @@
         "rawReading": "1 Kgs 8:22-23, 27-30",
         "reading": [
           {
-            "book": "1 Kgs",
+            "book": "1Kgs",
             "verses": [
               {
                 "chapter": 8,
@@ -53295,11 +53295,11 @@
     },
     "05-3-2": {
       "title": "Fifth Wednesday of Ordinary Time",
-      "first": {
+      "first": { 
         "rawReading": "1 Kgs 10:1-10",
         "reading": [
           {
-            "book": "1 Kgs",
+            "book": "1Kgs",
             "verses": [
               {
                 "chapter": 10,
@@ -53438,7 +53438,7 @@
         "rawReading": "1 Kgs 11:4-13",
         "reading": [
           {
-            "book": "1 Kgs",
+            "book": "1Kgs",
             "verses": [
               {
                 "chapter": 11,
@@ -53565,7 +53565,7 @@
         "rawReading": "1 Kgs 11:29-32; 12:19",
         "reading": [
           {
-            "book": "1 Kgs",
+            "book": "1Kgs",
             "verses": [
               {
                 "chapter": 11,
@@ -53672,7 +53672,7 @@
         "rawReading": "1 Kgs 12:26-32; 13:33-34",
         "reading": [
           {
-            "book": "1 Kgs",
+            "book": "1Kgs",
             "verses": [
               {
                 "chapter": 12,
@@ -53807,7 +53807,7 @@
         "rawReading": "Jas 1:1-11",
         "reading": [
           {
-            "book": "Jas",
+            "book": "JAMES",
             "verses": [
               {
                 "chapter": 1,
@@ -53922,7 +53922,7 @@
         "rawReading": "Jas 1:12-18",
         "reading": [
           {
-            "book": "Jas",
+            "book": "JAMES",
             "verses": [
               {
                 "chapter": 1,
@@ -54041,7 +54041,7 @@
         "rawReading": "Jas 1:19-27",
         "reading": [
           {
-            "book": "Jas",
+            "book": "JAMES",
             "verses": [
               {
                 "chapter": 1,
@@ -54148,7 +54148,7 @@
         "rawReading": "Jas 2:1-9",
         "reading": [
           {
-            "book": "Jas",
+            "book": "JAMES",
             "verses": [
               {
                 "chapter": 2,
@@ -54271,7 +54271,7 @@
         "rawReading": "Jas 2:14-24, 26",
         "reading": [
           {
-            "book": "Jas",
+            "book": "JAMES",
             "verses": [
               {
                 "chapter": 2,
@@ -54386,7 +54386,7 @@
         "rawReading": "Jas 3:1-10",
         "reading": [
           {
-            "book": "Jas",
+            "book": "JAMES",
             "verses": [
               {
                 "chapter": 3,
@@ -54533,7 +54533,7 @@
         "rawReading": "Jas 3:13-18",
         "reading": [
           {
-            "book": "Jas",
+            "book": "JAMES",
             "verses": [
               {
                 "chapter": 3,
@@ -54672,7 +54672,7 @@
         "rawReading": "Jas 4:1-10",
         "reading": [
           {
-            "book": "Jas",
+            "book": "JAMES",
             "verses": [
               {
                 "chapter": 4,
@@ -54803,7 +54803,7 @@
         "rawReading": "Jas 4:13-17",
         "reading": [
           {
-            "book": "Jas",
+            "book": "JAMES",
             "verses": [
               {
                 "chapter": 4,
@@ -54902,7 +54902,7 @@
         "rawReading": "Jas 5:1-6",
         "reading": [
           {
-            "book": "Jas",
+            "book": "JAMES",
             "verses": [
               {
                 "chapter": 5,
@@ -55037,7 +55037,7 @@
         "rawReading": "Jas 5:9-12",
         "reading": [
           {
-            "book": "Jas",
+            "book": "JAMES",
             "verses": [
               {
                 "chapter": 5,
@@ -55168,7 +55168,7 @@
         "rawReading": "Jas 5:13-22",
         "reading": [
           {
-            "book": "Jas",
+            "book": "JAMES",
             "verses": [
               {
                 "chapter": 5,
@@ -56685,7 +56685,7 @@
         "rawReading": "1 Kgs 17:1-6",
         "reading": [
           {
-            "book": "1 Kgs",
+            "book": "1Kgs",
             "verses": [
               {
                 "chapter": 17,
@@ -56824,7 +56824,7 @@
         "rawReading": "1 Kgs 17:7-16",
         "reading": [
           {
-            "book": "1 Kgs",
+            "book": "1Kgs",
             "verses": [
               {
                 "chapter": 17,
@@ -56939,7 +56939,7 @@
         "rawReading": "1 Kgs 18:20-39",
         "reading": [
           {
-            "book": "1 Kgs",
+            "book": "1Kgs",
             "verses": [
               {
                 "chapter": 18,
@@ -57090,7 +57090,7 @@
         "rawReading": "1 Kgs 18:41-46",
         "reading": [
           {
-            "book": "1 Kgs",
+            "book": "1Kgs",
             "verses": [
               {
                 "chapter": 18,
@@ -57193,7 +57193,7 @@
         "rawReading": "1 Kgs 19:9a, 11-16",
         "reading": [
           {
-            "book": "1 Kgs",
+            "book": "1Kgs",
             "verses": [
               {
                 "chapter": 19,
@@ -57300,7 +57300,7 @@
         "rawReading": "1 Kgs 19:19-21",
         "reading": [
           {
-            "book": "1 Kgs",
+            "book": "1Kgs",
             "verses": [
               {
                 "chapter": 19,
@@ -57395,7 +57395,7 @@
         "rawReading": "1 Kgs 21:1-16",
         "reading": [
           {
-            "book": "1 Kgs",
+            "book": "1Kgs",
             "verses": [
               {
                 "chapter": 21,
@@ -57538,7 +57538,7 @@
         "rawReading": "1 Kgs 21:17-29",
         "reading": [
           {
-            "book": "1 Kgs",
+            "book": "1Kgs",
             "verses": [
               {
                 "chapter": 21,
@@ -57673,7 +57673,7 @@
         "rawReading": "2 Kgs 2:1, 6-14",
         "reading": [
           {
-            "book": "2 Kgs",
+            "book": "2Kgs",
             "verses": [
               {
                 "chapter": 2,
@@ -57951,7 +57951,7 @@
         "rawReading": "2 Kgs 11:1-4, 9-18, 20",
         "reading": [
           {
-            "book": "2 Kgs",
+            "book": "2Kgs",
             "verses": [
               {
                 "chapter": 11,
@@ -58237,7 +58237,7 @@
         "rawReading": "2 Kgs 17:5-8, 13-15a, 18",
         "reading": [
           {
-            "book": "2 Kgs",
+            "book": "2Kgs",
             "verses": [
               {
                 "chapter": 17,
@@ -58344,7 +58344,7 @@
         "rawReading": "2 Kgs 19:9b-11, 14-21, 31-35a, 36",
         "reading": [
           {
-            "book": "2 Kgs",
+            "book": "2Kgs",
             "verses": [
               {
                 "chapter": 19,
@@ -58483,7 +58483,7 @@
         "rawReading": "2 Kgs 22:8-13; 23:1-3",
         "reading": [
           {
-            "book": "2 Kgs",
+            "book": "2Kgs",
             "verses": [
               {
                 "chapter": 22,
@@ -58610,7 +58610,7 @@
         "rawReading": "2 Kgs 24:8-17",
         "reading": [
           {
-            "book": "2 Kgs",
+            "book": "2Kgs",
             "verses": [
               {
                 "chapter": 24,
@@ -58749,7 +58749,7 @@
         "rawReading": "2 Kgs 25:1-12",
         "reading": [
           {
-            "book": "2 Kgs",
+            "book": "2Kgs",
             "verses": [
               {
                 "chapter": 25,
@@ -80423,7 +80423,7 @@
         "rawReading": "2 Kgs 5:1-15a",
         "reading": [
           {
-            "book": "2 Kgs",
+            "book": "2Kgs",
             "verses": [
               {
                 "chapter": 5,
@@ -82278,7 +82278,7 @@
         "rawReading": "2 Kgs 4:18b-21, 32-37",
         "reading": [
           {
-            "book": "2 Kgs",
+            "book": "2Kgs",
             "verses": [
               {
                 "chapter": 4,
@@ -119700,7 +119700,7 @@
         "rawReading": "James 2:14-17 (#740.13)",
         "reading": [
           {
-            "book": "Jas",
+            "book": "JAMES",
             "verses": [
               {
                 "chapter": 2,
