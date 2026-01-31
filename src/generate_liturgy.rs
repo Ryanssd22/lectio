@@ -1,3 +1,6 @@
+/*
+Main function in here is `generate`, which generates a json (or rust hashmap) of the current liturgy of the given day
+*/
 use chrono::{Datelike, Duration, NaiveDate, Weekday};
 use serde::{Deserialize, Serialize};
 use inflector::Inflector;
